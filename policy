@@ -5,6 +5,7 @@
 //
 //mkottala
 
+// Policy file specification of permissions
 grant {
     permission java.security.AllPermission;
 };

@@ -4,13 +4,13 @@
 // received any help on this assignment.
 //
 //mkottala
-//
 
+// importing classes for implementing JAVA RMI
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-
+// Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
 	private int itemId;
 	private int itemQuantity;
@@ -19,6 +19,7 @@ public class MarketPlaceModel {
 	private String adminName;
 	private String adminId;
 	private String password;
+	private String itemType;
 	
 	public MarketPlaceModel() {
 		//default login
@@ -27,58 +28,41 @@ public class MarketPlaceModel {
 		password = "mkottala";
 	}
 	
-	public void registration(String userName, String userId, String password){
+	//Method to register user with details received from controller
+	public String registerUser(String userName, String userId, String password){
 		this.userName = userName;
 		this.userId = userId;
 		this.password = password;
-		System.out.println("User Registration Successful " + this.userName );
+		return "User Registration Successful " + this.userName ;
 	}
 	
-	public void checkLogin(String userId, String password) {
+	public String[] getItemList(String itemType) {
+		//generally should return items from database of the given type
+		//some sample return
+		return  new String[] { "item1", "item2" , "item3" };
+	}
+	
+	//Method for Checking the user login from the view
+	public String checkLogin(String userId, String password) {
 		if(this.userId.equals(userId) && this.password.equals(password)) {
-			System.out.println("Successful login");
+			return "Successful login";
 		}
 		else {
-			System.out.println("login failed");
+			return "login failed";
 		}
 	}
 	
 	public void updateItemQuantity() {
-		
+		//should implement logic for Updating Quantity
 	}
 	
 	public void removeItems() {
-		
+		//should implement logic for removing items
 	}
 	
 	public void addItems() {
-		
+		// should implement logic for adding items
 	}
 	
-	public static void main(String args[]) throws RemoteException{
-		// Set the RMI Security Manager...
-		System.setSecurityManager(new SecurityManager());
-		
-		try {
-			System.out.println("Creating a Server Connection!");
-			
-			// Location of Server
-			String name = "//tesla.cs.iupui.edu:2518/home/mkottala/OOAD/Assignment1/MarketPlaceServer";
-			
-			// Create a new instance of a Market Place Server.
-			MarketPlaceController controller = new MarketPlaceController(name);
-			
-			System.out.println("MarketPlaceModel: binding it to name: " + name);
-			
-			// Binds the BankServer to the RMI Service.
-			Naming.rebind(name, controller);
-			
-			System.out.println("Market Place Server is Ready!");
-		} 
-		catch (Exception e){
-			System.out.println("Exception: " + e.getMessage());
-			e.printStackTrace();
-		}
-	}
 }
 

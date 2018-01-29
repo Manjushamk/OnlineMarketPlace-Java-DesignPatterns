@@ -7,12 +7,15 @@
 
 /**
  * This interface serves as the proxy between the View and the
- * Controller. The Controller must implement this method.
+ * Controller,Model . The MarketPlaceController implements this method.
  *
  */
 
 import java.rmi.Remote;
 
 public interface MarketPlace extends Remote {
-	 void login(String userId, String password) throws java.rmi.RemoteException;
+	//interfaces that MarketPlaceView uses remotely
+	 String login(String userId, String password) throws java.rmi.RemoteException;
+	 String register(String userName, String userId, String password) throws java.rmi.RemoteException;
+	 String[] getItems(String itemType) throws java.rmi.RemoteException;
 }
