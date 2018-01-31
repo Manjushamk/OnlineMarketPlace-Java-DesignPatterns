@@ -28,7 +28,6 @@ public class MarketPlaceModel {
 		password = "mkottala";
 	}
 	
-	//Method to register user with details received from controller
 	public String registerUser(String userName, String userId, String password){
 		this.userName = userName;
 		this.userId = userId;
@@ -42,7 +41,6 @@ public class MarketPlaceModel {
 		return  new String[] { "item1", "item2" , "item3" };
 	}
 	
-	//Method for Checking the user login from the view
 	public String checkLogin(String userId, String password) {
 		if(this.userId.equals(userId) && this.password.equals(password)) {
 			return "Successful login";
@@ -64,5 +62,6 @@ public class MarketPlaceModel {
 		// should implement logic for adding items
 	}
 	
+
 }
 

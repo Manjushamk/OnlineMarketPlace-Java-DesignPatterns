@@ -60,7 +60,7 @@ public class MarketPlaceView {
 		// RMI Security Manager
 		System.setSecurityManager(new SecurityManager());
 		try{
-			String name = "//tesla.cs.iupui.edu:2518/home/mkottala/OOAD/Assignment1/MarketPlaceServer";
+			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
 			// Attempt to locate the MarketPlace Server
 			MarketPlace marketPlace = (MarketPlace) Naming.lookup(name);
 			
