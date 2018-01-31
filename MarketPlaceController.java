@@ -48,7 +48,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 			System.out.println("Creating a Server Connection!");
 			
 			// Location of Server
-			String name = "//tesla.cs.iupui.edu:2518/home/mkottala/OOAD/Assignment1/MarketPlaceServer";
+			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
 			
 			// Create a new instance of a Market Place Controller.
 			MarketPlaceController controller = new MarketPlaceController(name);
