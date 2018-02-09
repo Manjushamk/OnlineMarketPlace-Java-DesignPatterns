@@ -53,7 +53,9 @@ public class MarketPlaceView {
 		userInput.close();
 	}
 	
-	
+	// Ryan: This is a violation of separation of concerns as we are mixing 
+	// View logic with "framework" functionality. Instead this needs to be 
+	// separated using a Controller.
 	
 	//Main Method for RMI Client
 	public static void main(String args[]){
