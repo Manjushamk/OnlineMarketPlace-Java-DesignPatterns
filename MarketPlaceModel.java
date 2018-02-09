@@ -5,11 +5,6 @@
 //
 //mkottala
 
-// importing classes for implementing JAVA RMI
-import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
 	private int itemId;

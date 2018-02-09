@@ -29,6 +29,20 @@ public class MarketPlaceView {
 		userInput.close();
 	}
 	
+	//Get methods for userId, UserName and Password
+	public String getUserId() {
+		return this.userId;
+	}
+	
+	public String getUserName() {
+		return this.userName;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	
 	// Method to be implemented for Browsing items
 	public void browseItems() {
 		System.out.println("Browsing Items displayed here");
@@ -56,40 +70,6 @@ public class MarketPlaceView {
 	// Ryan: This is a violation of separation of concerns as we are mixing 
 	// View logic with "framework" functionality. Instead this needs to be 
 	// separated using a Controller.
-	
-	//Main Method for RMI Client
-	public static void main(String args[]){
-		// RMI Security Manager
-		System.setSecurityManager(new SecurityManager());
-		try{
-			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
-			// Attempt to locate the MarketPlace Server
-			MarketPlace marketPlace = (MarketPlace) Naming.lookup(name);
-			
-			MarketPlaceView view1 = new MarketPlaceView();
-			System.out.println("Enter Action : ");
-			System.out.println("1. Login");
-			System.out.println("2. Register User");
-			Scanner userInput = new Scanner(System.in);
-			int option = userInput.nextInt();
-			if (option == 1) {
-				view1.enterLogin();
-				System.out.println(marketPlace.login(view1.userId,view1.password));
-			}
-			else if (option == 2 ){
-				view1.registration();
-				System.out.println(marketPlace.register(view1.userName, view1.userId,view1.password));
-			}
-			userInput.close();		
-				
-		} catch(Exception e){
-			System.out.println("MarketPlace Client Exception: " +
-			e.getMessage());
-			e.printStackTrace();
-		}
-		
-		System.exit(0);
-	}
 	
 
 }
