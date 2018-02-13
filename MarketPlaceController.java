@@ -22,9 +22,9 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	}
 
 	//Implementation of remote method
-	public synchronized String login(String userId, String password) throws RemoteException{
+	public synchronized boolean login(String userId, String password, String type) throws RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
-		return model.checkLogin(userId,password);
+		return model.checkLogin(userId,password,type);
 	}
 	
 	// method to be implemented for user Registration

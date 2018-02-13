@@ -1,6 +1,3 @@
-import java.rmi.Naming;
-import java.util.Scanner;
-
 // Honor Pledge:
 //
 // I pledge that I have neither given nor 
@@ -9,7 +6,17 @@ import java.util.Scanner;
 //mkottala
 
 
+// FIXED: This is how I fixed what was wrong.
+// I have separated the framework functionality by including an additional controller 
+// which implements the RMI client functionality
+
+
+import java.rmi.Naming;
+import java.util.Scanner;
+
+
 public class MarketPlaceClientController {
+	static MarketPlace marketPlace;
 	
 	//Main Method for RMI Client
 		public static void main(String args[]){
@@ -18,31 +25,17 @@ public class MarketPlaceClientController {
 			try{
 				String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
 				// Attempt to locate the MarketPlace Server
-				MarketPlace marketPlace = (MarketPlace) Naming.lookup(name);
+				marketPlace = (MarketPlace) Naming.lookup(name);
 				
-				MarketPlaceView view1 = new MarketPlaceView();
-				System.out.println("Enter Action : ");
-				System.out.println("1. Login");
-				System.out.println("2. Register User");
-				Scanner userInput = new Scanner(System.in);
-				int option = userInput.nextInt();
-				if (option == 1) {
-					//user login
-					view1.enterLogin();
-					String userId = view1.getUserId();
-					String password = view1.getPassword();
-					System.out.println(marketPlace.login(userId,password));
-				}
-				else if (option == 2 ){
-					//user registration
-					view1.registration();
-					String userId = view1.getUserId();
-					String password = view1.getPassword();
-					String userName = view1.getUserName();
-					System.out.println(marketPlace.register(userName, userId, password));
-				}
-				userInput.close();		
-					
+				
+				//Creating an instance of Entry View
+				ClientEntryView entryPoint = new ClientEntryView();
+				// Create new instance of a Front Controller
+				FrontController frontController = new FrontController();
+				
+				// Dispatch request for respective views
+				
+				frontController.dispatchRequest(entryPoint.performAction());					
 			} catch(Exception e){
 				System.out.println("MarketPlace Client Exception: " +
 				e.getMessage());
@@ -50,6 +43,23 @@ public class MarketPlaceClientController {
 			}
 			
 			System.exit(0);
+		}
+		
+		public boolean loginCheck(String request) {
+			ClientEntryView loginView = new ClientEntryView();
+			loginView.checkLogin();
+			String id = loginView.getId();
+			String password = loginView.getPassword();
+			System.out.println("Login Checking");
+			try {
+				return marketPlace.login(id, password, request);
+			}
+			catch(Exception e){
+				System.out.println("MarketPlace Client login Exception: " +
+				e.getMessage());
+				e.printStackTrace();
+			}
+			return true;
 		}
 		
 }

@@ -7,20 +7,21 @@
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
-	private int itemId;
-	private int itemQuantity;
 	private String userName;
 	private String userId;
 	private String adminName;
 	private String adminId;
 	private String password;
 	private String itemType;
+	private String adminPassword;
 	
 	public MarketPlaceModel() {
 		//default login
 		userName = "Manjusha";
 		userId = "mkottala";
 		password = "mkottala";
+		adminId = "manju";
+		adminPassword = "manju";
 	}
 	
 	public String registerUser(String userName, String userId, String password){
@@ -36,13 +37,24 @@ public class MarketPlaceModel {
 		return  new String[] { "item1", "item2" , "item3" };
 	}
 	
-	public String checkLogin(String userId, String password) {
-		if(this.userId.equals(userId) && this.password.equals(password)) {
-			return "Successful login";
+	public boolean checkLogin(String userId, String password, String type) {
+		if(type.equalsIgnoreCase("User")) {
+			if(this.userId.equals(userId) && this.password.equals(password)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
-			return "login failed";
+			if(this.adminId.equals(userId) && this.adminPassword.equals(password)) {
+				return true; 
+			}
+			else {
+				return false;
 		}
+		}
+		
 	}
 	
 	public void updateItemQuantity() {
