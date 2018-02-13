@@ -7,5 +7,9 @@
 
 
 public interface Admin {
-	public void displayAdmin();
+	public int displayAdmin();
+	public void add();
+	public void update();
+	public void browse();
+	public void delete();
 }

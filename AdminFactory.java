@@ -14,7 +14,7 @@ public class AdminFactory extends AbstractFactory{
 
 	@Override
 	Admin getAdminView(String type) {
-		if(type.equalsIgnoreCase("user")) {
+		if(type.equalsIgnoreCase("admin")) {
 			return new MarketPlaceAdminView();
 		}
 		return null;

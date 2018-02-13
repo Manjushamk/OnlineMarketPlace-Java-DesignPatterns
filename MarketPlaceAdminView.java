@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 // Honor Pledge:
 //
@@ -7,19 +6,21 @@ import java.util.Scanner;
 //
 //mkottala
 
+import java.util.Scanner;
 
 public class MarketPlaceAdminView implements Admin{
 	
 	private String adminName;
 	private String adminId;
 	private String password;
+	private Scanner userInput;
 	
 	//method for entering user login information
 	public void enterLogin() {
 		// Sample user login 
 		System.out.println(" Admin login ");
 		System.out.println("Enter Id: ");
-		Scanner userInput = new Scanner(System.in);
+		userInput = new Scanner(System.in);
 		adminId = userInput.nextLine();
 		System.out.println("Enter Password: ");
 		password = userInput.nextLine();
@@ -41,14 +42,38 @@ public class MarketPlaceAdminView implements Admin{
 	
 	
 	// Method to be implemented for Browsing items
-	public void browseItems() {
+	public void browse() {
 		System.out.println("Browsing Items displayed here");
 	}
+
+
+	//Method to be implented for Adding Items
+	public void update(){
+		System.out.println("Update items");
+	}
 	
-	
+	//method to be implemented for deleting items
+	public void delete(){
+		System.out.println("Deleting Items");
+	}
+
+
+	//method to be implemented for adding items
+	public void add(){
+		System.out.println("Adding items");
+	}
+
 	// Method o be implemented for Displaying User or Admin Profile
-	public void displayAdmin() {
+	public int displayAdmin() {
 		System.out.println("Displaying Admin Profile");
+		System.out.println("Enter Action");
+		System.out.println("1.Add Items");
+		System.out.println("2.Delete Items");
+		System.out.println("3.Update Items");
+		System.out.println("4.Browse Items");
+		userInput = new Scanner(System.in);
+		int option = userInput.nextInt();
+		return option;
 	}
 	
 	//method for user registration

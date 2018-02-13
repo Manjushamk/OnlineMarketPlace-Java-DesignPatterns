@@ -7,14 +7,11 @@
 
 public class FactoryProducer {
    public static AbstractFactory getSelectedView(String type){
-   
-      if(type.equalsIgnoreCase("user")){
-         return new UserFactory();
-         
-      }else if(type.equalsIgnoreCase("admin")){
+      if(type.equalsIgnoreCase("User")){
+         return new UserFactory();  
+      }else if(type.equalsIgnoreCase("Admin")){
          return new AdminFactory();
       }
-      
       return null;
    }
 }

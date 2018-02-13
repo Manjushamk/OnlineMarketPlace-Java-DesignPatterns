@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 public class MarketPlaceClientController {
-	static MarketPlace marketPlace;
+	static private MarketPlace marketPlace;
 	
 	//Main Method for RMI Client
 		public static void main(String args[]){

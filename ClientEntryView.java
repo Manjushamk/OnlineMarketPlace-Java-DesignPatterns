@@ -5,7 +5,6 @@
 //
 //mkottala
 
-
 import java.util.Scanner;
 
 public class ClientEntryView {
