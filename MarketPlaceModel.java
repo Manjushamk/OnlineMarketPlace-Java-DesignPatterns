@@ -9,10 +9,8 @@
 public class MarketPlaceModel {
 	private String userName;
 	private String userId;
-	private String adminName;
 	private String adminId;
 	private String password;
-	private String itemType;
 	private String adminPassword;
 	
 	public MarketPlaceModel() {
@@ -56,18 +54,6 @@ public class MarketPlaceModel {
 		}
 		}
 		
-	}
-	
-	public void updateItemQuantity() {
-		//should implement logic for Updating Quantity
-	}
-	
-	public void removeItems() {
-		//should implement logic for removing items
-	}
-	
-	public void addItems() {
-		// should implement logic for adding items
 	}
 	
 
