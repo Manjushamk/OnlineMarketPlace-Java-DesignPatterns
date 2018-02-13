@@ -30,7 +30,6 @@ public class Dispatcher {
 	    	Admin adminObj = adminView.getAdminView(request);
 	    	System.out.println(adminObj);
 	    	int choice = adminObj.displayAdmin();
-	    	System.out.println(choice);
 	    	AddItems addItems = new AddItems(adminObj);
 	    	DeleteItems deleteItems = new DeleteItems(adminObj);
 	    	UpdateItems updateItems = new UpdateItems(adminObj);
