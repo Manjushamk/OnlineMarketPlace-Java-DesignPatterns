@@ -7,12 +7,14 @@
 
 import java.util.Scanner;
 
+
+//Generic view for the point of entry such as Login
 public class ClientEntryView {
 	private String userId;
 	private String password;
 	private Scanner userInput;
 	
-	
+	//Method for selecting the view 
 	public String performAction() {
 		userInput = new Scanner(System.in);
 		System.out.println("Enter Action as either 1 or 2:  ");
@@ -29,10 +31,8 @@ public class ClientEntryView {
 		
 	}
 	
-	public String getId() {
-		return this.userId;
-	}
 	
+	//method for input of id, password and setting them.
 	public void checkLogin() {
 		userInput = new Scanner(System.in);
 		System.out.println("Enter Id: ");
@@ -42,8 +42,14 @@ public class ClientEntryView {
 		password = userInput.nextLine();
 	}
 	
+	
+	//get methods
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public String getId() {
+		return this.userId;
 	}
 	
 }

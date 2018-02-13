@@ -7,6 +7,7 @@
 //mkottala
 
 
+// Creation of abstract factory class
 public abstract class AbstractFactory {
 	abstract User getUserView(String type);
 	abstract Admin getAdminView(String type);

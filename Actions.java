@@ -5,6 +5,7 @@
 //
 //mkottala
 
+//Command interface for implementing the admin commands add, update, delete and browse items
 public interface Actions {
 	void execute();
 }

@@ -5,8 +5,11 @@
 //
 //mkottala
 
+// Factory class implementation for Admin extending abstract factory class
 public class AdminFactory extends AbstractFactory{
 
+	//Overriding the methods for selection of the concrete class
+	
 	@Override
 	public User getUserView(String type) {
 		return null;

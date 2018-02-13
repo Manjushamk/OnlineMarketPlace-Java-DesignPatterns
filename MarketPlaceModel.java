@@ -37,6 +37,7 @@ public class MarketPlaceModel {
 		return  new String[] { "item1", "item2" , "item3" };
 	}
 	
+	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
 		if(type.equalsIgnoreCase("User")) {
 			if(this.userId.equals(userId) && this.password.equals(password)) {

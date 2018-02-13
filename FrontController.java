@@ -26,13 +26,13 @@ public class FrontController {
 	public void dispatchRequest(String request) {
 		System.out.println("View : " + request);   
 		
-		// If the user has been authenticated - dispatch request...
+		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request)) {
-			System.out.println(request + " is authentication success.");
+			System.out.println(request + " authentication is successful.");
 			dispatcher.dispatch(request);
 	    }	
 		else {
-			System.out.println(request + " is authentication failed.");
+			System.out.println(request + " authentication failed.");
 		}
 	}
 	

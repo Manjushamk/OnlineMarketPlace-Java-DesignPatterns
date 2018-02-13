@@ -5,6 +5,7 @@
 //
 //mkottala
 
+//Concreate class creation for updating items command that implements the Actions Command interface
 public class UpdateItems implements Actions{
    private Admin admin;
 
@@ -12,6 +13,7 @@ public class UpdateItems implements Actions{
       this.admin = admin;
    }
 
+   //execute method used in invoker
    public void execute() {
       admin.update();
 }

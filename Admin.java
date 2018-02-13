@@ -5,7 +5,7 @@
 //
 //mkottala
 
-
+//interface for admin methods
 public interface Admin {
 	public int displayAdmin();
 	public void add();

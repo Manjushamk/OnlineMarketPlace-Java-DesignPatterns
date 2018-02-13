@@ -45,6 +45,7 @@ public class MarketPlaceClientController {
 			System.exit(0);
 		}
 		
+		//Method for interacting with the remote method for login check
 		public boolean loginCheck(String request) {
 			ClientEntryView loginView = new ClientEntryView();
 			loginView.checkLogin();

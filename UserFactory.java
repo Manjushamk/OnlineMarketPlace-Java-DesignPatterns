@@ -5,7 +5,9 @@
 //
 //mkottala
 
+// Factory class implementation for User extending abstract factory class
 public class UserFactory extends AbstractFactory{
+	//Overriding the methods for selection of the concrete class
 	
 	@Override
 	public User getUserView(String type) {

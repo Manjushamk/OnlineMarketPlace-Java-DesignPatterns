@@ -25,6 +25,7 @@ public class MarketPlaceUserView implements User{
 		return this.userId;
 	}
 	
+	//get methods
 	public String getUserName() {
 		return this.userName;
 	}

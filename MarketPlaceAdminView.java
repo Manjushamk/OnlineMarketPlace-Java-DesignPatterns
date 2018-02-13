@@ -76,7 +76,7 @@ public class MarketPlaceAdminView implements Admin{
 		return option;
 	}
 	
-	//method for user registration
+	//method for user registration - yet to be used
 	public void registration() {
 		Scanner userInput = new Scanner(System.in);
 		System.out.println(" Enter Admin Registration Details:  ");
