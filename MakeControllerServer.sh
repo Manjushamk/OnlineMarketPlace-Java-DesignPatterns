@@ -1,2 +1,2 @@
-javac MarketPlaceController.java MarketPlace.java MarketPlaceModel.java
+javac *.java
 java -Djava.security.policy=policy MarketPlaceController

@@ -1,2 +1,1 @@
-javac MarketPlaceView.java
-java -Djava.security.policy=policy MarketPlaceView
+java -Djava.security.policy=policy  MarketPlaceClientController
