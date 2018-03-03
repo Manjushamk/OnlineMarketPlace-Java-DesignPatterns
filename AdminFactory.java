@@ -12,6 +12,7 @@ public class AdminFactory extends AbstractFactory{
 	
 	@Override
 	public User getUserView(String type) {
+		// Ryan: Do you really want to return null here?
 		return null;
 	}
 
