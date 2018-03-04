@@ -18,8 +18,8 @@ public class AuthorizationInvocationHandler implements InvocationHandler, Serial
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		if (method.isAnnotationPresent(RoleAnnotation.class)) {
-			RoleAnnotation test = method.getAnnotation(RoleAnnotation.class);
+		if (method.isAnnotationPresent(RoleAnnotations.class)) {
+			RoleAnnotations test = method.getAnnotation(RoleAnnotations.class);
 			Session session = (Session) args[0];
 
 			if (session.getRoleType().equals(test.value())) {
