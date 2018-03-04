@@ -68,15 +68,15 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
 	                new Class<?>[] {MarketPlace.class},
-	                new AuthorizationInvocationHandler(new MarketPlaceController()));
+	                new AuthorizationInvocationHandler(new MarketPlaceController(name)));
 			
 			// Create a new instance of a Market Place Controller.
-			MarketPlaceController controller = new MarketPlaceController(name);
+			// MarketPlaceController controller = new MarketPlaceController(name);
 			
 			System.out.println("MarketPlaceModel: binding it to name: " + name);
 			
 			// Binds the Controller(with remote method implementation) to the RMI Service.
-			Naming.rebind(name, controller);
+			Naming.rebind(name, reflection_proxy);
 			
 			System.out.println("Market Place Server is Ready!");
 		} 
