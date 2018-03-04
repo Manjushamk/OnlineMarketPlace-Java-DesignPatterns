@@ -16,6 +16,7 @@ public class MarketPlaceUserView implements User{
 	private String userName;
 	private String userId;
 	private String password;
+	private Session session;
 	
 	//method for entering user login information
 

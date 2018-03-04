@@ -20,7 +20,7 @@ public class Dispatcher {
 	
 	//dispatch method to dispatch the requested view
 	
-	public void dispatch(String request) {
+	public void dispatch(String request, Session session) {
 		// Condition for selection of view
 		if(request.equalsIgnoreCase("User")) {
 			User userObj = userView.getUserView(request);
@@ -30,7 +30,7 @@ public class Dispatcher {
 	    	Admin adminObj = adminView.getAdminView(request);
 	    	System.out.println(adminObj);
 	    	int choice = adminObj.displayAdmin();
-	    	AddItems addItems = new AddItems(adminObj);
+	    	AddItems addItems = new AddItems(adminObj,session);
 	    	DeleteItems deleteItems = new DeleteItems(adminObj);
 	    	UpdateItems updateItems = new UpdateItems(adminObj);
 	    	BrowseItems browseItems = new BrowseItems(adminObj);

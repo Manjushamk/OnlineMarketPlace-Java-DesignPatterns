@@ -8,7 +8,7 @@
 //interface for admin methods
 public interface Admin {
 	public int displayAdmin();
-	public void add();
+	public void add(Session session);
 	public void update();
 	public void browse();
 	public void delete();

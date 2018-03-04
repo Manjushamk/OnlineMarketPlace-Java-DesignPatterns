@@ -32,7 +32,7 @@ public class FrontController {
 		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request)) {
 			System.out.println(request + " authentication is successful.");
-			dispatcher.dispatch(request);
+			dispatcher.dispatch(request,session);
 	    }	
 		else {
 			System.out.println(request + " authentication failed.");

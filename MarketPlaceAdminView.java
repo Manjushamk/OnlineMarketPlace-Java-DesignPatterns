@@ -63,7 +63,9 @@ public class MarketPlaceAdminView implements Admin{
 
 	//method to be implemented for adding items
 	@Override
-	public void add(){
+	public void add(Session session){
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		clientControllerObj.browseItems(session);
 		System.out.println("Adding items");
 	}
 
