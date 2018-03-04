@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class MarketPlaceClientController {
 	static private MarketPlace marketPlace;
-	
+	Session session;
 	//Main Method for RMI Client
 		public static void main(String args[]){
 			// RMI Security Manager
