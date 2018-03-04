@@ -79,6 +79,7 @@ public class MarketPlaceClientController {
 				e.getMessage());
 				e.printStackTrace();
 			}
+			return session;
 		}
 
 		

@@ -21,6 +21,7 @@ public class FrontController {
 	private boolean isAuthenticUser(String request) {
 		MarketPlaceClientController clientControllerLogin = new MarketPlaceClientController();
 		session = clientControllerLogin.sessionLogin(request);
+		//System.out.println("Session" + session);
 		return clientControllerLogin.loginCheck(session,request); 
 	}
 	
@@ -31,7 +32,7 @@ public class FrontController {
 		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request)) {
 			System.out.println(request + " authentication is successful.");
-			dispatcher.dispatch(request, session);
+			dispatcher.dispatch(request);
 	    }	
 		else {
 			System.out.println(request + " authentication failed.");
