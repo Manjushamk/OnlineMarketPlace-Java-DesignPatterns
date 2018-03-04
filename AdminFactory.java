@@ -13,6 +13,9 @@ public class AdminFactory extends AbstractFactory{
 	@Override
 	public User getUserView(String type) {
 		// Ryan: Do you really want to return null here?
+
+		// FIXED: In the AdminFactory class, the getUserView will never be used. When we extend the AbstractFactory class,
+		// its abstract methods should be implemented here. So, as it never be user I am returning null for the User Object.
 		return null;
 	}
 

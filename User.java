@@ -8,5 +8,7 @@
 //interface for User methods
 public interface User {
 	// Ryan: Please make sure to indent your code properly - adds to readability.
-public void displayUser();
+
+	//FIXED: fixed indentation
+	public void displayUser();
 }
