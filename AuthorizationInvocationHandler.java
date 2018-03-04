@@ -22,7 +22,7 @@ public class AuthorizationInvocationHandler implements InvocationHandler, Serial
 			RoleAnnotation test = method.getAnnotation(RoleAnnotation.class);
 			Session session = (Session) args[0];
 
-			if (session.getUser().getRoleType().equals(test.value())) {
+			if (session.getRoleType().equals(test.value())) {
 				return method.invoke(objectImpl, args);
 			} else {
 				throw new AuthorizationException(method.getName());
