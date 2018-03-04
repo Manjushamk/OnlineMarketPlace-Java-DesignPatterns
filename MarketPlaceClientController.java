@@ -45,15 +45,22 @@ public class MarketPlaceClientController {
 			System.exit(0);
 		}
 		
+
 		//Method for interacting with the remote method for login check
-		public boolean loginCheck(String request) {
+		public boolean loginCheck(Session session, String request) {
 			ClientEntryView loginView = new ClientEntryView();
 			loginView.checkLogin();
 			String id = loginView.getId();
 			String password = loginView.getPassword();
 			System.out.println("Login Checking");
 			try {
-				return marketPlace.login(id, password, request);
+				if(request == "Admin"){
+					return marketPlace.adminLogin(session, id, password, request);
+				}
+				else{
+					return marketPlace.userLogin(session, id, password, request);
+				}
+				
 			}
 			catch(Exception e){
 				System.out.println("MarketPlace Client login Exception: " +
@@ -62,5 +69,17 @@ public class MarketPlaceClientController {
 			}
 			return true;
 		}
+
+		public Session sessionLogin(String request){
+			try{
+				session = marketPlace.sessionLogin(request);
+			}
+			catch(Exception e){
+				System.out.println("Session Creation Exception" +
+				e.getMessage());
+				e.printStackTrace();
+			}
+		}
+
 		
 }

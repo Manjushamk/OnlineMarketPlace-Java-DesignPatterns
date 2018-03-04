@@ -9,6 +9,7 @@
 public class FrontController {
 	//instance of Dispatcher class
 	private Dispatcher dispatcher;
+	Session session;
 	
 	//constructor for the FrontController class
 	public FrontController() {
@@ -19,7 +20,8 @@ public class FrontController {
 	//Sample authentication check
 	private boolean isAuthenticUser(String request) {
 		MarketPlaceClientController clientControllerLogin = new MarketPlaceClientController();
-		return clientControllerLogin.loginCheck(request); 
+		session = clientControllerLogin.sessionLogin(request);
+		return clientControllerLogin.loginCheck(session,request); 
 	}
 	
 	//method for dispatching the request to the Dispatcher class
@@ -29,7 +31,7 @@ public class FrontController {
 		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request)) {
 			System.out.println(request + " authentication is successful.");
-			dispatcher.dispatch(request);
+			dispatcher.dispatch(request, session);
 	    }	
 		else {
 			System.out.println(request + " authentication failed.");

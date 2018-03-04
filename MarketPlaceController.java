@@ -16,17 +16,32 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	private String name;
 	
 	//Constructor for the controller
+
 	public MarketPlaceController(String name) throws RemoteException {
 		super();
 		this.name = name;
 	}
 
 	//Implementation of remote method
-	public synchronized boolean login(String userId, String password, String type) throws RemoteException{
+	@Override
+	public synchronized boolean adminLogin(String userId, String password, String type) throws RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.checkLogin(userId,password,type);
+	}
+
+	@Override
+	public synchronized boolean userLogin(String userId, String password, String type) throws RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
 	
+	@Override
+	public Session sessionLogin(String type) throws RemoteException{
+		Session session = new Session(type);
+		return session;
+	}
+
+
 	// method to be implemented for user Registration
 	public synchronized String register(String userName, String userId, String password) throws RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
