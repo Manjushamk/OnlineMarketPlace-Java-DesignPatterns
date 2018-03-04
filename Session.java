@@ -16,7 +16,7 @@ public class Session implements Serializable{
 		this.roleType=roleType;
 	}
 
-	public getRoleType(){
+	public String getRoleType(){
 		return roleType;
 	}
 }
