@@ -9,6 +9,7 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.lang.reflect.Proxy;
 
 // Creation of Controller class that implements the Remote Interface
 public class MarketPlaceController extends UnicastRemoteObject implements MarketPlace{
@@ -64,6 +65,10 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 			
 			// Location of Server
 			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
+
+			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
+	                new Class<?>[] {MarketPlace.class},
+	                new AuthorizationInvocationHandler(new ServerImpl()));
 			
 			// Create a new instance of a Market Place Controller.
 			MarketPlaceController controller = new MarketPlaceController(name);
