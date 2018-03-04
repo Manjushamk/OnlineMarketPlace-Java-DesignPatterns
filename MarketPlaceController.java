@@ -68,7 +68,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
 	                new Class<?>[] {MarketPlace.class},
-	                new AuthorizationInvocationHandler(new ServerImpl()));
+	                new AuthorizationInvocationHandler(new MarketPlaceController()));
 			
 			// Create a new instance of a Market Place Controller.
 			MarketPlaceController controller = new MarketPlaceController(name);
