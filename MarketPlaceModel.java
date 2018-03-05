@@ -12,6 +12,7 @@ public class MarketPlaceModel {
 	private String adminId;
 	private String password;
 	private String adminPassword;
+	private String[] items = new String[20];
 	
 	public MarketPlaceModel() {
 		//default login
@@ -20,6 +21,7 @@ public class MarketPlaceModel {
 		password = "mkottala";
 		adminId = "manju";
 		adminPassword = "manju";
+		items = new String[]{"Book","Pen","Cycle","Camera"};
 	}
 	
 	public String registerUser(String userName, String userId, String password){
@@ -32,11 +34,20 @@ public class MarketPlaceModel {
 	public String addItems(){
 		return "Called server addItems Method";
 	}
+
+	public String addItems(){
+		return "Called server delete Items Method";
+	}
+
+	public String addItems(){
+		return "Called server Update Items Method";
+	}
+	public String[] browseAdminItems(){
+		return getItemList();
+	}
 	
-	public String[] getItemList(String itemType) {
-		//generally should return items from database of the given type
-		//some sample return
-		return  new String[] { "item1", "item2" , "item3" };
+	public String[] getItemList() {
+		return this.items;
 	}
 	
 	//method to verify login information

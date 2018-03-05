@@ -49,6 +49,24 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.addItems();
 	}
 
+	@Override
+	public String updateItems(Session session) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.updateItems();
+	}
+
+	@Override
+	public String deleteItems(Session session) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.deleteItems();
+	}
+
+	@Override
+	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.browseAdminItems();
+	}
+
 
 	// method to be implemented for user Registration
 	public synchronized String register(String userName, String userId, String password) throws RemoteException{
@@ -56,13 +74,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.registerUser(userName,userId,password);
 	}
 	
-	// method to be implemented to get the items for browsing in the view
-	public synchronized String[] getItems(String itemType) throws RemoteException{
-		// Have to implement to get the items from the database of the specified type
-		MarketPlaceModel model = new MarketPlaceModel();
-		return model.getItemList(itemType);
-	}
-	
+
 	public static void main(String args[]) throws RemoteException{
 		// Set the RMI Security Manager...
 		System.setSecurityManager(new SecurityManager());

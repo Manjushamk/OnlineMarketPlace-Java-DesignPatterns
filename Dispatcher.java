@@ -31,9 +31,9 @@ public class Dispatcher {
 	    	System.out.println(adminObj);
 	    	int choice = adminObj.displayAdmin();
 	    	AddItems addItems = new AddItems(adminObj,session);
-	    	DeleteItems deleteItems = new DeleteItems(adminObj);
-	    	UpdateItems updateItems = new UpdateItems(adminObj);
-	    	BrowseItems browseItems = new BrowseItems(adminObj);
+	    	DeleteItems deleteItems = new DeleteItems(adminObj,session);
+	    	UpdateItems updateItems = new UpdateItems(adminObj,session);
+	    	BrowseItems browseItems = new BrowseItems(adminObj,session);
 	    	Invoker invokerObj = new Invoker();
 	    	switch(choice) {
 	    	case 1 : invokerObj.getActions(addItems);
