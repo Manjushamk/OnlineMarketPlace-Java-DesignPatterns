@@ -9,7 +9,7 @@
 public interface Admin {
 	public int displayAdmin();
 	public void add(Session session);
-	public void update();
-	public void browse();
-	public void delete();
+	public void update(Session session);
+	public void browse(Session session);
+	public void delete(Session session);
 }
