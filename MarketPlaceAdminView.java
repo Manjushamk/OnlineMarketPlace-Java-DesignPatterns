@@ -40,26 +40,6 @@ public class MarketPlaceAdminView implements Admin{
 		return this.password;
 	}
 	
-	
-	// Method to be implemented for Browsing items
-	@Override
-	public void browse() {
-		System.out.println("Browsing Items displayed here");
-	}
-
-
-	//Method to be implented for Adding Items
-	@Override
-	public void update(){
-		System.out.println("Update items");
-	}
-	
-	//method to be implemented for deleting items
-	@Override
-	public void delete(){
-		System.out.println("Deleting Items");
-	}
-
 
 	//method to be implemented for adding items
 	@Override
@@ -68,6 +48,35 @@ public class MarketPlaceAdminView implements Admin{
 		System.out.println("Adding items");
 		System.out.println(clientControllerObj.addItems(session));
 	}
+
+
+	// Method to be implemented for Browsing items
+	@Override
+	public void browse(Session session) {
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Browsing Items displayed here");
+		String[] items = clientControllerObj.browseAdminItems(session);
+		for (String element: items) {
+         System.out.println(element);
+      }
+	}
+
+	//Method to be implented for Adding Items
+	@Override
+	public void update(Session session){
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Update items");
+		System.out.println(clientControllerObj.updateItems(session));
+	}
+	
+	//method to be implemented for deleting items
+	@Override
+	public void delete(Session session){
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Delete items");
+		System.out.println(clientControllerObj.deleteItems(session));
+	}
+
 
 	// Method o be implemented for Displaying User or Admin Profile
 	@Override

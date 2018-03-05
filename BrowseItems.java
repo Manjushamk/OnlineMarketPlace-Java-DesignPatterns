@@ -8,13 +8,15 @@
 //Concreate class creation for browsing items command that implements the Actions Command interface
 public class BrowseItems implements Actions{
    private Admin admin;
+   private Session session;
 
-   public BrowseItems(Admin admin ){
-      this.admin = admin;
+   public BrowseItems(Admin admin , Session session){
+     this.admin = admin;
+     this.session = session;
    }
 
    //execute method used in invoker
    public void execute() {
-      admin.browse();
+     admin.browse(session);
 }
 }
