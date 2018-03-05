@@ -35,11 +35,11 @@ public class MarketPlaceModel {
 		return "Called server addItems Method";
 	}
 
-	public String addItems(){
+	public String deleteItems(){
 		return "Called server delete Items Method";
 	}
 
-	public String addItems(){
+	public String updateItems(){
 		return "Called server Update Items Method";
 	}
 	public String[] browseAdminItems(){
