@@ -8,13 +8,15 @@
 //Concreate class creation for updating items command that implements the Actions Command interface
 public class UpdateItems implements Actions{
    private Admin admin;
+   private Session session;
 
-   public UpdateItems(Admin admin ){
+   public UpdateItems(Admin admin , Session session){
       this.admin = admin;
+      this.session = session;      
    }
 
    //execute method used in invoker
    public void execute() {
-      admin.update();
+      admin.update(session);
 }
 }
