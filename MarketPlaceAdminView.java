@@ -65,8 +65,8 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public void add(Session session){
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
-		clientControllerObj.browseItems(session);
 		System.out.println("Adding items");
+		System.out.println(clientControllerObj.addItems(session));
 	}
 
 	// Method o be implemented for Displaying User or Admin Profile
