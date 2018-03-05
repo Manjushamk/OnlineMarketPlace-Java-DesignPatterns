@@ -82,5 +82,18 @@ public class MarketPlaceClientController {
 			return session;
 		}
 
+		public String addItems(Session session){
+			String value = "";
+			try{
+				value = marketPlace.addItems(session);
+			}
+			catch(Exception e){
+				System.out.println("Error in adding items" +
+				e.getMessage());
+				e.printStackTrace();
+			}
+			return value;	
+		}
+
 		
 }

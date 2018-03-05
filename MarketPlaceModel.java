@@ -28,6 +28,10 @@ public class MarketPlaceModel {
 		this.password = password;
 		return "User Registration Successful " + this.userName ;
 	}
+
+	public String addItems(){
+		return "Called server addItems Method";
+	}
 	
 	public String[] getItemList(String itemType) {
 		//generally should return items from database of the given type
