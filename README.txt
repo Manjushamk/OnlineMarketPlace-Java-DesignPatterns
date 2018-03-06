@@ -26,6 +26,7 @@ Assignment 3
 7. In the second instance, you will get a menu for selecting 1. User or 2. Admin
 		> For 1.User - Enter Id: mkottala
 					   Enter password : mkottala
+					   A Method display User is called from server using User role based access.
 		> For 2.Admin - Enter Id: manju
 					    Enter password : manju
 				> For the admin a menu appears to select the actions 1.Add Items
@@ -33,6 +34,7 @@ Assignment 3
 																	 3.Update Items
 																	 4.Browse Items
 				 Enter an option.
+				 Respective methods are called from server using Admim role based access
 
 9. terminate RMI registry by entering command in server instance of putty:
  % fg
