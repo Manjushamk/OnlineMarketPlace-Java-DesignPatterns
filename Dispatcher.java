@@ -27,13 +27,16 @@ public class Dispatcher {
 			userObj.displayUser(session);
 		} 
 		else {
+			//this is entered when user requests for admin view
 			Admin adminObj = adminView.getAdminView(request);
 			int choice = adminObj.displayAdmin();
+			//creating instances for new concrete classes
 			AddItems addItems = new AddItems(adminObj,session);
 			DeleteItems deleteItems = new DeleteItems(adminObj,session);
 			UpdateItems updateItems = new UpdateItems(adminObj,session);
 			BrowseItems browseItems = new BrowseItems(adminObj,session);
 			Invoker invokerObj = new Invoker();
+			//admin can select his commands from the below choices
 			switch(choice) {
 			case 1 : invokerObj.getActions(addItems);
 			break;
@@ -45,6 +48,7 @@ public class Dispatcher {
 			break;  
 			default : System.out.println("Invalid Option");
 			}
+			//perform one of the above selected options
 			invokerObj.performActions();
 		}	
 	}
