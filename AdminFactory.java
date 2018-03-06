@@ -19,6 +19,7 @@ public class AdminFactory extends AbstractFactory{
 		return null;
 	}
 
+	//create new admin view if user inputs for a admin view
 	@Override
 	Admin getAdminView(String type) {
 		if(type.equalsIgnoreCase("admin")) {
