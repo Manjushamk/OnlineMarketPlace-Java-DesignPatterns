@@ -43,6 +43,7 @@ public class MarketPlaceUserView implements User{
 	
 	
 	// Method o be implemented for Displaying User or Admin Profile
+	@Override
 	public void displayUser() {
 		System.out.println("Displaying User Profile");
 	}
