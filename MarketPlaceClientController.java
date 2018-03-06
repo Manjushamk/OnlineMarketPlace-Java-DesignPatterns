@@ -134,9 +134,20 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
-}
 
 	public String displayUser(Session session){
 		String value = "";
+		try{
+			value = marketPlace.displayUser(session);
+		}
+		catch(Exception e){
+			System.out.println("Error in displaying " +
+					e.getMessage());
+			e.printStackTrace();
+		}
 		return value;	
 	}
+
+}
+
+

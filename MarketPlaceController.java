@@ -77,7 +77,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	@Override
 	public String displayUser(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
-		return displayUser();
+		return model.displayUser();
 	}
 
 
