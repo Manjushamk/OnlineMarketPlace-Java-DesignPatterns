@@ -17,37 +17,37 @@ public class MarketPlaceUserView implements User{
 	private String userId;
 	private String password;
 	private Session session;
-	
+
 	//method for entering user login information
 
-	
+
 	//Get methods for userId, UserName and Password
 	public String getUserId() {
 		return this.userId;
 	}
-	
+
 	//get methods
 	public String getUserName() {
 		return this.userName;
 	}
-	
+
 	public String getPassword() {
 		return this.password;
 	}
-	
-	
+
+
 	// Method to be implemented for Browsing items
 	public void browseItems() {
 		System.out.println("Browsing Items displayed here");
 	}
-	
-	
+
+
 	// Method o be implemented for Displaying User or Admin Profile
 	@Override
 	public void displayUser() {
 		System.out.println("Displaying User Profile");
 	}
-	
+
 	//method for user registration
 	public void registration() {
 		Scanner userInput = new Scanner(System.in);
@@ -60,11 +60,11 @@ public class MarketPlaceUserView implements User{
 		password = userInput.nextLine();
 		userInput.close();
 	}
-	
+
 	// Ryan: This is a violation of separation of concerns as we are mixing 
 	// View logic with "framework" functionality. Instead this needs to be 
 	// separated using a Controller.
-	
+
 	// FIXED: This is how I fixed what was wrong.
 	// I have separated the framework functionality by including an additional controller 
 	// which implements the RMI client functionality

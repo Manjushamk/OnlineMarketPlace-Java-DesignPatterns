@@ -13,7 +13,7 @@ public class MarketPlaceModel {
 	private String password;
 	private String adminPassword;
 	private String[] items = new String[20];
-	
+
 	public MarketPlaceModel() {
 		//default login
 		userName = "Manjusha";
@@ -23,7 +23,7 @@ public class MarketPlaceModel {
 		adminPassword = "manju";
 		items = new String[]{"Book","Pen","Cycle","Camera"};
 	}
-	
+
 	public String registerUser(String userName, String userId, String password){
 		this.userName = userName;
 		this.userId = userId;
@@ -45,11 +45,11 @@ public class MarketPlaceModel {
 	public String[] browseAdminItems(){
 		return getItemList();
 	}
-	
+
 	public String[] getItemList() {
 		return this.items;
 	}
-	
+
 	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
 		if(type.equalsIgnoreCase("User")) {
@@ -66,11 +66,11 @@ public class MarketPlaceModel {
 			}
 			else {
 				return false;
+			}
 		}
-		}
-		
+
 	}
-	
+
 
 }
 

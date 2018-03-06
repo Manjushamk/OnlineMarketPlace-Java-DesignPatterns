@@ -9,7 +9,7 @@
 public class AdminFactory extends AbstractFactory{
 
 	//Overriding the methods for selection of the concrete class
-	
+
 	@Override
 	public User getUserView(String type) {
 		// Ryan: Do you really want to return null here?

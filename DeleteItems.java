@@ -19,5 +19,5 @@ public class DeleteItems implements Actions{
    @Override
    public void execute() {
       admin.delete(session);
-}
+   }
 }

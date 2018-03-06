@@ -9,12 +9,12 @@
 import java.util.Scanner;
 
 public class MarketPlaceAdminView implements Admin{
-	
+
 	private String adminName;
 	private String adminId;
 	private String password;
 	private Scanner userInput;
-	
+
 	//method for entering user login information
 	public void enterLogin() {
 		// Sample user login 
@@ -26,20 +26,20 @@ public class MarketPlaceAdminView implements Admin{
 		password = userInput.nextLine();
 		userInput.close();
 	}
-	
+
 	//Get methods for adminId, adminName and Password
 	public String getadminId() {
 		return this.adminId;
 	}
-	
+
 	public String getadminName() {
 		return this.adminName;
 	}
-	
+
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 
 	//method to be implemented for adding items
 	@Override
@@ -57,8 +57,8 @@ public class MarketPlaceAdminView implements Admin{
 		System.out.println("Browsing Items displayed here");
 		String[] items = clientControllerObj.browseAdminItems(session);
 		for (String element: items) {
-         System.out.println(element);
-      }
+			System.out.println(element);
+		}
 	}
 
 	//Method to be implented for Adding Items
@@ -68,7 +68,7 @@ public class MarketPlaceAdminView implements Admin{
 		System.out.println("Update items");
 		System.out.println(clientControllerObj.updateItems(session));
 	}
-	
+
 	//method to be implemented for deleting items
 	@Override
 	public void delete(Session session){
@@ -91,7 +91,7 @@ public class MarketPlaceAdminView implements Admin{
 		int option = userInput.nextInt();
 		return option;
 	}
-	
+
 	//method for user registration - yet to be used
 	public void registration() {
 		Scanner userInput = new Scanner(System.in);

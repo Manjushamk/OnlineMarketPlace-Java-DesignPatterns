@@ -13,7 +13,7 @@ public class ClientEntryView {
 	private String userId;
 	private String password;
 	private Scanner userInput;
-	
+
 	//Method for selecting the view 
 	public String performAction() {
 		userInput = new Scanner(System.in);
@@ -22,16 +22,16 @@ public class ClientEntryView {
 		System.out.println("2. Admin");
 		int option = userInput.nextInt();	
 		if (option == 1) {
-		    return "User";
+			return "User";
 		}
 		else {
-		    return "Admin";
+			return "Admin";
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	//method for input of id, password and setting them.
 	public void checkLogin() {
 		userInput = new Scanner(System.in);
@@ -41,15 +41,15 @@ public class ClientEntryView {
 		System.out.println("Enter Password: ");
 		password = userInput.nextLine();
 	}
-	
-	
+
+
 	//get methods
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	public String getId() {
 		return this.userId;
 	}
-	
+
 }
