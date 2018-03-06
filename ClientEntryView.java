@@ -14,7 +14,7 @@ public class ClientEntryView {
 	private String password;
 	private Scanner userInput;
 
-	//Method for selecting the view 
+	//Method for selecting the view based on input
 	public String performAction() {
 		userInput = new Scanner(System.in);
 		System.out.println("Enter Action as either 1 or 2:  ");
@@ -27,8 +27,6 @@ public class ClientEntryView {
 		else {
 			return "Admin";
 		}
-
-
 	}
 
 
@@ -47,7 +45,8 @@ public class ClientEntryView {
 	public String getPassword() {
 		return this.password;
 	}
-
+	
+	//returns user Id
 	public String getId() {
 		return this.userId;
 	}
