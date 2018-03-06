@@ -9,7 +9,8 @@
 public class DeleteItems implements Actions{
    private Admin admin;
    private Session session;
-
+   
+   //DeleteItems constructor with admin object and session object
    public DeleteItems(Admin admin , Session session){
       this.admin = admin;
       this.session = session;
