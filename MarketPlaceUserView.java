@@ -20,7 +20,6 @@ public class MarketPlaceUserView implements User{
 
 	//method for entering user login information
 
-
 	//Get methods for userId, UserName and Password
 	public String getUserId() {
 		return this.userId;
