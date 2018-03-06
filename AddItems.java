@@ -9,7 +9,8 @@
 public class AddItems implements Actions{
    private Admin admin;
    private Session session;
-
+   
+   //constrcutor with admin object and session object
    public AddItems(Admin adminObj , Session session){
       this.admin = adminObj;
       this.session = session;
