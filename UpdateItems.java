@@ -9,7 +9,8 @@
 public class UpdateItems implements Actions{
    private Admin admin;
    private Session session;
-
+   
+   //UpdateItems constructor intitlaizes admin and session object
    public UpdateItems(Admin admin , Session session){
       this.admin = admin;
       this.session = session;      
