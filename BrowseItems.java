@@ -9,7 +9,8 @@
 public class BrowseItems implements Actions{
   private Admin admin;
   private Session session;
-
+  
+  //BrowseItems constructor with admin and session object
   public BrowseItems(Admin admin , Session session){
     this.admin = admin;
     this.session = session;
