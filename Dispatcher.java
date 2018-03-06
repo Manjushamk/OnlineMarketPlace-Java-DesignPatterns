@@ -28,7 +28,6 @@ public class Dispatcher {
 		} 
 		else {
 			Admin adminObj = adminView.getAdminView(request);
-			System.out.println(adminObj);
 			int choice = adminObj.displayAdmin();
 			AddItems addItems = new AddItems(adminObj,session);
 			DeleteItems deleteItems = new DeleteItems(adminObj,session);
