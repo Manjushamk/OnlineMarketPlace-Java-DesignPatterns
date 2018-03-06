@@ -47,7 +47,7 @@ public class MarketPlaceClientController {
 
 
 	//Method for interacting with the remote method for login check
-	public boolean loginCheck(Session session, String request) {
+	public boolean loginCheck(String request) {
 		ClientEntryView loginView = new ClientEntryView();
 		loginView.checkLogin();
 		String id = loginView.getId();
@@ -55,10 +55,10 @@ public class MarketPlaceClientController {
 		System.out.println("Login Checking");
 		try {
 			if(request == "Admin"){
-				return marketPlace.adminLogin(session, id, password, request);
+				return marketPlace.adminLogin(id, password, request);
 			}
 			else{
-				return marketPlace.userLogin(session, id, password, request);
+				return marketPlace.userLogin(id, password, request);
 			}
 
 		}

@@ -15,11 +15,9 @@ import java.rmi.Remote;
 
 public interface MarketPlace extends Remote {
 	//interfaces that MarketPlaceView uses remotely
-	@RoleAnnotations("User")
-	boolean userLogin(Session session, String userId, String password, String type) throws java.rmi.RemoteException;
+	boolean userLogin(String userId, String password, String type) throws java.rmi.RemoteException;
 
-	@RoleAnnotations("Admin")
-	boolean adminLogin(Session session, String userId, String password, String type) throws java.rmi.RemoteException;
+	boolean adminLogin(String userId, String password, String type) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
 	public String addItems(Session session) throws java.rmi.RemoteException;
