@@ -31,6 +31,10 @@ public class MarketPlaceModel {
 		return "User Registration Successful " + this.userName ;
 	}
 
+	public String displayUser(){
+		return "User Profile Display from Server";
+	}
+
 	public String addItems(){
 		return "Called server addItems Method";
 	}

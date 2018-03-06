@@ -33,6 +33,9 @@ public interface MarketPlace extends Remote {
 	@RoleAnnotations("Admin")
 	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException;
 
+	@RoleAnnotations("Admin")
+	public String displayUser(Session session) throws java.rmi.RemoteException;
+
 	Session sessionLogin(String request) throws java.rmi.RemoteException;
 	String register(String userName, String userId, String password) throws java.rmi.RemoteException;
 }

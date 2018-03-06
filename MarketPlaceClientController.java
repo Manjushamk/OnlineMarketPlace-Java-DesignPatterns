@@ -135,3 +135,8 @@ public class MarketPlaceClientController {
 	}
 
 }
+
+	public String displayUser(Session session){
+		String value = "";
+		return value;	
+	}

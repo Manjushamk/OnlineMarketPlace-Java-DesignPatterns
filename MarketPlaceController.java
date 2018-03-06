@@ -74,6 +74,12 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.registerUser(userName,userId,password);
 	}
 
+	@Override
+	public String displayUser(Session session) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return displayUser();
+	}
+
 
 	public static void main(String args[]) throws RemoteException{
 		// Set the RMI Security Manager...

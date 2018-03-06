@@ -24,7 +24,7 @@ public class Dispatcher {
 		// Condition for selection of view
 		if(request.equalsIgnoreCase("User")) {
 			User userObj = userView.getUserView(request);
-			userObj.displayUser();
+			userObj.displayUser(session);
 		} 
 		else {
 			Admin adminObj = adminView.getAdminView(request);

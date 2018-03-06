@@ -10,5 +10,5 @@ public interface User {
 	// Ryan: Please make sure to indent your code properly - adds to readability.
 
 	//FIXED: fixed indentation
-	public void displayUser();
+	public void displayUser(Session session);
 }
