@@ -5,7 +5,8 @@
 //
 //mkottala
 
-
+//FrontController class is responsible for entry point, user authentication
+//and dispatchinig to respective view
 public class FrontController {
 	//instance of Dispatcher class
 	private Dispatcher dispatcher;
