@@ -8,6 +8,8 @@
 
 import java.util.Scanner;
 
+//MarketPlaceAdminView implements from Admin interface and contains all admin related 
+//functions implementation
 public class MarketPlaceAdminView implements Admin{
 
 	private String adminName;
