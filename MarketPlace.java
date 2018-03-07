@@ -15,10 +15,13 @@ import java.rmi.Remote;
 
 public interface MarketPlace extends Remote {
 	//interfaces that MarketPlaceView uses remotely
+	
+	//interface methods used for user or customer login
 	boolean userLogin(String userId, String password, String type) throws java.rmi.RemoteException;
-
 	boolean adminLogin(String userId, String password, String type) throws java.rmi.RemoteException;
 
+	//admin related functions with role based access
+	//add update delete and browse items
 	@RoleAnnotations("Admin")
 	public String addItems(Session session) throws java.rmi.RemoteException;
 
@@ -31,9 +34,13 @@ public interface MarketPlace extends Remote {
 	@RoleAnnotations("Admin")
 	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException;
 
+	//user related function with role based access
 	@RoleAnnotations("User")
 	public String displayUser(Session session) throws java.rmi.RemoteException;
-
+	
+	//session creation method
 	Session sessionLogin(String request) throws java.rmi.RemoteException;
+	
+	//registers a user
 	String register(String userName, String userId, String password) throws java.rmi.RemoteException;
 }
