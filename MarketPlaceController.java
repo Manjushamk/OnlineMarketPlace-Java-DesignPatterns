@@ -29,38 +29,43 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
-
+	
+	//overriding interface implemented userlogin method
 	@Override
 	public synchronized boolean userLogin(String userId, String password, String type) throws RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
 
+	//overriding interface implemented sessionLogin method
 	@Override
 	public Session sessionLogin(String type) throws RemoteException{
 		Session session = new Session(type);
 		return session;
 	}
 
-
+	//overriding interface implemented addItems method
 	@Override
 	public String addItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addItems();
 	}
 
+	//overriding interface implemented updateIems method
 	@Override
 	public String updateItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.updateItems();
 	}
-
+	
+	//overriding interface implemented deleteItems method
 	@Override
 	public String deleteItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.deleteItems();
 	}
 
+	//overriding interface implemented browseItems method
 	@Override
 	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
@@ -74,6 +79,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.registerUser(userName,userId,password);
 	}
 
+	//displayUser method implementaion
 	@Override
 	public String displayUser(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
@@ -91,6 +97,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 			// Location of Server
 			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
 
+			//creating a dynamic proxy
 			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
 					new Class<?>[] {MarketPlace.class},
 					new AuthorizationInvocationHandler(new MarketPlaceController(name)));
