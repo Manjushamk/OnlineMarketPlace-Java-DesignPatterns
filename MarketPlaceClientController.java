@@ -14,7 +14,7 @@
 import java.rmi.Naming;
 import java.util.Scanner;
 
-
+//MarketPlaceClientController is a client side controller responsbile for RMI communication
 public class MarketPlaceClientController {
 	static private MarketPlace marketPlace;
 	Session session;
@@ -26,7 +26,6 @@ public class MarketPlaceClientController {
 			String name = "//tesla.cs.iupui.edu:2525/MarketPlaceServer";
 			// Attempt to locate the MarketPlace Server
 			marketPlace = (MarketPlace) Naming.lookup(name);
-
 
 			//Creating an instance of Entry View
 			ClientEntryView entryPoint = new ClientEntryView();
@@ -53,6 +52,7 @@ public class MarketPlaceClientController {
 		String id = loginView.getId();
 		String password = loginView.getPassword();
 		System.out.println("Login Checking");
+		//exception handling
 		try {
 			if(request == "Admin"){
 				return marketPlace.adminLogin(id, password, request);
@@ -70,6 +70,7 @@ public class MarketPlaceClientController {
 		return true;
 	}
 
+	//sessionLogin calls server side sessionLogin method
 	public Session sessionLogin(String request){
 		try{
 			session = marketPlace.sessionLogin(request);
@@ -82,6 +83,7 @@ public class MarketPlaceClientController {
 		return session;
 	}
 
+	//addItems calls server side add items for admin
 	public String addItems(Session session){
 		String value = "";
 		try{
@@ -95,6 +97,7 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
+	//updateItems calls server side update items method
 	public String updateItems(Session session){
 		String value = "";
 		try{
@@ -107,7 +110,8 @@ public class MarketPlaceClientController {
 		}
 		return value;	
 	}
-
+	
+	//deleteItems calls server side deletemthod for admin
 	public String deleteItems(Session session){
 		String value = "";
 		try{
@@ -120,7 +124,8 @@ public class MarketPlaceClientController {
 		}
 		return value;	
 	}
-
+	
+	//browse admin items server side method is called
 	public String[] browseAdminItems(Session session){
 		String[] value = {""};
 		try{
@@ -134,7 +139,7 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
-
+	//display user method onserver side for user is called
 	public String displayUser(Session session){
 		String value = "";
 		try{
