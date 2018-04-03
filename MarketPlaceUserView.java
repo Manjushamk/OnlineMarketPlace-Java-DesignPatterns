@@ -8,8 +8,7 @@
 // importing Scanner for input operation
 import java.util.ArrayList;
 import java.util.Scanner;
-//importing Naming class for obtaining reference to remote object
-import java.rmi.Naming;
+
 
 
 // View class of the MVC pattern and it acts as the client for the Java RMI
@@ -70,14 +69,14 @@ public class MarketPlaceUserView implements User{
 		password = userInput.nextLine();
 		userInput.close();
 	}
-	
+
 	// Method to be implemented for Browsing items
 	@Override
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here :");
 		System.out.println("Item Id  Item Name \tDescription \t\tQuantity  \tPrice");
-		ArrayList items = clientControllerObj.browseUserItems(session);
+		ArrayList<String> items = clientControllerObj.browseUserItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
 		}

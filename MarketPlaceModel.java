@@ -111,7 +111,7 @@ public class MarketPlaceModel {
 			else{
 				return "Out of Stock or enter an existing item Id";
 			}
-			
+
 		}
 		catch(SQLException e){
 			e.printStackTrace();;
@@ -121,8 +121,8 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for browsing items
-	public ArrayList browseItems(){
-		ArrayList itemList = new ArrayList();
+	public ArrayList<String> browseItems(){
+		ArrayList<String> itemList = new ArrayList<String>();
 		String rowDate;
 		int i = 0;
 		try{

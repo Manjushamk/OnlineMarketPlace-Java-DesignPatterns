@@ -30,7 +30,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
-	
+
 	//overriding interface implemented userlogin method
 	@Override
 	public synchronized boolean userLogin(String userId, String password, String type) throws RemoteException{
@@ -58,7 +58,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.updateItems();
 	}
-	
+
 	//overriding interface implemented deleteItems method
 	@Override
 	public String deleteItems(Session session) throws java.rmi.RemoteException{
@@ -68,7 +68,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented browseItems method
 	@Override
-	public synchronized ArrayList browseAdminItems(Session session) throws java.rmi.RemoteException{
+	public synchronized ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.browseItems();
 	}
@@ -76,7 +76,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented browseItems method
 	@Override
-	public synchronized ArrayList browseUserItems(Session session) throws java.rmi.RemoteException{
+	public synchronized ArrayList<String> browseUserItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.browseItems();
 	}

@@ -140,8 +140,8 @@ public class MarketPlaceClientController {
 	}
 
 	//browse admin items server side method is called
-	public ArrayList browseAdminItems(Session session){
-		ArrayList value = new ArrayList();
+	public ArrayList<String> browseAdminItems(Session session){
+		ArrayList<String> value = new ArrayList<String>();
 		try{
 			value = marketPlace.browseAdminItems(session);
 		}
@@ -154,8 +154,8 @@ public class MarketPlaceClientController {
 	}
 
 	//browse user items server side method is called
-	public ArrayList browseUserItems(Session session){
-		ArrayList value = new ArrayList();
+	public ArrayList<String> browseUserItems(Session session){
+		ArrayList<String> value = new ArrayList<String>();
 		try{
 			value = marketPlace.browseUserItems(session);
 		}
