@@ -6,6 +6,7 @@
 //mkottala
 
 // importing Scanner for input operation
+import java.util.ArrayList;
 import java.util.Scanner;
 //importing Naming class for obtaining reference to remote object
 import java.rmi.Naming;
@@ -60,6 +61,17 @@ public class MarketPlaceUserView implements User{
 		System.out.println("Enter Password: ");
 		password = userInput.nextLine();
 		userInput.close();
+	}
+	
+	// Method to be implemented for Browsing items
+	@Override
+	public void browse(Session session) {
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Browsing Items displayed here");
+		ArrayList items = clientControllerObj.browseUserItems(session);
+		for(int i = 0; i< items.size(); i++){
+			System.out.println(items.get(i));
+		}
 	}
 
 	// Ryan: This is a violation of separation of concerns as we are mixing 
