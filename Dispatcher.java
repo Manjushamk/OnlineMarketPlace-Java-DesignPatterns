@@ -26,6 +26,7 @@ public class Dispatcher {
 			User userObj = userView.getUserView(request);
 			int choice = userObj.displayUser(session);
 			BrowseUserItems browseUserItems = new BrowseUserItems(userObj,session);
+			Invoker invokerObj = new Invoker();
 			switch(choice) {
 			case 1 : invokerObj.getUserActions(browseUserItems);
 			break; 

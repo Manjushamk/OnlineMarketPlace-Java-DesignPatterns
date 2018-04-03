@@ -45,6 +45,7 @@ public class MarketPlaceUserView implements User{
 	// Method o be implemented for Displaying User or Admin Profile
 	@Override
 	public int displayUser(Session session) {
+		Scanner userInput = new Scanner(System.in);
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Displaying User Profile");
 		System.out.println(clientControllerObj.displayUser(session));
