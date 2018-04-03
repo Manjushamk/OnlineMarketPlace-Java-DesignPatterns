@@ -47,7 +47,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented addItems method
 	@Override
-	public String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
+	public synchronized String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addItems(itemRow);
 	}
@@ -90,14 +90,14 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//displayUser method implementaion
 	@Override
-	public String displayUser(Session session) throws java.rmi.RemoteException{
+	public synchronized String displayUser(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.displayUser();
 	}
 
 	//Purchase method for User
 	@Override
-	public String purchase(Session session, int ItemId, int quantity) throws java.rmi.RemoteException{
+	public synchronized String purchase(Session session, int ItemId, int quantity) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.purchase(ItemId,quantity);
 	}
