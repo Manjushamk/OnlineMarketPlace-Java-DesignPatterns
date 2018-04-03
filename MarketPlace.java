@@ -39,6 +39,10 @@ public interface MarketPlace extends Remote {
 	@RoleAnnotations("User")
 	public String displayUser(Session session) throws java.rmi.RemoteException;
 	
+	// user browse items function role based access
+	@RoleAnnotations("User")
+	public ArrayList browseUserItems(Session session) throws java.rmi.RemoteException;
+
 	//session creation method
 	Session sessionLogin(String request) throws java.rmi.RemoteException;
 	

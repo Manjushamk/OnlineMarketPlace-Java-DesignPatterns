@@ -143,7 +143,7 @@ public class MarketPlaceClientController {
 	public ArrayList browseUserItems(Session session){
 		ArrayList value = new ArrayList();
 		try{
-			value = marketPlace.browseAdminItems(session);
+			value = marketPlace.browseUserItems(session);
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +

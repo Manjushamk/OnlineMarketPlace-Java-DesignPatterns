@@ -67,7 +67,7 @@ public class MarketPlaceModel {
 	}
 	
 	//server side logic for browsing items
-	public ArrayList browseAdminItems(){
+	public ArrayList browseItems(){
 		ArrayList itemList = new ArrayList();
 		String rowDate;
 		int i = 0;

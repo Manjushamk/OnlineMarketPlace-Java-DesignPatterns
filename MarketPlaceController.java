@@ -70,7 +70,15 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	@Override
 	public synchronized ArrayList browseAdminItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
-		return model.browseAdminItems();
+		return model.browseItems();
+	}
+
+
+	//overriding interface implemented browseItems method
+	@Override
+	public synchronized ArrayList browseUserItems(Session session) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.browseItems();
 	}
 
 
