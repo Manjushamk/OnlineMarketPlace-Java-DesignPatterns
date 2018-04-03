@@ -32,12 +32,12 @@ public class Invoker {
 	private List<UserActions> userActionsList = new ArrayList<UserActions>(); 
 
 	// method to get the commands
-	public void getActions(UserActions userAction) {
+	public void getUserActions(UserActions userAction) {
 		userActionsList.add(userAction);
 	}
 
 	// method to execute the commands from the list
-	public void performActions() {
+	public void performUserActions() {
 		for (UserActions userAction : userActionsList) {
 			userAction.execute();
 		}

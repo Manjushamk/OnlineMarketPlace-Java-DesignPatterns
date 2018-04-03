@@ -24,7 +24,15 @@ public class Dispatcher {
 		// Condition for selection of view
 		if(request.equalsIgnoreCase("User")) {
 			User userObj = userView.getUserView(request);
-			userObj.displayUser(session);
+			int choice = userObj.displayUser(session);
+			BrowseUserItems browseUserItems = new BrowseUserItems(userObj,session);
+			switch(choice) {
+			case 1 : invokerObj.getUserActions(browseUserItems);
+			break; 
+			default : System.out.println("Invalid Option");
+			}
+			//perform one of the above selected options
+			invokerObj.performUserActions();
 		} 
 		else {
 			//this is entered when user requests for admin view
