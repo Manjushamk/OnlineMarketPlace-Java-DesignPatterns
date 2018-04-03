@@ -50,13 +50,17 @@ public class MarketPlaceModel {
 
 	//server side logic for adding items
 	public String addItems(String[] itemRow){
-		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+",'" + itemRow[1] +"','"+ itemRow[2]+"',"+Integer.parseInt(itemRow[3])+","+Double.parseDouble(itemRow[4])+")";
+		//Query for Insertion of the new items into the data base
+		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+",'" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
 		if(conn != null) {
 			statement = null;
 			try {
+				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
+					//
 					statement.executeUpdate(addItemQuery);
+					statement.close();
 					return "Item has been added";
 				}
 				catch(SQLException e) {
@@ -87,10 +91,10 @@ public class MarketPlaceModel {
 		try{
 			statement = conn.createStatement();
 			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId = "+ itemId);
-			//available_quantity = results.getInt(1);
 			while(results.next()){
 				available_quantity = results.getInt("Quantity");
 			}
+			results.close();
 			if(available_quantity >0 && available_quantity >= quantity){
 				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + " WHERE itemId = "+itemId ;
 				statement = null;
@@ -98,6 +102,7 @@ public class MarketPlaceModel {
 					statement = conn.createStatement();
 					try{
 						statement.executeUpdate(purchaseUpdate);
+						statement.close();
 						return "Item Purchase Successful";
 					}
 					catch(SQLException e){
@@ -129,10 +134,17 @@ public class MarketPlaceModel {
 			statement = conn.createStatement(); 
 			results = statement.executeQuery("SELECT * FROM Items");
 			while(results.next()){
-				rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t" + results.getString(3) + "\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+				if(results.getString(2).length() <6){
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
+				}
+				else{
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
+				}
 				itemList.add(i,rowDate);
 				i++;
 			}
+			statement.close();
+			results.close();
 		}
 		catch (SQLException e1){
 			System.out.println("Error while executing browse query");

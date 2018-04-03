@@ -75,7 +75,7 @@ public class MarketPlaceUserView implements User{
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here :");
-		System.out.println("Item Id  Item Name \tDescription \t\tQuantity  \tPrice");
+		System.out.println("Item Id  Item Name  \tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseUserItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));

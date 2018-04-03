@@ -49,17 +49,15 @@ public class MarketPlaceAdminView implements Admin{
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding items");
 		userInput = new Scanner(System.in);
-		String[] itemRow = {"","","","",""};
+		String[] itemRow = {"","","",""};
 		System.out.println("Enter Item Id: ");
 		itemRow[0] = userInput.nextLine();
 		System.out.println("Enter Item Name: ");
 		itemRow[1] = userInput.nextLine();
-		System.out.println("Enter Item Description: ");
-		itemRow[2] = userInput.nextLine();
 		System.out.println("Enter Item Quantity: ");
-		itemRow[3] = userInput.nextLine();
+		itemRow[2] = userInput.nextLine();
 		System.out.println("Enter Item Price: ");
-		itemRow[4] = userInput.nextLine();
+		itemRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addItems(session,itemRow));
 	}
@@ -70,7 +68,7 @@ public class MarketPlaceAdminView implements Admin{
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here : ");
-		System.out.println("Item Id  Item Name \tDescription \t\tQuantity  \tPrice");
+		System.out.println("Item Id  Item Name \tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
