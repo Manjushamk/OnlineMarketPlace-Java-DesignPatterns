@@ -26,11 +26,14 @@ public class Dispatcher {
 			User userObj = userView.getUserView(request);
 			int choice = 1;
 			BrowseUserItems browseUserItems = new BrowseUserItems(userObj,session);
+			Purchase purchase = new Purchase(userObj,session);
 			Invoker invokerObj = new Invoker();
 			while(choice == 1||choice ==2 ){
 				choice = userObj.displayUser(session);
 				switch(choice) {
 				case 1 : invokerObj.getUserActions(browseUserItems);
+				break; 
+				case 2 : invokerObj.getUserActions(purchase);
 				break; 
 				default : System.out.println("Exiting");
 				}
