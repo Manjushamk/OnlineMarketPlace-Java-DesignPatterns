@@ -11,4 +11,5 @@ public interface User {
 
 	//FIXED: fixed indentation
 	public void displayUser(Session session);
+	public void browse(Session session);
 }
