@@ -5,6 +5,8 @@
 //
 //mkottala
 
+import java.sql.*;
+
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
 	private String userName;
@@ -35,6 +37,11 @@ public class MarketPlaceModel {
 
 	//server side login for displaying a user
 	public String displayUser(){
+		DBConnection DatabaseObj = new DBConnection();
+		Connection conn = DatabaseObj.connect();
+		if(conn != null) {
+			System.out.println("Connection Established");
+		}
 		return "User Profile Display from Server";
 	}
 
