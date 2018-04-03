@@ -12,6 +12,7 @@
  */
 
 import java.rmi.Remote;
+import java.util.*;
 
 public interface MarketPlace extends Remote {
 	//interfaces that MarketPlaceView uses remotely
@@ -32,7 +33,7 @@ public interface MarketPlace extends Remote {
 	public String deleteItems(Session session) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
-	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException;
+	public ArrayList browseAdminItems(Session session) throws java.rmi.RemoteException;
 
 	//user related function with role based access
 	@RoleAnnotations("User")

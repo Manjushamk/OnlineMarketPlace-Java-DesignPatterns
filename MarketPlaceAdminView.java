@@ -6,7 +6,7 @@
 //
 //mkottala
 
-import java.util.Scanner;
+import java.util.*;
 
 //MarketPlaceAdminView implements from Admin interface and contains all admin related 
 //functions implementation
@@ -57,9 +57,9 @@ public class MarketPlaceAdminView implements Admin{
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here");
-		String[] items = clientControllerObj.browseAdminItems(session);
-		for (String element: items) {
-			System.out.println(element);
+		ArrayList items = clientControllerObj.browseAdminItems(session);
+		for(int i = 0; i< items.size(); i++){
+			System.out.println(items.get(i));
 		}
 	}
 

@@ -12,7 +12,7 @@
 
 
 import java.rmi.Naming;
-import java.util.Scanner;
+import java.util.*;
 
 //MarketPlaceClientController is a client side controller responsbile for RMI communication
 public class MarketPlaceClientController {
@@ -126,8 +126,8 @@ public class MarketPlaceClientController {
 	}
 	
 	//browse admin items server side method is called
-	public String[] browseAdminItems(Session session){
-		String[] value = {""};
+	public ArrayList browseAdminItems(Session session){
+		ArrayList value = new ArrayList();
 		try{
 			value = marketPlace.browseAdminItems(session);
 		}

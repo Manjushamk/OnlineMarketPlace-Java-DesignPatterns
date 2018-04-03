@@ -21,7 +21,7 @@ public class MarketPlaceModel {
 	private Connection conn = null;
 	private Statement statement = null;
 
-	//constructor with user detials init
+	//constructor with user details init
 	public MarketPlaceModel() {
 		//default login
 		userName = "Manjusha";
@@ -69,12 +69,15 @@ public class MarketPlaceModel {
 	//server side logic for browsing items
 	public ArrayList browseAdminItems(){
 		ArrayList itemList = new ArrayList();
+		String rowDate;
+		int i = 0;
 		try{
 			statement = conn.createStatement(); 
 			results = statement.executeQuery("SELECT * FROM Items");
 			while(results.next()){
 				rowDate = results.getInt(1)+ " , " + results.getString(2) + " , " + results.getString(3) + " , " + results.getInt(4) + " , " + results.getDouble(5);
-				itemList.add(rowDate)
+				itemList.add(i,rowDate);
+				i++;
 			}
 		}
 		catch (SQLException e1){
