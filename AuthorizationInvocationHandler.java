@@ -14,12 +14,12 @@ import java.lang.reflect.Method;
 //invoke method and code with appropriate functionality
 public class AuthorizationInvocationHandler implements InvocationHandler, Serializable {
 	private Object objectImpl;
-	
+
 	//constructor
 	public AuthorizationInvocationHandler(Object impl) {
 		this.objectImpl = impl;
 	}
-	
+
 	//overiding invoke method which can invoke an appropriate method
 	//if the annotation from interface and session both matches
 	@Override
@@ -28,7 +28,7 @@ public class AuthorizationInvocationHandler implements InvocationHandler, Serial
 		if (method.isAnnotationPresent(RoleAnnotations.class)) {
 			RoleAnnotations test = method.getAnnotation(RoleAnnotations.class);
 			Session session = (Session) args[0];
-			
+
 			if (session.getRoleType().equals(test.value())) {
 				return method.invoke(objectImpl, args);
 			} else {

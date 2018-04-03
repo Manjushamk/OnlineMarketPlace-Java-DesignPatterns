@@ -7,18 +7,18 @@
 
 //Concreate class creation for adding items command that implements the Actions Command interface
 public class AddItems implements Actions{
-   private Admin admin;
-   private Session session;
-   
-   //constrcutor with admin object and session object
-   public AddItems(Admin adminObj , Session session){
-      this.admin = adminObj;
-      this.session = session;
-   }
+	private Admin admin;
+	private Session session;
 
-   //execute method used in invoker
-   @Override
-   public void execute() {
-      admin.add(session);
-   }
+	//constrcutor with admin object and session object
+	public AddItems(Admin adminObj , Session session){
+		this.admin = adminObj;
+		this.session = session;
+	}
+
+	//execute method used in invoker
+	@Override
+	public void execute() {
+		admin.add(session);
+	}
 }

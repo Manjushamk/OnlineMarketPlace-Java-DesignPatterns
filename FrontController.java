@@ -24,20 +24,20 @@ public class FrontController {
 	private boolean isAuthenticUser(String request) {
 		return clientControllerLogin.loginCheck(request); 
 	}
-	
+
 	//method for dispatching the request to the Dispatcher class
 	public void dispatchRequest(String request) {
 		System.out.println("View : " + request);   
-		
+
 		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request)) {
 			System.out.println(request + " authentication is successful.");
 			session = clientControllerLogin.sessionLogin(request);
 			dispatcher.dispatch(request,session);
-	    }	
+		}	
 		else {
 			System.out.println(request + " authentication failed.");
 		}
 	}
-	
+
 }

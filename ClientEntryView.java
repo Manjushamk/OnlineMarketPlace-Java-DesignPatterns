@@ -45,7 +45,7 @@ public class ClientEntryView {
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	//returns user Id
 	public String getId() {
 		return this.userId;

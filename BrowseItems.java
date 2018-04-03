@@ -7,18 +7,18 @@
 
 //Concreate class creation for browsing items command that implements the Actions Command interface
 public class BrowseItems implements Actions{
-  private Admin admin;
-  private Session session;
-  
-  //BrowseItems constructor with admin and session object
-  public BrowseItems(Admin admin , Session session){
-    this.admin = admin;
-    this.session = session;
-  }
+	private Admin admin;
+	private Session session;
 
-  //execute method used in invoker
-  @Override
-  public void execute() {
-    admin.browse(session);
-  }
+	//BrowseItems constructor with admin and session object
+	public BrowseItems(Admin admin , Session session){
+		this.admin = admin;
+		this.session = session;
+	}
+
+	//execute method used in invoker
+	@Override
+	public void execute() {
+		admin.browse(session);
+	}
 }

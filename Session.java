@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Session implements Serializable{
 
 	String roleType;
-	
+
 	//constrcutor to intialize roleType
 	public Session(String roleType){
 		this.roleType=roleType;
