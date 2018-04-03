@@ -109,7 +109,7 @@ public class MarketPlaceModel {
 				}
 			}
 			else{
-				return "Out of Stock";
+				return "Out of Stock or enter an existing item Id";
 			}
 			
 		}
