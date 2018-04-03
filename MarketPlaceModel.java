@@ -82,19 +82,42 @@ public class MarketPlaceModel {
 
 	//server side logic for purchase item of user role
 	public String purchase(int itemId, int quantity){
-		int available_quantity;
+		int available_quantity = 0;
 		statement = null;
 		try{
 			statement = conn.createStatement();
-			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId"+ itemId);
-			available_quantity = results.getInt(1);
-			return "Hi this is purchase item"+available_quantity;
+			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId = "+ itemId);
+			//available_quantity = results.getInt(1);
+			while(results.next()){
+				available_quantity = results.getInt("Quantity");
+			}
+			if(available_quantity >0 && available_quantity >= quantity){
+				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + "WHERE itemId = "+itemId ;
+				statement = null;
+				try{
+					statement = conn.createStatement();
+					try{
+						statement.executeUpdate(purchaseUpdate);
+						return "Item Purchase Successful";
+					}
+					catch(SQLException e){
+						e.printStackTrace();
+					}
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+			else{
+				return "Out of Stock"
+			}
+			
 		}
 		catch(SQLException e){
 			e.printStackTrace();;
 		}
 
-		return "Hi this is purchase item";
+		return "purchase item";
 	}
 
 	//server side logic for browsing items
