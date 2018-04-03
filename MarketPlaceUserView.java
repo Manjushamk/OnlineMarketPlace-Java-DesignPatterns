@@ -50,8 +50,8 @@ public class MarketPlaceUserView implements User{
 		System.out.println("Displaying User Profile");
 		System.out.println(clientControllerObj.displayUser(session));
 		System.out.println("Enter Action");
-		System.out.println("1.Purchase Items");
-		System.out.println("2.Delete Items");
+		System.out.println("1.Browse Items");
+		System.out.println("2.Purchase Items");
 		userInput = new Scanner(System.in);
 		int option = userInput.nextInt();
 		return option;
