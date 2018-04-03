@@ -110,7 +110,7 @@ public class MarketPlaceClientController {
 		}
 		return value;	
 	}
-	
+
 	//deleteItems calls server side deletemthod for admin
 	public String deleteItems(Session session){
 		String value = "";
@@ -124,9 +124,23 @@ public class MarketPlaceClientController {
 		}
 		return value;	
 	}
-	
+
 	//browse admin items server side method is called
 	public ArrayList browseAdminItems(Session session){
+		ArrayList value = new ArrayList();
+		try{
+			value = marketPlace.browseAdminItems(session);
+		}
+		catch(Exception e){
+			System.out.println("Error in adding items" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}
+
+	//browse user items server side method is called
+	public ArrayList browseUserItems(Session session){
 		ArrayList value = new ArrayList();
 		try{
 			value = marketPlace.browseAdminItems(session);
