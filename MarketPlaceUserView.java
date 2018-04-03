@@ -82,6 +82,18 @@ public class MarketPlaceUserView implements User{
 		}
 	}
 
+	@Override
+	public void purchase(Session session) {
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		//User input of item id 
+		Scanner userInput = new Scanner(System.in);
+		System.out.println("Enter the Item Number:");
+		int itemId = userInput.nextInt();
+		System.out.println("Enter the Quantity:");
+		int quantity =userInput.nextInt();
+		String result = clientControllerObj.purchase(session,itemId,quantity);
+		System.out.println(result);
+	}
 	// Ryan: This is a violation of separation of concerns as we are mixing 
 	// View logic with "framework" functionality. Instead this needs to be 
 	// separated using a Controller.
