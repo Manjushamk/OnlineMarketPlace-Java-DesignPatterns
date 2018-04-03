@@ -49,6 +49,7 @@ public class MarketPlaceAdminView implements Admin{
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding items");
 		System.out.println(clientControllerObj.addItems(session));
+
 	}
 
 
@@ -57,7 +58,7 @@ public class MarketPlaceAdminView implements Admin{
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here");
-		ArrayList items = clientControllerObj.browseAdminItems(session);
+		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
 		}
@@ -84,7 +85,7 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public int displayAdmin() {
 		System.out.println("Displaying Admin Profile");
-		System.out.println("Enter Action");
+		System.out.println("For exit enter anything other than 1,2,3,4");
 		System.out.println("1.Add Items");
 		System.out.println("2.Delete Items");
 		System.out.println("3.Update Items");
