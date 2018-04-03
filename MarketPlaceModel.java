@@ -80,6 +80,23 @@ public class MarketPlaceModel {
 		return "Called server Update Items Method";
 	}
 
+	//server side logic for purchase item of user role
+	public String purchase(int itemId, int quantity){
+		int available_quantity;
+		statement = null;
+		try{
+			statement = conn.createStatement();
+			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId"+ itemId);
+			available_quantity = results.getInt(1);
+			return "Hi this is purchase item"+available_quantity;
+		}
+		catch(SQLException e){
+			e.printStackTrace();;
+		}
+
+		return "Hi this is purchase item";
+	}
+
 	//server side logic for browsing items
 	public ArrayList browseItems(){
 		ArrayList itemList = new ArrayList();

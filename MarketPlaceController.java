@@ -95,6 +95,13 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.displayUser();
 	}
 
+	//Purchase method for User
+	@Override
+	public String purchase(Session session, int ItemId, int quantity) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.purchase(ItemId,quantity);
+	}
+
 
 	public static void main(String args[]) throws RemoteException{
 		// Set the RMI Security Manager...
