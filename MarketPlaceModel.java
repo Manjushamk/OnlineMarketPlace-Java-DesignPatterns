@@ -6,6 +6,7 @@
 //mkottala
 
 import java.sql.*;
+import java.util.*;
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
@@ -18,6 +19,7 @@ public class MarketPlaceModel {
 	private DBConnection dbConnObj;
 	private ResultSet results = null;
 	private Connection conn = null;
+	private Statement statement = null;
 
 	//constructor with user detials init
 	public MarketPlaceModel() {
@@ -65,8 +67,20 @@ public class MarketPlaceModel {
 	}
 	
 	//server side logic for browsing items
-	public String[] browseAdminItems(){
-		return getItemList();
+	public ArrayList browseAdminItems(){
+		ArrayList itemList = new ArrayList();
+		try{
+			statement = conn.createStatement(); 
+			results = statement.executeQuery("SELECT * FROM Items");
+			while(results.next()){
+				rowDate = results.getInt(1)+ " , " + results.getString(2) + " , " + results.getString(3) + " , " + results.getInt(4) + " , " + results.getDouble(5);
+				itemList.add(rowDate)
+			}
+		}
+		catch (SQLException e1){
+			System.out.println("Error while executing browse query");
+		}
+		return itemList;
 	}
 
 	//server side logic for getting items list

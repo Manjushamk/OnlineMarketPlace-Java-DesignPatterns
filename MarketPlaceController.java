@@ -10,6 +10,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.lang.reflect.Proxy;
+import java.util.*;
 
 // Creation of Controller class that implements the Remote Interface
 public class MarketPlaceController extends UnicastRemoteObject implements MarketPlace{
@@ -67,7 +68,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented browseItems method
 	@Override
-	public String[] browseAdminItems(Session session) throws java.rmi.RemoteException{
+	public ArrayList browseAdminItems(Session session) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.browseAdminItems();
 	}
