@@ -58,8 +58,9 @@ public class MarketPlaceModel {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
-					//
+					//Execution of Query
 					statement.executeUpdate(addItemQuery);
+					//statement close
 					statement.close();
 					return "Item has been added";
 				}
@@ -89,19 +90,26 @@ public class MarketPlaceModel {
 		int available_quantity = 0;
 		statement = null;
 		try{
+			//statement creation
 			statement = conn.createStatement();
+			//statement execution and storing it in the result set
 			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId = "+ itemId);
+			//Accessing the elements of the ResultSet results
 			while(results.next()){
 				available_quantity = results.getInt("Quantity");
 			}
+			// closing the ResultSet results
 			results.close();
 			if(available_quantity >0 && available_quantity >= quantity){
+				//Query for updating the Quantity of the item for purchase
 				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + " WHERE itemId = "+itemId ;
 				statement = null;
 				try{
 					statement = conn.createStatement();
 					try{
+						//Query execution
 						statement.executeUpdate(purchaseUpdate);
+						//Closing the statement
 						statement.close();
 						return "Item Purchase Successful";
 					}
@@ -127,22 +135,28 @@ public class MarketPlaceModel {
 
 	//server side logic for browsing items
 	public ArrayList<String> browseItems(){
+		//list of rows of result in strings format
 		ArrayList<String> itemList = new ArrayList<String>();
 		String rowDate;
 		int i = 0;
 		try{
+			//Statement creations
 			statement = conn.createStatement(); 
+			//executing the Query and results contain the output of the Query as a ResultSet Object
 			results = statement.executeQuery("SELECT * FROM Items");
 			while(results.next()){
 				if(results.getString(2).length() <6){
+					//converting the Query result rows to string with formatting
 					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
 				}
 				else{
 					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
 				}
+				//adding of the row as string to the string array list
 				itemList.add(i,rowDate);
 				i++;
 			}
+			// closing Statement and ResultSet objects statement and results
 			statement.close();
 			results.close();
 		}
