@@ -15,6 +15,9 @@ public class MarketPlaceModel {
 	private String password;
 	private String adminPassword;
 	private String[] items = new String[20];
+	private DBConnection dbConnObj;
+	private ResultSet results = null;
+	private Connection conn = null;
 
 	//constructor with user detials init
 	public MarketPlaceModel() {
@@ -24,7 +27,13 @@ public class MarketPlaceModel {
 		password = "mkottala";
 		adminId = "manju";
 		adminPassword = "manju";
+		dbConnObj = new DBConnection();
+		conn = dbConnObj.connect();
+		if(conn != null) {
+			System.out.println("Connection Established");
+		}
 		items = new String[]{"Book","Pen","Cycle","Camera"};
+
 	}
 
 	//server side login for registering a user
@@ -36,12 +45,7 @@ public class MarketPlaceModel {
 	}
 
 	//server side login for displaying a user
-	public String displayUser(){
-		DBConnection DatabaseObj = new DBConnection();
-		Connection conn = DatabaseObj.connect();
-		if(conn != null) {
-			System.out.println("Connection Established");
-		}
+	public String displayUser(){ 
 		return "User Profile Display from Server";
 	}
 
@@ -93,4 +97,3 @@ public class MarketPlaceModel {
 
 
 }
-
