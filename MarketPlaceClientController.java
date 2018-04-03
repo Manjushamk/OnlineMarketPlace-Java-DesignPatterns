@@ -97,6 +97,20 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
+	//purchase function that calls server side purchase function for user
+	public String purchase( Session session, int itemId, int quantity){
+		String value = "";
+		try{
+			value = marketPlace.purchase(session, itemId, quantity);
+		}
+		catch(Exception e){
+			System.out.println("Error in adding items" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}	
+
 	//updateItems calls server side update items method
 	public String updateItems(Session session){
 		String value = "";
