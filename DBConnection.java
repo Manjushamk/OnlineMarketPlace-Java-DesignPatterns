@@ -20,7 +20,9 @@ public class DBConnection {
 	public Connection connect() {
 		if (conn == null) {
 			try {
+				//Registering the driver
 				Class.forName(DB_DRIVER);
+				//Connecting to the database using the url and credentials given
 				conn = DriverManager.getConnection(DB_URL, "mkottala","mkottala");
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
@@ -33,6 +35,7 @@ public class DBConnection {
 	public void disconnect() {
 		if (conn != null) {
 			try {
+				//CLose the database connection
 				conn.close();
 				conn = null;
 			} catch (SQLException e) {
