@@ -48,7 +48,7 @@ public class Dispatcher {
 			UpdateItems updateItems = new UpdateItems(adminObj,session);
 			BrowseItems browseItems = new BrowseItems(adminObj,session);
 			Invoker invokerObj = new Invoker();
-			int choice = adminObj.displayAdmin();
+			int choice = 1;
 			while(choice == 1 || choice == 2 || choice == 3 || choice == 4 ){
 				choice = adminObj.displayAdmin();
 				//admin can select his commands from the below choices
