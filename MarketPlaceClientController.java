@@ -23,7 +23,7 @@ public class MarketPlaceClientController {
 		// RMI Security Manager
 		System.setSecurityManager(new SecurityManager());
 		try{
-			String name = "//10.234.136.55:2525/MarketPlaceServer";
+			String name = "//10.234.136.55:2526/MarketPlaceServer";
 			// Attempt to locate the MarketPlace Server
 			marketPlace = (MarketPlace) Naming.lookup(name);
 

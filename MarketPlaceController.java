@@ -111,7 +111,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 			System.out.println("Creating a Server Connection!");
 
 			// Location of Server
-			String name = "//10.234.136.55:2525/MarketPlaceServer";
+			String name = "//10.234.136.55:2526/MarketPlaceServer";
 
 			//creating a dynamic proxy
 			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
