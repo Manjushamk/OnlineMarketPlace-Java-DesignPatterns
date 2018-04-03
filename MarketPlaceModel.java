@@ -50,7 +50,7 @@ public class MarketPlaceModel {
 
 	//server side logic for adding items
 	public String addItems(String[] itemRow){
-		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+"," + itemRow[1] +","+ itemRow[2]+","+Integer.parseInt(itemRow[3])+","+Double.parseDouble(itemRow[4])+")";
+		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+",'" + itemRow[1] +"','"+ itemRow[2]+"',"+Integer.parseInt(itemRow[3])+","+Double.parseDouble(itemRow[4])+")";
 		if(conn != null) {
 			statement = null;
 			try {
@@ -60,7 +60,7 @@ public class MarketPlaceModel {
 					return "Item has been added";
 				}
 				catch(SQLException e) {
-					System.out.println("Error in Update");
+					e.printStackTrace();
 				}
 			}
 			catch(SQLException e) {

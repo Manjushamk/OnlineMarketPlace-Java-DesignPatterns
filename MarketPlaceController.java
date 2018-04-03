@@ -47,7 +47,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented addItems method
 	@Override
-	public String addItems(String[] itemRow, Session session) throws java.rmi.RemoteException{
+	public String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addItems(itemRow);
 	}
