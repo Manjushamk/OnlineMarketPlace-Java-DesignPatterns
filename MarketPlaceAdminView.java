@@ -60,7 +60,8 @@ public class MarketPlaceAdminView implements Admin{
 		itemRow[3] = userInput.nextLine();
 		System.out.println("Enter Item Price: ");
 		itemRow[4] = userInput.nextLine();
-		System.out.println(clientControllerObj.addItems(session));
+		// string array itemRow has the data for item to be added to the database table
+		System.out.println(clientControllerObj.addItems(itemRow, session));
 	}
 
 

@@ -31,9 +31,6 @@ public class MarketPlaceModel {
 		adminPassword = "manju";
 		dbConnObj = new DBConnection();
 		conn = dbConnObj.connect();
-		if(conn != null) {
-			System.out.println("Connection Established");
-		}
 		items = new String[]{"Book","Pen","Cycle","Camera"};
 
 	}
@@ -52,10 +49,27 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for adding items
-	public String addItems(){
-		return "Called server addItems Method";
+	public String addItems(String[] itemRow){
+		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+"," + itemRow[1] +","+ itemRow[2]+","+Integer.parseInt(itemRow[3])+","+Double.parseDouble(itemRow[4])+")";
+		if(conn != null) {
+			statement = null;
+			try {
+				statement = conn.createStatement();
+				try {
+					statement.executeUpdate(addItemQuery);
+					return "Item has been added";
+				}
+				catch(SQLException e) {
+					System.out.println("Error in Update");
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding Items";
 	}
-	
+
 	//server side logic for deleting items
 	public String deleteItems(){
 		return "Called server delete Items Method";
@@ -65,7 +79,7 @@ public class MarketPlaceModel {
 	public String updateItems(){
 		return "Called server Update Items Method";
 	}
-	
+
 	//server side logic for browsing items
 	public ArrayList browseItems(){
 		ArrayList itemList = new ArrayList();

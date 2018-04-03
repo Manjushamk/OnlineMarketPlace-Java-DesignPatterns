@@ -24,7 +24,7 @@ public interface MarketPlace extends Remote {
 	//admin related functions with role based access
 	//add update delete and browse items
 	@RoleAnnotations("Admin")
-	public String addItems(Session session) throws java.rmi.RemoteException;
+	public String addItems(String[] itemRow, Session session) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
 	public String updateItems(Session session) throws java.rmi.RemoteException;

@@ -84,10 +84,10 @@ public class MarketPlaceClientController {
 	}
 
 	//addItems calls server side add items for admin
-	public String addItems(Session session){
+	public String addItems(String[] itemRow, Session session){
 		String value = "";
 		try{
-			value = marketPlace.addItems(session);
+			value = marketPlace.addItems(itemRow, session);
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +
