@@ -129,7 +129,7 @@ public class MarketPlaceModel {
 			statement = conn.createStatement(); 
 			results = statement.executeQuery("SELECT * FROM Items");
 			while(results.next()){
-				rowDate = results.getInt(1)+ " , " + results.getString(2) + " , " + results.getString(3) + " , " + results.getInt(4) + " , " + results.getDouble(5);
+				rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t" + results.getString(3) + "\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				itemList.add(i,rowDate);
 				i++;
 			}
