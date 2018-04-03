@@ -92,7 +92,7 @@ public class MarketPlaceModel {
 				available_quantity = results.getInt("Quantity");
 			}
 			if(available_quantity >0 && available_quantity >= quantity){
-				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + "WHERE itemId = "+itemId ;
+				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + " WHERE itemId = "+itemId ;
 				statement = null;
 				try{
 					statement = conn.createStatement();
@@ -109,7 +109,7 @@ public class MarketPlaceModel {
 				}
 			}
 			else{
-				return "Out of Stock"
+				return "Out of Stock";
 			}
 			
 		}
