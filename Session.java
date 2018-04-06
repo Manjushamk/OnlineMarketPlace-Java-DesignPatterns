@@ -12,6 +12,7 @@ import java.io.Serializable;
 //A new session object is created and passed over the application
 public class Session implements Serializable{
 
+	// Ryan: Should this have a scope associated with it?
 	String roleType;
 
 	//constrcutor to intialize roleType

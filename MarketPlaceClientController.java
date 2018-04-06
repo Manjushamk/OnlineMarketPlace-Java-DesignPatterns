@@ -12,6 +12,7 @@
 
 
 import java.rmi.Naming;
+// Ryan: Do you really need everything in this package?
 import java.util.*;
 
 //MarketPlaceClientController is a client side controller responsbile for RMI communication

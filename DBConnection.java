@@ -6,6 +6,7 @@
 //
 //mkottala
 
+// Ryan: Do you really need everything in this package?
 //importing libraries required for sql connectivity
 import java.sql.*;
 
