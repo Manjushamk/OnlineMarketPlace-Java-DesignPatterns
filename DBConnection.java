@@ -7,8 +7,11 @@
 //mkottala
 
 // Ryan: Do you really need everything in this package?
-//importing libraries required for sql connectivity
-import java.sql.*;
+// Fixed: I have modified the import statement accordingly to import the minimum number of 
+// classes/interfaces required for database connectivity
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConnection {
 	//Database connection variables initialization
