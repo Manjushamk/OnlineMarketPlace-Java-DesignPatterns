@@ -6,7 +6,7 @@
 //mkottala
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
