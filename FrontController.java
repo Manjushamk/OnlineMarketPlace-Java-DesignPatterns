@@ -10,8 +10,8 @@
 public class FrontController {
 	//instance of Dispatcher class
 	private Dispatcher dispatcher;
-	Session session;
-	MarketPlaceClientController clientControllerLogin;
+	private Session session;
+	private MarketPlaceClientController clientControllerLogin;
 
 	//constructor for the FrontController class
 	public FrontController() {
