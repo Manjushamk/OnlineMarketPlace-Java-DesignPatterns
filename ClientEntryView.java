@@ -20,12 +20,16 @@ public class ClientEntryView {
 		System.out.println("Enter Action as either 1 or 2:  ");
 		System.out.println("1. User");
 		System.out.println("2. Admin");
+		System.out.println("3. Customer Registration")
 		int option = userInput.nextInt();	
 		if (option == 1) {
 			return "User";
 		}
-		else {
+		else if (option == 2) {
 			return "Admin";
+		}
+		else{
+			return "Register";
 		}
 	}
 
