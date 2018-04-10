@@ -5,7 +5,12 @@
 //
 //mkottala
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import java.util.ArrayList;
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
