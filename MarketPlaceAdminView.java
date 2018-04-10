@@ -7,7 +7,10 @@
 //mkottala
 
 // Ryan: Do you really need everything in this package?
-import java.util.*;
+// Fixed: I have used only the Arraylist, Scanner classes from this package,
+// So I have modified the import statement accordingly
+import java.util.Scanner;
+import java.util.ArrayList;
 
 //MarketPlaceAdminView implements from Admin interface and contains all admin related 
 //functions implementation
