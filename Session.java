@@ -13,7 +13,8 @@ import java.io.Serializable;
 public class Session implements Serializable{
 
 	// Ryan: Should this have a scope associated with it?
-	String roleType;
+	// Fixed: I have associated the scope as private to this variable
+	private String roleType;
 
 	//constrcutor to intialize roleType
 	public Session(String roleType){
