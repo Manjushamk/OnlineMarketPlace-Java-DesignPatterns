@@ -12,7 +12,9 @@ import java.io.Serializable;
 //A new session object is created and passed over the application
 public class Session implements Serializable{
 
-	String roleType;
+	// Ryan: Should this have a scope associated with it?
+	// Fixed: I have associated the scope as private to this variable
+	private String roleType;
 
 	//constrcutor to intialize roleType
 	public Session(String roleType){

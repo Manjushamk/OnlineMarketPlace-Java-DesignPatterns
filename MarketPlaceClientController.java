@@ -12,7 +12,11 @@
 
 
 import java.rmi.Naming;
-import java.util.*;
+// Ryan: Do you really need everything in this package?
+// Fixed: I have used only the Arraylist, Scanner classes from this package,
+// So I have modified the import statement accordingly
+import java.util.Scanner;
+import java.util.ArrayList;
 
 //MarketPlaceClientController is a client side controller responsbile for RMI communication
 public class MarketPlaceClientController {
