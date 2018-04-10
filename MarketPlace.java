@@ -13,7 +13,8 @@
 
 import java.rmi.Remote;
 // Ryan: Do you really need everything in this package?
-import java.util.*;
+// Fixed: I have used only the Arraylist from this package, So I have modified the import statement accordingly
+import java.util.ArrayList;
 
 public interface MarketPlace extends Remote {
 	//interfaces that MarketPlaceView uses remotely
