@@ -53,5 +53,5 @@ public interface MarketPlace extends Remote {
 	public Session sessionLogin(String request) throws java.rmi.RemoteException;
 
 	//registers a user
-	public String register(String userName, String userId, String password) throws java.rmi.RemoteException;
+	public String register(String firstName,String lastName,String userName, String password) throws java.rmi.RemoteException;
 }
