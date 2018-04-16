@@ -22,15 +22,27 @@ public class FrontController {
 
 	//Sample authentication check
 	private boolean isAuthenticUser(String request) {
-		return clientControllerLogin.loginCheck(request); 
+		if(request.equals("Registration Success")){
+			System.out.println("user Registration Successful and displaying User View");
+			return true;
+		}
+		else{
+			System.out.println("View : " + request);
+			return clientControllerLogin.loginCheck(request);
+		}
 	}
 
 	//method for dispatching the request to the Dispatcher class
 	public void dispatchRequest(String request) {
-		System.out.println("View : " + request);   
+		if(request == "Register"){
+			request = clientControllerLogin.registerUser();
+		}   
 
 		// If the user has been authenticated - dispatch request
-		if(isAuthenticUser(request)) {
+		if(isAuthenticUser(request) || !request.equals("Error in Registration")) {
+			if(request.equals("Registration Success")){
+				request = "User";
+			}
 			System.out.println(request + " authentication is successful.");
 			session = clientControllerLogin.sessionLogin(request);
 			dispatcher.dispatch(request,session);
