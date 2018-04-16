@@ -10,8 +10,10 @@ import java.util.Scanner;
 
 //Generic view for the point of entry such as Login
 public class ClientEntryView {
-	private String userId;
+	private String userName;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private Scanner userInput;
 
 	//Method for selecting the view based on input
@@ -37,8 +39,21 @@ public class ClientEntryView {
 	//method for input of id, password and setting them.
 	public void checkLogin() {
 		userInput = new Scanner(System.in);
-		System.out.println("Enter Id: ");
-		userId = userInput.nextLine();
+		System.out.println("Enter username: ");
+		userName = userInput.nextLine();
+		userInput = new Scanner(System.in);
+		System.out.println("Enter Password: ");
+		password = userInput.nextLine();
+	}
+
+	public void registerUser(){
+		userInput = new Scanner(System.in);
+		System.out.println("Enter firstName: ");
+		firstName = userInput.nextLine();
+		System.out.println("Enter lastName: ");
+		lastName = userInput.nextLine();
+		System.out.println("Enter username: ");
+		userName = userInput.nextLine();
 		userInput = new Scanner(System.in);
 		System.out.println("Enter Password: ");
 		password = userInput.nextLine();
@@ -51,8 +66,18 @@ public class ClientEntryView {
 	}
 
 	//returns user Id
-	public String getId() {
-		return this.userId;
+	public String getUserName() {
+		return this.userName;
+	}
+
+	//returns user Id
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	//returns user Id
+	public String getLastName() {
+		return this.lastName;
 	}
 
 }
