@@ -83,9 +83,9 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 
 	// method to be implemented for user Registration
-	public synchronized String register(String userName, String userId, String password) throws RemoteException{
+	public String register(String firstName,String lastName,String userName, String password) throws RemoteException{
 		MarketPlaceModel model = new MarketPlaceModel();
-		return model.registerUser(userName,userId,password);
+		return model.registerUser(firstName,lastName,userName,password);
 	}
 
 	//displayUser method implementaion
