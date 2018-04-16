@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
 import java.util.ArrayList;
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
@@ -41,11 +40,30 @@ public class MarketPlaceModel {
 	}
 
 	//server side login for registering a user
-	public String registerUser(String userName, String userId, String password){
-		this.userName = userName;
-		this.userId = userId;
-		this.password = password;
-		return "User Registration Successful " + this.userName ;
+	public String registerUser(String firstName, String lastName,String userName, String password){
+		//Query for Insertion of the new items into the data base
+		String registerUser = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES('"+ firstName+"','" + lastName +"','"+userName+"','"+password+"')";
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					//Execution of Query
+					statement.executeUpdate(registerUser);
+					//statement close
+					statement.close();
+					return "Registration Success";
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Registration";
 	}
 
 	//server side login for displaying a user
