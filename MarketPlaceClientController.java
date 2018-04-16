@@ -53,7 +53,7 @@ public class MarketPlaceClientController {
 	public boolean loginCheck(String request) {
 		ClientEntryView loginView = new ClientEntryView();
 		loginView.checkLogin();
-		String id = loginView.getId();
+		String id = loginView.getUserName();
 		String password = loginView.getPassword();
 		System.out.println("Login Checking");
 		//exception handling
@@ -71,7 +71,7 @@ public class MarketPlaceClientController {
 					e.getMessage());
 			e.printStackTrace();
 		}
-		return true;
+		return false;
 	}
 
 	//sessionLogin calls server side sessionLogin method
@@ -185,6 +185,29 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
+	//user registration view
+	public String registerUser(){
+		ClientEntryView registerView = new ClientEntryView();
+		registerView.registerUser();
+		String value = "";
+		String userName = registerView.getUserName();
+		String firstName = registerView.getFirstName();
+		String lastName = registerView.getLastName();
+		String password = registerView.getPassword();
+		System.out.println("Registering User");
+		//exception handling
+		try {	
+				return marketPlace.register(firstName,lastName, userName, password);
+		}
+		catch(Exception e){
+			System.out.println("MarketPlace Client registration Exception: " +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		value = "Registration failed";
+		return value;
+	}
 }
+
 
 
