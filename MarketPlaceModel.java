@@ -168,8 +168,14 @@ public class MarketPlaceModel {
 			//executing the Query and results contain the output of the Query as a ResultSet Object
 			results = statement.executeQuery("SELECT * FROM tbl_items");
 			while(results.next()){
-				if(results.getString(2).length() <6){
+				if(results.getString(2).length() <6 && results.getString(3).length() <6){
 					//converting the Query result rows to string with formatting
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+				}
+				else if(results.getString(2).length() <6 ){
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+				}
+				else if(results.getString(3).length() <6){
 					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else{
