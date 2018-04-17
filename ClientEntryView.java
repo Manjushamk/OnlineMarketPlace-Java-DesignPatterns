@@ -30,9 +30,14 @@ public class ClientEntryView {
 		else if (option == 2) {
 			return "Admin";
 		}
-		else{
+		else if (option == 3){
 			return "Register";
 		}
+		else{
+			System.out.println("Not a valid option");
+			System.exit(0);
+		}
+		return "";
 	}
 
 
