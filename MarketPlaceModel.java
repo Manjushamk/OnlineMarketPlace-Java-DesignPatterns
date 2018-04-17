@@ -177,7 +177,6 @@ public class MarketPlaceModel {
 				}
 				//adding of the row as string to the string array list
 				itemList.add(i,rowDate);
-				System.out.println(rowDate);
 				i++;
 			}
 			// closing Statement and ResultSet objects statement and results
