@@ -27,7 +27,6 @@ public class FrontController {
 			return true;
 		}
 		else if(request.equals("User") || request.equals("Admin")){
-			System.out.println(request.equals("User"));
 			System.out.println("View : " + request);
 			return clientControllerLogin.loginCheck(request);
 		}
