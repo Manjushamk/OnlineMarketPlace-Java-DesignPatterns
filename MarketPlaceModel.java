@@ -163,7 +163,7 @@ public class MarketPlaceModel {
 		String rowDate;
 		int i = 0;
 		try{
-			//Statement creations
+			//Statement creation
 			statement = conn.createStatement(); 
 			//executing the Query and results contain the output of the Query as a ResultSet Object
 			results = statement.executeQuery("SELECT * FROM Items");
@@ -197,12 +197,22 @@ public class MarketPlaceModel {
 	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
 		if(type.equalsIgnoreCase("User")) {
-			if(this.userId.equals(userId) && this.password.equals(password)) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			try{
+				//Statement creations
+				statement = conn.createStatement(); 
+				//executing the Query and results contain the output of the Query as a ResultSet Object
+				results = statement.executeQuery("SELECT * FROM tbl_customer where userName = '"+ userId + "' and password = '"+password+"'");
+				if(results.next() != false){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}		
+			catch (SQLException e1){
+			System.out.println("Error while while checking user login");
+		}
+
 		}
 		else {
 			if(this.adminId.equals(userId) && this.adminPassword.equals(password)) {
@@ -212,6 +222,7 @@ public class MarketPlaceModel {
 				return false;
 			}
 		}
+		return false;
 
 	}
 
