@@ -26,10 +26,12 @@ public class FrontController {
 			System.out.println("user Registration Successful and displaying User View");
 			return true;
 		}
-		else{
+		else if(request.equals("User") || request.equals("Admin")){
+			System.out.println(request.equals("User"));
 			System.out.println("View : " + request);
 			return clientControllerLogin.loginCheck(request);
 		}
+		return false;
 	}
 
 	//method for dispatching the request to the Dispatcher class
@@ -39,7 +41,7 @@ public class FrontController {
 		}   
 
 		// If the user has been authenticated - dispatch request
-		if(isAuthenticUser(request) || !request.equals("Error in Registration")) {
+		if(isAuthenticUser(request) && !request.equals("Error in Registration")) {
 			if(request.equals("Registration Success")){
 				request = "User";
 			}
@@ -48,7 +50,7 @@ public class FrontController {
 			dispatcher.dispatch(request,session);
 		}	
 		else {
-			System.out.println(request + " authentication failed.");
+			System.out.println(request + ": "+ " authentication failed.");
 		}
 	}
 
