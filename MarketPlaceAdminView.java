@@ -53,14 +53,14 @@ public class MarketPlaceAdminView implements Admin{
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding items");
 		userInput = new Scanner(System.in);
-		String[] itemRow = {"","","",""};
-		System.out.println("Enter Item Id: ");
-		itemRow[0] = userInput.nextLine();
+		String[] itemRow = {"","","","",""};
 		System.out.println("Enter Item Name: ");
+		itemRow[0] = userInput.nextLine();
+		System.out.println("Enter Item Description: ");
 		itemRow[1] = userInput.nextLine();
-		System.out.println("Enter Item Quantity: ");
-		itemRow[2] = userInput.nextLine();
 		System.out.println("Enter Item Price: ");
+		itemRow[2] = userInput.nextLine();
+		System.out.println("Enter Item Quantity: ");
 		itemRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addItems(session,itemRow));

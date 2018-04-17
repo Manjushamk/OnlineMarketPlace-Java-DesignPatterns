@@ -74,7 +74,7 @@ public class MarketPlaceModel {
 	//server side logic for adding items
 	public String addItems(String[] itemRow){
 		//Query for Insertion of the new items into the data base
-		String addItemQuery = "INSERT INTO Items VALUES("+ Integer.parseInt(itemRow[0])+",'" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
+		String addItemQuery = "INSERT INTO tbl_items(itemName,description,price,quantity) VALUES("+ "'" + itemRow[0] +"','" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
 		if(conn != null) {
 			statement = null;
 			try {
