@@ -215,12 +215,21 @@ public class MarketPlaceModel {
 
 		}
 		else {
-			if(this.adminId.equals(userId) && this.adminPassword.equals(password)) {
-				return true; 
-			}
-			else {
-				return false;
-			}
+			try{
+				//Statement creations
+				statement = conn.createStatement(); 
+				//executing the Query and results contain the output of the Query as a ResultSet Object
+				results = statement.executeQuery("SELECT * FROM tbl_admin where userName = '"+ userId + "' and password = '"+password+"'");
+				if(results.next() != false){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}		
+			catch (SQLException e1){
+			System.out.println("Error while while checking admin login");
+		}
 		}
 		return false;
 
