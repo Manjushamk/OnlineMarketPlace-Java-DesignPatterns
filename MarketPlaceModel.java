@@ -166,17 +166,18 @@ public class MarketPlaceModel {
 			//Statement creation
 			statement = conn.createStatement(); 
 			//executing the Query and results contain the output of the Query as a ResultSet Object
-			results = statement.executeQuery("SELECT * FROM Items");
+			results = statement.executeQuery("SELECT * FROM tbl_items");
 			while(results.next()){
 				if(results.getString(2).length() <6){
 					//converting the Query result rows to string with formatting
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t \t" + results.getString(3) +"\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else{
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t" + results.getInt(3) + " \t\t" + results.getDouble(4);
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t \t" + results.getString(3) + " \t\t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				//adding of the row as string to the string array list
 				itemList.add(i,rowDate);
+				System.out.println(rowDate);
 				i++;
 			}
 			// closing Statement and ResultSet objects statement and results
@@ -202,6 +203,7 @@ public class MarketPlaceModel {
 				statement = conn.createStatement(); 
 				//executing the Query and results contain the output of the Query as a ResultSet Object
 				results = statement.executeQuery("SELECT * FROM tbl_customer where userName = '"+ userId + "' and password = '"+password+"'");
+				// return true if login is successful
 				if(results.next() != false){
 					return true;
 				}
@@ -220,6 +222,7 @@ public class MarketPlaceModel {
 				statement = conn.createStatement(); 
 				//executing the Query and results contain the output of the Query as a ResultSet Object
 				results = statement.executeQuery("SELECT * FROM tbl_admin where userName = '"+ userId + "' and password = '"+password+"'");
+				// return true if admin login is successful
 				if(results.next() != false){
 					return true;
 				}
@@ -234,6 +237,4 @@ public class MarketPlaceModel {
 		return false;
 
 	}
-
-
 }
