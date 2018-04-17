@@ -72,7 +72,7 @@ public class MarketPlaceAdminView implements Admin{
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here : ");
-		System.out.println("Item Id  Item Name \t\tQuantity  \tPrice");
+		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));

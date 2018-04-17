@@ -170,10 +170,10 @@ public class MarketPlaceModel {
 			while(results.next()){
 				if(results.getString(2).length() <6){
 					//converting the Query result rows to string with formatting
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t \t" + results.getString(3) +"\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else{
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t \t" + results.getString(3) + " \t\t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t " + results.getString(3) + " \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				//adding of the row as string to the string array list
 				itemList.add(i,rowDate);
