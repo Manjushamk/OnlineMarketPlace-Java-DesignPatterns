@@ -107,13 +107,14 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public int displayAdmin() {
 		System.out.println("Displaying Admin Profile");
-		System.out.println("For exit enter anything other than 1,2,3,4,5,6");
+		System.out.println("For exit enter anything other than 1,2,3,4,5,6,7");
 		System.out.println("1.Add Items");
 		System.out.println("2.Delete Items");
 		System.out.println("3.Update Items");
 		System.out.println("4.Browse Items");
 		System.out.println("5.Add Admin");
-		System.out.println("6.Add User");
+		System.out.println("6.Add Customer");
+		System.out.println("7.Remove Customer");
 		userInput = new Scanner(System.in);
 		int option = userInput.nextInt();
 		return option;
@@ -168,5 +169,11 @@ public class MarketPlaceAdminView implements Admin{
 		UserRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addUser(session,UserRow));
+	}
+
+	//method for adding user and passing data to client controller
+	@Override
+	public void removeUser(Session session){
+		System.out.println("Remove User");
 	}
 }
