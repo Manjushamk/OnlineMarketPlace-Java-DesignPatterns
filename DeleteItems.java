@@ -5,7 +5,7 @@
 //
 //mkottala
 
-//Concreate class creation for deleting items command that implements the Actions Command interface
+//Concrete class creation for deleting items command that implements the Actions Command interface
 public class DeleteItems implements Actions{
 	private Admin admin;
 	private Session session;

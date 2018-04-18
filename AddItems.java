@@ -5,7 +5,7 @@
 //
 //mkottala
 
-//Concreate class creation for adding items command that implements the Actions Command interface
+//Concrete class creation for adding items command that implements the Actions Command interface
 public class AddItems implements Actions{
 	private Admin admin;
 	private Session session;
