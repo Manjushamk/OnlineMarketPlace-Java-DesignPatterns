@@ -29,10 +29,16 @@ public interface MarketPlace extends Remote {
 	public String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
+	public String addUser( Session session, String[] UserRow) throws java.rmi.RemoteException;
+
+	@RoleAnnotations("Admin")
+	public String addAdmin( Session session, String[] AdminRow) throws java.rmi.RemoteException;
+
+	@RoleAnnotations("Admin")
 	public String updateItems(Session session) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
-	public String deleteItems(Session session) throws java.rmi.RemoteException;
+	public String deleteItems(Session session, int itemId) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
 	public ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException;
