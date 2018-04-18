@@ -125,13 +125,41 @@ public class MarketPlaceAdminView implements Admin{
 		userInput.close();
 	}
 
+	//method for adding admin and passing data to client controller
 	@Override
 	public void addAdmin(Session session) {
-		System.out.println("Add Admin");
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Adding Admin");
+		userInput = new Scanner(System.in);
+		String[] AdminRow = {"","","",""};
+		System.out.println("Enter First Name: ");
+		AdminRow[0] = userInput.nextLine();
+		System.out.println("Enter Last Name: ");
+		AdminRow[1] = userInput.nextLine();
+		System.out.println("Enter username: ");
+		AdminRow[2] = userInput.nextLine();
+		System.out.println("Enter password: ");
+		AdminRow[3] = userInput.nextLine();
+		// string array itemRow has the data for item to be added to the database table
+		System.out.println(clientControllerObj.addAdmin(session,AdminRow));
 	}
 
+	//method for adding user and passing data to client controller
 	@Override
 	public void addUser(Session session) {
-		System.out.println("Add User");
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		System.out.println("Adding User");
+		userInput = new Scanner(System.in);
+		String[] UserRow = {"","","",""};
+		System.out.println("Enter First Name: ");
+		UserRow[0] = userInput.nextLine();
+		System.out.println("Enter Last Name: ");
+		UserRow[1] = userInput.nextLine();
+		System.out.println("Enter username: ");
+		UserRow[2] = userInput.nextLine();
+		System.out.println("Enter password: ");
+		UserRow[3] = userInput.nextLine();
+		// string array itemRow has the data for item to be added to the database table
+		System.out.println(clientControllerObj.addUser(session,UserRow));
 	}
 }
