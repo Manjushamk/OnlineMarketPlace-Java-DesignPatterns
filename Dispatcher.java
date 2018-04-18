@@ -52,9 +52,10 @@ public class Dispatcher {
 			BrowseItems browseItems = new BrowseItems(adminObj,session);
 			AddAdminConcrete addAdmin = new AddAdminConcrete(adminObj,session);
 			AddUserConcrete addUser = new AddUserConcrete(adminObj,session);
+			RemoveUser removeUser = new RemoveUser(adminObj,session);
 			Invoker invokerObj = new Invoker();
 			int choice = 1;
-			while(choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6){
+			while(choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7){
 				choice = adminObj.displayAdmin();
 				//admin can select his commands from the below choices
 				switch(choice) {
@@ -69,6 +70,8 @@ public class Dispatcher {
 				case 5 : invokerObj.getActions(addAdmin);
 				break;
 				case 6 : invokerObj.getActions(addUser);
+				break;
+				case 7 : invokerObj.getActions(removeUser);
 				break;
 				default : System.out.println("Exiting");
 				}
