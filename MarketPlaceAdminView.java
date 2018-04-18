@@ -100,11 +100,13 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public int displayAdmin() {
 		System.out.println("Displaying Admin Profile");
-		System.out.println("For exit enter anything other than 1,2,3,4");
+		System.out.println("For exit enter anything other than 1,2,3,4,5,6");
 		System.out.println("1.Add Items");
 		System.out.println("2.Delete Items");
 		System.out.println("3.Update Items");
 		System.out.println("4.Browse Items");
+		System.out.println("5.Add Admin");
+		System.out.println("6.Add User");
 		userInput = new Scanner(System.in);
 		int option = userInput.nextInt();
 		return option;
@@ -121,5 +123,15 @@ public class MarketPlaceAdminView implements Admin{
 		System.out.println("Enter Password: ");
 		password = userInput.nextLine();
 		userInput.close();
+	}
+
+	@Override
+	public void addAdmin(Session session) {
+		System.out.println("Add Admin");
+	}
+
+	@Override
+	public void addUser(Session session) {
+		System.out.println("Add User");
 	}
 }
