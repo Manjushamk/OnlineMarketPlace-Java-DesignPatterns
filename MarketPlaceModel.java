@@ -99,14 +99,93 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for deleting items
-	public String deleteItems(){
-		return "Called server delete Items Method";
+	public String deleteItems(int itemId){
+				//Query for Insertion of the new items into the data base
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					//Execution of Query
+					statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
+					//statement close
+					statement.close();
+					return "Item is deleted";
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding Items, Should enter correct itemId";
 	}
 
 	//server side logic for updating items
 	public String updateItems(){
 		return "Called server Update Items Method";
 	}
+
+
+
+	//server side logic for adding admins
+	public String addAdmin(String[] adminRow){
+		//Query for Insertion of the new admins into the data base
+		String addAdminQuery = "INSERT INTO tbl_admin(firstName,lastName,userName,password) VALUES("+ "'" + adminRow[0] +"','" + adminRow[1] +"','"+adminRow[2]+"','"+adminRow[3]+"')";
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					//Execution of Query
+					statement.executeUpdate(addAdminQuery);
+					//statement close
+					statement.close();
+					return "Admin has been added";
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding Admin";
+	}
+
+
+	//server side logic for adding Users
+	public String addUser(String[] userRow){
+		//Query for Insertion of the new users into the data base
+		String addUserQuery = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES("+ "'" + userRow[0] +"','" + userRow[1] +"','"+userRow[2]+"','"+userRow[3]+"')";
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					//Execution of Query
+					statement.executeUpdate(addUserQuery);
+					//statement close
+					statement.close();
+					return "Customer has been added";
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding Customer";
+	}
+
 
 	//server side logic for purchase item of user role
 	public String purchase(int itemId, int quantity){
