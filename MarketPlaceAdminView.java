@@ -33,20 +33,6 @@ public class MarketPlaceAdminView implements Admin{
 		userInput.close();
 	}
 
-	//Get methods for adminId, adminName and Password
-	public String getadminId() {
-		return this.adminId;
-	}
-
-	public String getadminName() {
-		return this.adminName;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-
 	//method to be implemented for adding items
 	@Override
 	public void add(Session session){
