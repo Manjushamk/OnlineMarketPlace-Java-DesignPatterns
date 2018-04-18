@@ -14,4 +14,6 @@ public interface Admin {
 	public void update(Session session);
 	public void browse(Session session);
 	public void delete(Session session);
+	public void addAdmin(Session session);
+	public void addUser(Session session);
 }
