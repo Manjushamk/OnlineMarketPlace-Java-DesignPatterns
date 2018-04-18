@@ -15,10 +15,6 @@ import java.util.ArrayList;
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
 	private String userName;
-	private String userId;
-	private String adminId;
-	private String password;
-	private String adminPassword;
 	private String[] items = new String[20];
 	private DBConnection dbConnObj;
 	private ResultSet results = null;
@@ -28,11 +24,6 @@ public class MarketPlaceModel {
 	//constructor with user details init
 	public MarketPlaceModel() {
 		//default login
-		userName = "Manjusha";
-		userId = "mkottala";
-		password = "mkottala";
-		adminId = "manju";
-		adminPassword = "manju";
 		dbConnObj = new DBConnection();
 		conn = dbConnObj.connect();
 		items = new String[]{"Book","Pen","Cycle","Camera"};
@@ -274,10 +265,47 @@ public class MarketPlaceModel {
 		return itemList;
 	}
 
-	//server side logic for getting items list
-	public String[] getItemList() {
-		return this.items;
+
+		//server side logic for browsing items
+	public ArrayList<String> displayUsersList(){
+		//list of rows of result in strings format
+		ArrayList<String> userList = new ArrayList<String>();
+		String rowDate;
+		int i = 0;
+		try{
+			//Statement creation
+			statement = conn.createStatement(); 
+			//executing the Query and results contain the output of the Query as a ResultSet Object
+			results = statement.executeQuery("SELECT * FROM tbl_customer");
+			while(results.next()){
+				if(results.getString(2).length() <6 && results.getString(3).length() <6){
+					//converting the Query result rows to string with formatting
+					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t" + results.getString(4);
+				}
+				else if(results.getString(2).length() <6 ){
+					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t" + results.getString(4);
+				}
+				else if(results.getString(3).length() <6){
+					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t" + results.getString(4);
+				}
+				else{
+					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + " \t \t " + results.getString(3) + " \t \t" + results.getString(4);
+				}
+				//adding of the row as string to the string array list
+				userList.add(i,rowDate);
+				i++;
+			}
+			// closing Statement and ResultSet objects statement and results
+			statement.close();
+			results.close();
+		}
+		catch (SQLException e1){
+			System.out.println("Error while getting customers list");
+		}
+		return userList;
 	}
+
+
 
 	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
