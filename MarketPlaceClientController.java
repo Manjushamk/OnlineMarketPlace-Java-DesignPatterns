@@ -235,6 +235,20 @@ public class MarketPlaceClientController {
 		value = "Registration failed";
 		return value;
 	}
+
+	public ArrayList<String> displayUsersList(Session session){
+		ArrayList<String> value = new ArrayList<String>();
+		try{
+			value = marketPlace.displayUsersList(session);
+		}
+		catch(Exception e){
+			System.out.println("Error in adding items" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}
+
 }
 
 
