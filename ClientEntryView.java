@@ -53,9 +53,9 @@ public class ClientEntryView {
 
 	public void registerUser(){
 		userInput = new Scanner(System.in);
-		System.out.println("Enter firstName: ");
+		System.out.println("Enter first Name: ");
 		firstName = userInput.nextLine();
-		System.out.println("Enter lastName: ");
+		System.out.println("Enter last Name: ");
 		lastName = userInput.nextLine();
 		System.out.println("Enter username: ");
 		userName = userInput.nextLine();
