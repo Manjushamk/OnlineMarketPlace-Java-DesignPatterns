@@ -91,8 +91,15 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public void delete(Session session){
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
-		System.out.println("Delete items");
-		System.out.println(clientControllerObj.deleteItems(session));
+		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
+		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
+		for(int i = 0; i< items.size(); i++){
+			System.out.println(items.get(i));
+		}
+		System.out.println("Enter Item Id from above list: ");
+		userInput = new Scanner(System.in);
+		int itemId = userInput.nextInt();
+		System.out.println(clientControllerObj.deleteItems(session, itemId));
 	}
 
 
