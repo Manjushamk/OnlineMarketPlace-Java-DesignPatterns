@@ -101,6 +101,34 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
+		//addItems calls server side add items for admin
+	public String addUser( Session session, String[] userRow){
+		String value = "";
+		try{
+			value = marketPlace.addUser(session, userRow);
+		}
+		catch(Exception e){
+			System.out.println("Error in adding User" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}
+
+		//addItems calls server side add items for admin
+	public String addAdmin( Session session, String[] AdminRow){
+		String value = "";
+		try{
+			value = marketPlace.addAdmin(session, AdminRow);
+		}
+		catch(Exception e){
+			System.out.println("Error in adding items" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}
+
 	//purchase function that calls server side purchase function for user
 	public String purchase( Session session, int itemId, int quantity){
 		String value = "";
@@ -130,10 +158,10 @@ public class MarketPlaceClientController {
 	}
 
 	//deleteItems calls server side deletemthod for admin
-	public String deleteItems(Session session){
+	public String deleteItems(Session session, int itemId){
 		String value = "";
 		try{
-			value = marketPlace.deleteItems(session);
+			value = marketPlace.deleteItems(session, itemId);
 		}
 		catch(Exception e){
 			System.out.println("Error in deleteItems items" +
