@@ -80,6 +80,13 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.deleteItems(itemId);
 	}
 
+	//overriding interface implemented removeUser method
+	@Override
+	public String removeUser(Session session, int customerId) throws java.rmi.RemoteException{
+		MarketPlaceModel model = new MarketPlaceModel();
+		return model.removeUser(customerId);
+	}
+
 	//overriding interface implemented browseItems method
 	@Override
 	public synchronized ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException{

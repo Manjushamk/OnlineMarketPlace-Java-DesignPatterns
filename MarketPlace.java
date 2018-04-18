@@ -41,6 +41,9 @@ public interface MarketPlace extends Remote {
 	public String deleteItems(Session session, int itemId) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")
+	public String removeUser(Session session, int customerId) throws java.rmi.RemoteException;
+
+	@RoleAnnotations("Admin")
 	public ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException;
 
 	@RoleAnnotations("Admin")

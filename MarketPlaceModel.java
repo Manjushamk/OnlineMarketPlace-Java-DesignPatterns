@@ -98,11 +98,23 @@ public class MarketPlaceModel {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
-					//Execution of Query
-					statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
-					//statement close
-					statement.close();
-					return "Item is deleted";
+					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
+					if (results.next()!= false) {
+						try{
+						//Execution of Query for delete items
+						statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
+						//statement close
+						statement.close();
+						return "Item is deleted";
+						}
+						catch(SQLException e){
+							e.printStackTrace();
+						}
+					}
+					else{
+						return "Enter valid Item id";
+					}
+					
 				}
 				catch(SQLException e) {
 					e.printStackTrace();
@@ -112,7 +124,7 @@ public class MarketPlaceModel {
 				System.out.println("Error in Statement Creation");
 			}
 		}
-		return "Error in Adding Items, Should enter correct itemId";
+		return "Error in deleting Items, Should enter correct itemId";
 	}
 
 	//server side logic for updating items
@@ -230,7 +242,7 @@ public class MarketPlaceModel {
 	public ArrayList<String> browseItems(){
 		//list of rows of result in strings format
 		ArrayList<String> itemList = new ArrayList<String>();
-		String rowDate;
+		String rowData;
 		int i = 0;
 		try{
 			//Statement creation
@@ -240,19 +252,19 @@ public class MarketPlaceModel {
 			while(results.next()){
 				if(results.getString(2).length() <6 && results.getString(3).length() <6){
 					//converting the Query result rows to string with formatting
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowData = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else if(results.getString(2).length() <6 ){
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowData = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else if(results.getString(3).length() <6){
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowData = results.getInt(1)+ " \t " + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				else{
-					rowDate = results.getInt(1)+ " \t " + results.getString(2) + " \t \t " + results.getString(3) + " \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
+					rowData = results.getInt(1)+ " \t " + results.getString(2) + " \t \t " + results.getString(3) + " \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
 				}
 				//adding of the row as string to the string array list
-				itemList.add(i,rowDate);
+				itemList.add(i,rowData);
 				i++;
 			}
 			// closing Statement and ResultSet objects statement and results
@@ -266,11 +278,11 @@ public class MarketPlaceModel {
 	}
 
 
-		//server side logic for browsing items
+	//server side logic for displaying Users List
 	public ArrayList<String> displayUsersList(){
 		//list of rows of result in strings format
 		ArrayList<String> userList = new ArrayList<String>();
-		String rowDate;
+		String rowData;
 		int i = 0;
 		try{
 			//Statement creation
@@ -278,21 +290,11 @@ public class MarketPlaceModel {
 			//executing the Query and results contain the output of the Query as a ResultSet Object
 			results = statement.executeQuery("SELECT * FROM tbl_customer");
 			while(results.next()){
-				if(results.getString(2).length() <6 && results.getString(3).length() <6){
-					//converting the Query result rows to string with formatting
-					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t" + results.getString(4);
-				}
-				else if(results.getString(2).length() <6 ){
-					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t" + results.getString(4);
-				}
-				else if(results.getString(3).length() <6){
-					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + "\t \t " + results.getString(3) +"\t \t \t" + results.getString(4);
-				}
-				else{
-					rowDate = results.getInt(1)+ " \t \t" + results.getString(2) + " \t \t " + results.getString(3) + " \t \t" + results.getString(4);
-				}
+				//converting the Query result rows to string with formatting
+				rowData = results.getInt(1)+ " \t " + results.getString(4);
+				
 				//adding of the row as string to the string array list
-				userList.add(i,rowDate);
+				userList.add(i,rowData);
 				i++;
 			}
 			// closing Statement and ResultSet objects statement and results
@@ -347,6 +349,43 @@ public class MarketPlaceModel {
 		}
 		}
 		return false;
-
 	}
+
+	//server side logic for deleting items
+	public String removeUser(int customerId){
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
+					if (results.next()!= false) {
+						try{
+						//Execution of Query for delete customers
+						statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
+						//statement close
+						statement.close();
+						return "Customer is deleted";
+						}
+						catch(SQLException e){
+							e.printStackTrace();
+						}
+					}
+					else{
+						return "Enter valid customer id";
+					}
+					
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Deleting Customers, Should enter correct Customer Id";
+	}
+
 }

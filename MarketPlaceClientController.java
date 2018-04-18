@@ -236,13 +236,29 @@ public class MarketPlaceClientController {
 		return value;
 	}
 
+	//Display users List
 	public ArrayList<String> displayUsersList(Session session){
 		ArrayList<String> value = new ArrayList<String>();
 		try{
 			value = marketPlace.displayUsersList(session);
 		}
 		catch(Exception e){
-			System.out.println("Error in adding items" +
+			System.out.println("Error in displaying users" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
+	}
+
+
+	//Delete c calls server side deletemthod for admin
+	public String removeUser(Session session, int customerId){
+		String value = "";
+		try{
+			value = marketPlace.removeUser(session, customerId);
+		}
+		catch(Exception e){
+			System.out.println("Error in deleting customer" +
 					e.getMessage());
 			e.printStackTrace();
 		}

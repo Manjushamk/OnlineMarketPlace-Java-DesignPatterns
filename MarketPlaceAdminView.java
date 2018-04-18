@@ -176,13 +176,13 @@ public class MarketPlaceAdminView implements Admin{
 	public void removeUser(Session session){
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		ArrayList<String> users = clientControllerObj.displayUsersList(session);
-		System.out.println("Customer Id \tFirst Name \t\t Last Name  \t\tUser Name ");
+		System.out.println("Id \t User Name ");
 		for(int i = 0; i< users.size(); i++){
 			System.out.println(users.get(i));
 		}
-		System.out.println("Enter Customer Id from above list: ");
+		System.out.println("Enter Customer Id to delete from above list: ");
 		userInput = new Scanner(System.in);
-		int itemId = userInput.nextInt();
-		System.out.println("Remove User");
+		int customerId = userInput.nextInt();
+		System.out.println(clientControllerObj.removeUser(session, customerId));
 	}
 }
