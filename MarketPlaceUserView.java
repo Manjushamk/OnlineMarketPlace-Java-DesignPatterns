@@ -94,12 +94,17 @@ public class MarketPlaceUserView implements User{
 		String result = clientControllerObj.purchase(session,itemId,quantity);
 		System.out.println(result);
 	}
-	// Ryan: This is a violation of separation of concerns as we are mixing 
-	// View logic with "framework" functionality. Instead this needs to be 
-	// separated using a Controller.
 
-	// FIXED: This is how I fixed what was wrong.
-	// I have separated the framework functionality by including an additional controller 
-	// which implements the RMI client functionality
+	//implementing view output of add items to cart
+	@Override
+	public void addItemsToCart(Session session) {
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+	}
 
+
+	//implementing view output of display cart
+	@Override
+	public void displayCart(Session session) {
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+	}
 }
