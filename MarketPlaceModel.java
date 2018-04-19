@@ -52,7 +52,6 @@ public class MarketPlaceModel {
 		//			results = statement.executeQuery(select customer_id from );
 					//statement close
 					statement.close();
-					System.out.println(this.customerId+","+this.userName);
 					return "Registration Success";
 				}
 				catch(SQLException e) {
@@ -322,6 +321,7 @@ public class MarketPlaceModel {
 				results = statement.executeQuery("SELECT * FROM tbl_customer where userName = '"+ userId + "' and password = '"+password+"'");
 				// return true if login is successful
 				if(results.next() != false){
+					this.customerId = results.getInt(1);
 					return true;
 				}
 				else{
@@ -459,13 +459,4 @@ public class MarketPlaceModel {
 		return "Error in Updating item, Enter valid option";
 	}
 
-
-
-
-		// try{
-		// 	double quantity = Double.parseDouble(itemUpdate);
-		// }
-		// catch(NumberFormatException e){
-		// 	return "Number format exception";
-		// }
 }
