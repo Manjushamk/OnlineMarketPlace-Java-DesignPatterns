@@ -75,6 +75,7 @@ public class MarketPlaceAdminView implements Admin{
 			System.out.println(items.get(i));
 		}
 		System.out.println("Enter Item Id from above list: ");
+		String itemUpdate = "";
 		userInput = new Scanner(System.in);
 		int itemId = userInput.nextInt();
 		System.out.println("Enter update action 1, 2 or 3");
@@ -82,9 +83,10 @@ public class MarketPlaceAdminView implements Admin{
 		System.out.println("2. Update item Price");
 		System.out.println("3. Update item Quantity");
 		int itemField = userInput.nextInt();
-		System.out.println("Enter Update Value: ");
-		String itemUpdate = userInput.nextLine();
-		System.out.println(clientControllerObj.updateItems(session,itemId,itemField, itemUpdate));
+		System.out.println("Enter Update Value :");
+		Scanner userUpdate = new Scanner(System.in);
+		itemUpdate = userUpdate.nextLine();
+		System.out.println(clientControllerObj.updateItems(session, itemId, itemField, itemUpdate));
 	}
 
 	//method to be implemented for deleting items
