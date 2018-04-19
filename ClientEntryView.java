@@ -19,7 +19,7 @@ public class ClientEntryView {
 	//Method for selecting the view based on input
 	public String performAction() {
 		userInput = new Scanner(System.in);
-		System.out.println("Enter Action as either 1 or 2:  ");
+		System.out.println("Enter Action as either 1, 2 or 3:  ");
 		System.out.println("1. User");
 		System.out.println("2. Admin");
 		System.out.println("3. Customer Registration");
@@ -39,7 +39,7 @@ public class ClientEntryView {
 		}
 		return "";
 	}
-
+ 
 
 	//method for input of id, password and setting them.
 	public void checkLogin() {
