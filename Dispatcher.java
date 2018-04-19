@@ -26,14 +26,20 @@ public class Dispatcher {
 			User userObj = userView.getUserView(request);
 			int choice = 1;
 			BrowseUserItems browseUserItems = new BrowseUserItems(userObj,session);
+			AddItemsToCart addItemsToCart = new AddItemsToCart(userObj,session);
+			DisplayCart displayCart = new DisplayCart(userObj,session);
 			Purchase purchase = new Purchase(userObj,session);
 			Invoker invokerObj = new Invoker();
-			while(choice == 1||choice ==2 ){
+			while(choice == 1||choice ==2 || choice ==3 || choice ==4){
 				choice = userObj.displayUser(session);
 				switch(choice) {
 				case 1 : invokerObj.getUserActions(browseUserItems);
 				break; 
 				case 2 : invokerObj.getUserActions(purchase);
+				break; 
+				case 3 : invokerObj.getUserActions(addItemsToCart);
+				break; 
+				case 4 : invokerObj.getUserActions(displayCart);
 				break; 
 				default : System.out.println("Exiting");
 				}
