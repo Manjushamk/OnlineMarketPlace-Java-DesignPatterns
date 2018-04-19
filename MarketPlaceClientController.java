@@ -144,10 +144,10 @@ public class MarketPlaceClientController {
 	}	
 
 	//updateItems calls server side update items method
-	public String updateItems(Session session){
+	public String updateItems(Session session,int itemId, int itemField, String itemUpdate){
 		String value = "";
 		try{
-			value = marketPlace.updateItems(session);
+			value = marketPlace.updateItems(session,itemId,itemField,itemUpdate);
 		}
 		catch(Exception e){
 			System.out.println("Error in update items" +
