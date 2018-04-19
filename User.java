@@ -13,4 +13,6 @@ public interface User {
 	public int displayUser(Session session);
 	public void browse(Session session);
 	public void purchase(Session session);
+	public void addItemsToCart(Session session);
 }
+
