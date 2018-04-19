@@ -15,6 +15,8 @@ import java.util.ArrayList;
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
 	private String userName;
+	private int customerId;
+	private String cartId;
 	private String[] items = new String[20];
 	private DBConnection dbConnObj;
 	private ResultSet results = null;
@@ -41,9 +43,16 @@ public class MarketPlaceModel {
 				statement = conn.createStatement();
 				try {
 					//Execution of Query
-					statement.executeUpdate(registerUser);
+					statement.executeUpdate(registerUser,Statement.RETURN_GENERATED_KEYS);
+					results = statement.getGeneratedKeys();
+					if(results.next() != false){
+						this.customerId = results.getInt(1);
+						this.userName = userName;
+					}
+		//			results = statement.executeQuery(select customer_id from );
 					//statement close
 					statement.close();
+					System.out.println(this.customerId+","+this.userName);
 					return "Registration Success";
 				}
 				catch(SQLException e) {
