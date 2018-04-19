@@ -127,12 +127,6 @@ public class MarketPlaceModel {
 		return "Error in deleting Items, Should enter correct itemId";
 	}
 
-	//server side logic for updating items
-	public String updateItems(){
-		return "Called server Update Items Method";
-	}
-
-
 
 	//server side logic for adding admins
 	public String addAdmin(String[] adminRow){
@@ -388,4 +382,81 @@ public class MarketPlaceModel {
 		return "Error in Deleting Customers, Should enter correct Customer Id";
 	}
 
+	//server side logic for updating items
+	public String updateItems(int itemId, int itemField, String itemUpdate){
+		if(conn != null) {
+			statement = null;
+			try {
+				//statemt creation to run the sql query
+				statement = conn.createStatement();
+				try {
+					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
+					if (results.next()!= false) {
+						if(itemField == 1){
+							try{
+								statement.executeUpdate("UPDATE tbl_items SET description = '"+itemUpdate+"' WHERE item_id ="+itemId);
+								return "Updated Item Description";
+							}
+							catch(SQLException e) {
+								e.printStackTrace();
+							}	
+						}
+						else if(itemField == 2){
+							 try{
+		 						double price = Double.parseDouble(itemUpdate);
+		 						try{
+									statement.executeUpdate("UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId);
+									return "Updated Item Description";
+								}
+								catch(SQLException e) {
+									e.printStackTrace();
+								}
+		 						}
+							 catch(NumberFormatException e){
+		 						return "Enter a valid number";
+							 }
+						}
+						else if(itemField == 3){
+							 try{
+		 						int quantity = Integer.parseInt(itemUpdate);
+		 						try{
+									statement.executeUpdate("UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId);
+									return "Updated Item Description";
+								}
+								catch(SQLException e) {
+									e.printStackTrace();
+								}
+		 						}
+							 catch(NumberFormatException e){
+		 						return "Enter a valid positive Integer for quantity";
+							 }
+						}
+						else{
+							return "Invalid option entered";
+						}
+					}
+					else{
+						return "Enter valid item Id";
+					}
+				}
+				catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Updating item, Enter valid option";
+	}
+
+
+
+
+		// try{
+		// 	double quantity = Double.parseDouble(itemUpdate);
+		// }
+		// catch(NumberFormatException e){
+		// 	return "Number format exception";
+		// }
 }
