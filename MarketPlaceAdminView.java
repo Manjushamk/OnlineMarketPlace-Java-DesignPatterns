@@ -69,8 +69,22 @@ public class MarketPlaceAdminView implements Admin{
 	@Override
 	public void update(Session session){
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
-		System.out.println("Update items");
-		System.out.println(clientControllerObj.updateItems(session));
+		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
+		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
+		for(int i = 0; i< items.size(); i++){
+			System.out.println(items.get(i));
+		}
+		System.out.println("Enter Item Id from above list: ");
+		userInput = new Scanner(System.in);
+		int itemId = userInput.nextInt();
+		System.out.println("Enter update action 1, 2 or 3");
+		System.out.println("1. Update item Description");
+		System.out.println("2. Update item Price");
+		System.out.println("3. Update item Quantity");
+		int itemField = userInput.nextInt();
+		System.out.println("Enter Update Value: ");
+		String itemUpdate = userInput.nextLine();
+		System.out.println(clientControllerObj.updateItems(session,itemId,itemField, itemUpdate));
 	}
 
 	//method to be implemented for deleting items
@@ -89,7 +103,7 @@ public class MarketPlaceAdminView implements Admin{
 	}
 
 
-	// Method o be implemented for Displaying User or Admin Profile
+	// Method implemented for Displaying Admin Profile
 	@Override
 	public int displayAdmin() {
 		System.out.println("Displaying Admin Profile");
