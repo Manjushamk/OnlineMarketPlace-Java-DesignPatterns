@@ -265,6 +265,19 @@ public class MarketPlaceClientController {
 		return value;	
 	}
 
+	//function to call server side add items to cart method
+	public String addItemsToCart(Session session, int itemId, int quantity){
+		String value = "";
+		try{
+			value = marketPlace.addItemsToCart(session, itemId, quantity);
+		}
+		catch(Exception e){
+						System.out.println("Error in adding items to cart" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 }
 
 
