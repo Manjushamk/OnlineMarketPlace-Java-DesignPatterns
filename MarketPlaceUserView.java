@@ -51,6 +51,8 @@ public class MarketPlaceUserView implements User{
 		System.out.println("Enter Action");
 		System.out.println("1.Browse Items");
 		System.out.println("2.Purchase Items");
+		System.out.println("3.Add Item to Cart");
+		System.out.println("4.Display cart");
 		userInput = new Scanner(System.in);
 		int option = userInput.nextInt();
 		return option;
@@ -74,7 +76,7 @@ public class MarketPlaceUserView implements User{
 	@Override
 	public void browse(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
-		System.out.println("Browsing Items displayed here :");
+		System.out.println("Items displayed here :");
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseUserItems(session);
 		for(int i = 0; i< items.size(); i++){
@@ -99,6 +101,13 @@ public class MarketPlaceUserView implements User{
 	@Override
 	public void addItemsToCart(Session session) {
 		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		browse(session);
+		System.out.println("Enter the item Id to add item to cart: ");
+		Scanner userInput = new Scanner(System.in);
+		int itemId =userInput.nextInt();
+		System.out.println("Enter item Quantity: ");
+		int quantity = userInput.nextInt();
+		System.out.println(clientControllerObj.addItemsToCart(session,itemId,quantity));
 	}
 
 
