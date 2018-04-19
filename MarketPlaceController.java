@@ -16,25 +16,25 @@ import java.util.ArrayList;
 public class MarketPlaceController extends UnicastRemoteObject implements MarketPlace{
 	//The variable 'name' must include the location where the Server is going to be registered with RMI to run.
 	private String name;
+	private MarketPlaceModel model = null;
 
 	//Constructor for the controller
 
 	public MarketPlaceController(String name) throws RemoteException {
 		super();
 		this.name = name;
+		model = new MarketPlaceModel();
 	}
 
 	//Implementation of remote method
 	@Override
 	public synchronized boolean adminLogin(String userId, String password, String type) throws RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
 
 	//overriding interface implemented userlogin method
 	@Override
 	public synchronized boolean userLogin(String userId, String password, String type) throws RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.checkLogin(userId,password,type);
 	}
 
@@ -48,84 +48,72 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	//overriding interface implemented addItems method
 	@Override
 	public synchronized String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addItems(itemRow);
 	}
 
 	//overriding interface implemented addUsers method
 	@Override
 	public synchronized String addUser( Session session, String[] userRow) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addUser(userRow);
 	}
 
 	//overriding interface implemented addAdmin method
 	@Override
 	public synchronized String addAdmin( Session session, String[] adminRow) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.addAdmin(adminRow);
 	}
 
 	//overriding interface implemented updateIems method
 	@Override
 	public String updateItems(Session session,int itemId, int itemField, String itemUpdate) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.updateItems(itemId,itemField,itemUpdate);
 	}
 
 	//overriding interface implemented deleteItems method
 	@Override
 	public String deleteItems(Session session, int itemId) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.deleteItems(itemId);
 	}
 
 	//overriding interface implemented removeUser method
 	@Override
 	public String removeUser(Session session, int customerId) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.removeUser(customerId);
 	}
 
 	//overriding interface implemented browseItems method
 	@Override
 	public synchronized ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.browseItems();
 	}
 
 	//overriding interface implemented browseItems method
 	@Override
 	public synchronized ArrayList<String> displayUsersList(Session session) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.displayUsersList();
 	}
 
 	//overriding interface implemented browseItems method
 	@Override
 	public synchronized ArrayList<String> browseUserItems(Session session) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.browseItems();
 	}
 
 
 	// method to be implemented for user Registration
 	public String register(String firstName,String lastName,String userName, String password) throws RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.registerUser(firstName,lastName,userName,password);
 	}
 
 	//displayUser method implementaion
 	@Override
 	public synchronized String displayUser(Session session) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.displayUser();
 	}
 
 	//Purchase method for User
 	@Override
 	public synchronized String purchase(Session session, int ItemId, int quantity) throws java.rmi.RemoteException{
-		MarketPlaceModel model = new MarketPlaceModel();
 		return model.purchase(ItemId,quantity);
 	}
 
