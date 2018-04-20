@@ -1,4 +1,3 @@
-
 // Honor Pledge:
 //
 // I pledge that I have neither given nor 
@@ -15,14 +14,15 @@ import java.util.ArrayList;
 //MarketPlaceAdminView implements from Admin interface and contains all admin related 
 //functions implementation
 public class MarketPlaceAdminView implements Admin{
+
 	private String adminName;
 	private String adminId;
 	private String password;
 	private Scanner userInput;
-	private MarketPlaceClientController clientControllerObj = null;
-
+	private MarketPlaceClientController clientControllerObj;
+	
 	public MarketPlaceAdminView(){
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+		clientControllerObj = new MarketPlaceClientController();
 	}
 
 	//method for entering user login information
