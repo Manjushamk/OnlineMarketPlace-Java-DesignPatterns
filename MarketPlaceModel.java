@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MarketPlaceModel {
 	private String userName;
 	private int customerId;
-	private String cartId;
+	private int cartId;
 	private String[] items = new String[20];
 	private DBConnection dbConnObj;
 	private ResultSet results = null;
@@ -49,7 +49,7 @@ public class MarketPlaceModel {
 						this.customerId = results.getInt(1);
 						this.userName = userName;
 					}
-		//			results = statement.executeQuery(select customer_id from );
+					//			results = statement.executeQuery(select customer_id from );
 					//statement close
 					statement.close();
 					return "Registration Success";
@@ -99,7 +99,7 @@ public class MarketPlaceModel {
 
 	//server side logic for deleting items
 	public String deleteItems(int itemId){
-				//Query for Insertion of the new items into the data base
+		//Query for Insertion of the new items into the data base
 		if(conn != null) {
 			statement = null;
 			try {
@@ -109,11 +109,11 @@ public class MarketPlaceModel {
 					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
 					if (results.next()!= false) {
 						try{
-						//Execution of Query for delete items
-						statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
-						//statement close
-						statement.close();
-						return "Item is deleted";
+							//Execution of Query for delete items
+							statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
+							//statement close
+							statement.close();
+							return "Item is deleted";
 						}
 						catch(SQLException e){
 							e.printStackTrace();
@@ -122,7 +122,7 @@ public class MarketPlaceModel {
 					else{
 						return "Enter valid Item id";
 					}
-					
+
 				}
 				catch(SQLException e) {
 					e.printStackTrace();
@@ -192,53 +192,6 @@ public class MarketPlaceModel {
 	}
 
 
-	//server side logic for purchase item of user role
-	public String purchase(int itemId, int quantity){
-		int available_quantity = 0;
-		statement = null;
-		try{
-			//statement creation
-			statement = conn.createStatement();
-			//statement execution and storing it in the result set
-			results = statement.executeQuery("SELECT Quantity FROM Items WHERE itemId = "+ itemId);
-			//Accessing the elements of the ResultSet results
-			while(results.next()){
-				available_quantity = results.getInt("Quantity");
-			}
-			// closing the ResultSet results
-			results.close();
-			if(available_quantity >0 && available_quantity >= quantity){
-				//Query for updating the Quantity of the item for purchase
-				String purchaseUpdate = "UPDATE Items SET Quantity = "+ (available_quantity - quantity) + " WHERE itemId = "+itemId ;
-				statement = null;
-				try{
-					statement = conn.createStatement();
-					try{
-						//Query execution
-						statement.executeUpdate(purchaseUpdate);
-						//Closing the statement
-						statement.close();
-						return "Item Purchase Successful";
-					}
-					catch(SQLException e){
-						e.printStackTrace();
-					}
-				}
-				catch(SQLException e){
-					e.printStackTrace();
-				}
-			}
-			else{
-				return "Out of Stock or enter an existing item Id";
-			}
-
-		}
-		catch(SQLException e){
-			e.printStackTrace();;
-		}
-
-		return "purchase item";
-	}
 
 	//server side logic for browsing items
 	public ArrayList<String> browseItems(){
@@ -294,7 +247,7 @@ public class MarketPlaceModel {
 			while(results.next()){
 				//converting the Query result rows to string with formatting
 				rowData = results.getInt(1)+ " \t " + results.getString(4);
-				
+
 				//adding of the row as string to the string array list
 				userList.add(i,rowData);
 				i++;
@@ -318,10 +271,11 @@ public class MarketPlaceModel {
 				//Statement creations
 				statement = conn.createStatement(); 
 				//executing the Query and results contain the output of the Query as a ResultSet Object
-				results = statement.executeQuery("SELECT * FROM tbl_customer where userName = '"+ userId + "' and password = '"+password+"'");
+				results = statement.executeQuery("SELECT c.customer_id, ct.cart_id FROM tbl_customer c JOIN tbl_cart ct ON c.customer_id = ct.customer_id where c.userName = '"+ userId + "' and c.password = '"+password+"'");
 				// return true if login is successful
 				if(results.next() != false){
 					this.customerId = results.getInt(1);
+					this.cartId = results.getInt(2);
 					return true;
 				}
 				else{
@@ -329,8 +283,8 @@ public class MarketPlaceModel {
 				}
 			}		
 			catch (SQLException e1){
-			System.out.println("Error while while checking user login");
-		}
+				System.out.println("Error while while checking user login");
+			}
 
 		}
 		else {
@@ -348,8 +302,8 @@ public class MarketPlaceModel {
 				}
 			}		
 			catch (SQLException e1){
-			System.out.println("Error while while checking admin login");
-		}
+				System.out.println("Error while while checking admin login");
+			}
 		}
 		return false;
 	}
@@ -365,11 +319,11 @@ public class MarketPlaceModel {
 					results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
 					if (results.next()!= false) {
 						try{
-						//Execution of Query for delete customers
-						statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
-						//statement close
-						statement.close();
-						return "Customer is deleted";
+							//Execution of Query for delete customers
+							statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
+							//statement close
+							statement.close();
+							return "Customer is deleted";
 						}
 						catch(SQLException e){
 							e.printStackTrace();
@@ -378,7 +332,7 @@ public class MarketPlaceModel {
 					else{
 						return "Enter valid customer id";
 					}
-					
+
 				}
 				catch(SQLException e) {
 					e.printStackTrace();
@@ -411,34 +365,34 @@ public class MarketPlaceModel {
 							}	
 						}
 						else if(itemField == 2){
-							 try{
-		 						double price = Double.parseDouble(itemUpdate);
-		 						try{
+							try{
+								double price = Double.parseDouble(itemUpdate);
+								try{
 									statement.executeUpdate("UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId);
 									return "Updated Item Description";
 								}
 								catch(SQLException e) {
 									e.printStackTrace();
 								}
-		 						}
-							 catch(NumberFormatException e){
-		 						return "Enter a valid number";
-							 }
+							}
+							catch(NumberFormatException e){
+								return "Enter a valid number";
+							}
 						}
 						else if(itemField == 3){
-							 try{
-		 						int quantity = Integer.parseInt(itemUpdate);
-		 						try{
+							try{
+								int quantity = Integer.parseInt(itemUpdate);
+								try{
 									statement.executeUpdate("UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId);
 									return "Updated Item Description";
 								}
 								catch(SQLException e) {
 									e.printStackTrace();
 								}
-		 						}
-							 catch(NumberFormatException e){
-		 						return "Enter a valid positive Integer for quantity";
-							 }
+							}
+							catch(NumberFormatException e){
+								return "Enter a valid positive Integer for quantity";
+							}
 						}
 						else{
 							return "Invalid option entered";
@@ -457,6 +411,83 @@ public class MarketPlaceModel {
 			}
 		}
 		return "Error in Updating item, Enter valid option";
+	}
+
+
+	//Add items to cart
+	public String addItemsToCart(int itemId, int quantity){
+		int available_quantity = 0;
+		if(conn != null) {
+			statement = null;
+			try {
+				//statement creation to run the sql query
+				statement = conn.createStatement();
+				try{
+					results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
+					//Accessing the elements of the ResultSet results
+					while(results.next()){
+						available_quantity = results.getInt("Quantity");
+					}
+					// closing the ResultSet results
+					results.close();
+					if(available_quantity >0 && available_quantity >= quantity){
+						try{
+							String insertQuery = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+this.cartId+","+itemId+","+quantity+")";
+							statement.executeUpdate(insertQuery);
+							return "Added item Successfully";
+						}
+						catch(SQLException e) {
+							return "Error in adding item to cart";
+						}
+					}
+					else{
+						return "Item may be out of Stock";
+					}
+
+				}	
+				catch(SQLException e) {
+					System.out.println("Error in executing quantity checking Query");
+				}
+			}
+			catch(SQLException e) {
+				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding item to cart";
+
+	}
+
+	//server side logic for purchase item of user role
+	public String purchase(){
+
+		return "purchase item";
+	}
+
+	//server side logic for browsing items
+	public ArrayList<String> displayCart(){
+		//list of rows of result in strings format
+		ArrayList<String> cartList = new ArrayList<String>();
+		String rowData;
+		int i = 0;
+		try{
+			//Statement creation
+			statement = conn.createStatement(); 
+			//executing the Query and results contain the output of the Query as a ResultSet Object
+			results = statement.executeQuery("SELECT * FROM tbl_cartItems");
+			while(results.next()){
+					rowData = results.getInt(1)+ " \t  " + results.getInt(2) + " \t   " + results.getInt(3);
+				//adding of the row as string to the string array list
+				cartList.add(i,rowData);
+				i++;
+			}
+			// closing Statement and ResultSet objects statement and results
+			statement.close();
+			results.close();
+		}
+		catch (SQLException e1){
+			System.out.println("Error while executing displaying cart");
+		}
+		return cartList;
 	}
 
 }
