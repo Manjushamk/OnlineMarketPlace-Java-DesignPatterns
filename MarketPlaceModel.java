@@ -478,11 +478,7 @@ public class MarketPlaceModel {
 							itemsList.add(i, results.getInt(1));
 							quantityList.add(i, results.getInt(2));
 							i++;
-							System.out.println(results.getInt(1));
-							System.out.println(results.getInt(1));
 						}
-						System.out.println(itemsList);
-						System.out.println(quantityList);
 
 						for(i = 0; i< itemsList.size(); i++){
 							int available_quantity = 0;
