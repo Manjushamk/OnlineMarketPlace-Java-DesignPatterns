@@ -29,8 +29,11 @@ Assignment 4
 		> For 1.User - Enter Id: mkottala
 					   Enter password : mkottala
 				> For the admin a menu appears to select the actions 1.Browse Items
-																	 2.Purchase Items
-				 Enter an options 1 or 2 for calling their respective functions, anything other than those options for exit
+																	 2.Checkout (Purchase cart Items)
+																	 3.Add Item to Cart
+																	 4.Display cart
+
+				 Enter an options 1,2,3 or 4 for calling their respective functions, anything other than those options for exit
 				 Respective methods are called from server using User role based access
 		> For 2.Admin - Enter Id: manju
 					    Enter password : manju
@@ -38,7 +41,11 @@ Assignment 4
 																	 2.Delete Items
 																	 3.Update Items
 																	 4.Browse Items
-				 Enter an any of the options 1,2,3,4 for calling their respective functions, anything other than those options for exit
+																	 5.Add Admin
+																	 6.Add Customer
+																	 7.Remove Customer
+
+				 Enter an any of the options 1,2,3,4,5,6 or 7 for calling their respective functions, anything other than those options for exit
 				 Respective methods are called from server using Admim role based access
 
 9. terminate RMI registry by entering command in server instance of putty:
