@@ -113,7 +113,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//Purchase method for User
 	@Override
-	public synchronized String purchase(Session session) throws java.rmi.RemoteException{
+	public synchronized ArrayList<String> purchase(Session session) throws java.rmi.RemoteException{
 		return model.purchase();
 	}
 
