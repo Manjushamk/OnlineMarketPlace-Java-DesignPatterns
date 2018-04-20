@@ -113,10 +113,20 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//Purchase method for User
 	@Override
-	public synchronized String purchase(Session session, int ItemId, int quantity) throws java.rmi.RemoteException{
-		return model.purchase(ItemId,quantity);
+	public synchronized String purchase(Session session) throws java.rmi.RemoteException{
+		return model.purchase();
 	}
 
+
+	//Add items to cart fucntion
+	public String addItemsToCart(Session session, int itemId, int quantity) throws java.rmi.RemoteException{
+		return model.addItemsToCart(itemId,quantity);
+	}
+
+	@Override
+	public synchronized ArrayList<String> displayCart(Session session) throws java.rmi.RemoteException{
+		return model.displayCart();
+	}
 
 	public static void main(String args[]) throws RemoteException{
 		// Set the RMI Security Manager...
@@ -148,4 +158,6 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 			e.printStackTrace();
 		}
 	}
+
+
 }
