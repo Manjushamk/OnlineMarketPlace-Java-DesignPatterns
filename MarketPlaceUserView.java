@@ -89,9 +89,10 @@ public class MarketPlaceUserView implements User{
 
 	@Override
 	public void purchase(Session session) {
-		System.out.println("Enter the Item Number:");
-		String result = clientControllerObj.purchase(session);
-		System.out.println(result);
+		ArrayList<String> result = clientControllerObj.purchase(session);
+		for(int i = 0; i< result.size(); i++){
+			System.out.println(result.get(i));
+		}
 	}
 
 	//implementing view output of add items to cart
