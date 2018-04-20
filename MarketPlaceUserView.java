@@ -111,11 +111,17 @@ public class MarketPlaceUserView implements User{
 	//implementing view output of display cart
 	@Override
 	public void displayCart(Session session) {
-		System.out.println("Cart Items displayed here :");
-		System.out.println("CartId   ItemId   Quantity");
 		ArrayList<String> cartItems = clientControllerObj.displayCart(session);
-		for(int i = 0; i< cartItems.size(); i++){
-			System.out.println(cartItems.get(i));
+		if(cartItems.isEmpty()){
+			System.out.println("Cart is Empty");
 		}
+		else{
+			System.out.println("Cart Items displayed here :");
+			System.out.println("CartId   ItemId   Quantity");
+			for(int i = 0; i< cartItems.size(); i++){
+				System.out.println(cartItems.get(i));
+			}
+		}
+
 	}
 }
