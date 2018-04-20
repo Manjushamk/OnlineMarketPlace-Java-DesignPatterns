@@ -130,8 +130,8 @@ public class MarketPlaceClientController {
 	}
 
 	//purchase function that calls server side purchase function for user
-	public String purchase( Session session){
-		String value = "";
+	public ArrayList<String> purchase( Session session){
+		ArrayList<String> value = new ArrayList<String>();
 		try{
 			value = marketPlace.purchase(session);
 		}
