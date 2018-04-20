@@ -130,13 +130,13 @@ public class MarketPlaceClientController {
 	}
 
 	//purchase function that calls server side purchase function for user
-	public String purchase( Session session, int itemId, int quantity){
+	public String purchase( Session session){
 		String value = "";
 		try{
-			value = marketPlace.purchase(session, itemId, quantity);
+			value = marketPlace.purchase(session);
 		}
 		catch(Exception e){
-			System.out.println("Error in adding items" +
+			System.out.println("Error in purchasing items" +
 					e.getMessage());
 			e.printStackTrace();
 		}
@@ -276,6 +276,21 @@ public class MarketPlaceClientController {
 					e.getMessage());
 			e.printStackTrace();
 		}
+		return value;
+	}
+
+	//browse admin items server side method is called
+	public ArrayList<String> displayCart(Session session){
+		ArrayList<String> value = new ArrayList<String>();
+		try{
+			value = marketPlace.displayCart(session);
+		}
+		catch(Exception e){
+			System.out.println("Error in displaying cart" +
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return value;	
 	}
 
 }
