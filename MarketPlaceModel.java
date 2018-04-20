@@ -458,11 +458,11 @@ public class MarketPlaceModel {
 					try{
 						//Query for checking if there is a nay data for entered itemId
 						results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
-					//Accessing the elements of the ResultSet results
+						//Accessing the elements of the ResultSet results
 						while(results.next()){
 							available_quantity = results.getInt("Quantity");
 						}
-					// closing the ResultSet results
+						// closing the ResultSet results
 						results.close();
 						if(available_quantity >0 && available_quantity >= quantity){
 							try{
@@ -546,13 +546,16 @@ public class MarketPlaceModel {
 								}
 							}
 						}
-						try {
-							//Query for deleting emptying the cart after purchase
-							statement.executeUpdate("DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId);
-						}
-						catch(Exception e) {
-							System.out.println("Error in deleting items from cart ");
-							e.printStackTrace();
+
+						synchronized(this) {	
+							try {
+								//Query for deleting emptying the cart after purchase
+								statement.executeUpdate("DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId);
+							}
+							catch(Exception e) {
+								System.out.println("Error in deleting items from cart ");
+								e.printStackTrace();
+							}
 						}
 						return returnList;
 					}
