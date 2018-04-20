@@ -28,13 +28,13 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//Implementation of remote method
 	@Override
-	public synchronized boolean adminLogin(String userId, String password, String type) throws RemoteException{
+	public boolean adminLogin(String userId, String password, String type) throws RemoteException{
 		return model.checkLogin(userId,password,type);
 	}
 
 	//overriding interface implemented userlogin method
 	@Override
-	public synchronized boolean userLogin(String userId, String password, String type) throws RemoteException{
+	public boolean userLogin(String userId, String password, String type) throws RemoteException{
 		return model.checkLogin(userId,password,type);
 	}
 
@@ -47,19 +47,19 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented addItems method
 	@Override
-	public synchronized String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
+	public String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException{
 		return model.addItems(itemRow);
 	}
 
 	//overriding interface implemented addUsers method
 	@Override
-	public synchronized String addUser( Session session, String[] userRow) throws java.rmi.RemoteException{
+	public String addUser( Session session, String[] userRow) throws java.rmi.RemoteException{
 		return model.addUser(userRow);
 	}
 
 	//overriding interface implemented addAdmin method
 	@Override
-	public synchronized String addAdmin( Session session, String[] adminRow) throws java.rmi.RemoteException{
+	public String addAdmin( Session session, String[] adminRow) throws java.rmi.RemoteException{
 		return model.addAdmin(adminRow);
 	}
 
@@ -83,19 +83,19 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//overriding interface implemented browseItems method
 	@Override
-	public synchronized ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException{
+	public ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException{
 		return model.browseItems();
 	}
 
 	//overriding interface implemented browseItems method
 	@Override
-	public synchronized ArrayList<String> displayUsersList(Session session) throws java.rmi.RemoteException{
+	public ArrayList<String> displayUsersList(Session session) throws java.rmi.RemoteException{
 		return model.displayUsersList();
 	}
 
 	//overriding interface implemented browseItems method
 	@Override
-	public synchronized ArrayList<String> browseUserItems(Session session) throws java.rmi.RemoteException{
+	public ArrayList<String> browseUserItems(Session session) throws java.rmi.RemoteException{
 		return model.browseItems();
 	}
 
@@ -107,13 +107,13 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 	//displayUser method implementaion
 	@Override
-	public synchronized String displayUser(Session session) throws java.rmi.RemoteException{
+	public String displayUser(Session session) throws java.rmi.RemoteException{
 		return model.displayUser();
 	}
 
 	//Purchase method for User
 	@Override
-	public synchronized ArrayList<String> purchase(Session session) throws java.rmi.RemoteException{
+	public ArrayList<String> purchase(Session session) throws java.rmi.RemoteException{
 		return model.purchase();
 	}
 
@@ -124,7 +124,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	}
 
 	@Override
-	public synchronized ArrayList<String> displayCart(Session session) throws java.rmi.RemoteException{
+	public ArrayList<String> displayCart(Session session) throws java.rmi.RemoteException{
 		return model.displayCart();
 	}
 

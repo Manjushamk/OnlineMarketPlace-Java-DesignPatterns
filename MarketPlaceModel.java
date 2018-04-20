@@ -102,21 +102,25 @@ public class MarketPlaceModel {
 		//Query for Insertion of the new items into the data base
 		if(conn != null) {
 			statement = null;
+
+
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
 					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
 					if (results.next()!= false) {
-						try{
-							//Execution of Query for delete items
-							statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
-							//statement close
-							statement.close();
-							return "Item is deleted";
-						}
-						catch(SQLException e){
-							e.printStackTrace();
+						synchronized(this) {
+							try{
+								//Execution of Query for delete items
+								statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
+								//statement close
+								statement.close();
+								return "Item is deleted";
+							}
+							catch(SQLException e){
+								e.printStackTrace();
+							}
 						}
 					}
 					else{
@@ -145,6 +149,7 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				synchronized(this) {
 				try {
 					//Execution of Query
 					statement.executeUpdate(addAdminQuery);
@@ -154,6 +159,7 @@ public class MarketPlaceModel {
 				}
 				catch(SQLException e) {
 					e.printStackTrace();
+				}
 				}
 			}
 			catch(SQLException e) {
@@ -173,6 +179,7 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				synchronized(this) {
 				try {
 					//Execution of Query
 					statement.executeUpdate(addUserQuery);
@@ -182,6 +189,7 @@ public class MarketPlaceModel {
 				}
 				catch(SQLException e) {
 					e.printStackTrace();
+				}
 				}
 			}
 			catch(SQLException e) {
@@ -315,6 +323,8 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				
+				synchronized(this) {
 				try {
 					results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
 					if (results.next()!= false) {
@@ -338,6 +348,7 @@ public class MarketPlaceModel {
 					e.printStackTrace();
 				}
 			}
+			}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
 			}
@@ -352,6 +363,7 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				synchronized(this) {
 				try {
 					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
 					if (results.next()!= false) {
@@ -405,7 +417,9 @@ public class MarketPlaceModel {
 				catch(SQLException e) {
 					e.printStackTrace();
 				}
+				
 			}
+		}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
 			}
@@ -422,6 +436,7 @@ public class MarketPlaceModel {
 			try {
 				//statement creation to run the sql query
 				statement = conn.createStatement();
+				synchronized(this) {
 				try{
 					results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
 					//Accessing the elements of the ResultSet results
@@ -448,6 +463,7 @@ public class MarketPlaceModel {
 				catch(SQLException e) {
 					System.out.println("Error in executing quantity checking Query");
 				}
+			}
 			}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
@@ -480,6 +496,7 @@ public class MarketPlaceModel {
 							i++;
 						}
 
+						synchronized(this) {
 						for(i = 0; i< itemsList.size(); i++){
 							int available_quantity = 0;
 							int quantity = quantityList.get(i);
@@ -506,6 +523,7 @@ public class MarketPlaceModel {
 								statusOfItem = "Item Id : "+itemId+ " is out of Stock";
 								returnList.add(i,statusOfItem);
 							}
+						}
 						}
 						try {
 							statement.executeUpdate("DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId);
