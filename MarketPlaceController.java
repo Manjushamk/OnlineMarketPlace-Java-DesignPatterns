@@ -26,7 +26,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		model = new MarketPlaceModel();
 	}
 
-	//Implementation of remote method
+	//Implementation of remote method admin Login
 	@Override
 	public boolean adminLogin(String userId, String password, String type) throws RemoteException{
 		return model.checkLogin(userId,password,type);
@@ -87,7 +87,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 		return model.browseItems();
 	}
 
-	//overriding interface implemented browseItems method
+	//overriding interface implemented displayUsersList method
 	@Override
 	public ArrayList<String> displayUsersList(Session session) throws java.rmi.RemoteException{
 		return model.displayUsersList();
@@ -140,8 +140,8 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 
 			//creating a dynamic proxy
 			MarketPlace reflection_proxy = (MarketPlace) Proxy.newProxyInstance(MarketPlace.class.getClassLoader(),
-					new Class<?>[] {MarketPlace.class},
-					new AuthorizationInvocationHandler(new MarketPlaceController(name)));
+				new Class<?>[] {MarketPlace.class},
+				new AuthorizationInvocationHandler(new MarketPlaceController(name)));
 
 			// Create a new instance of a Market Place Controller.
 			// MarketPlaceController controller = new MarketPlaceController(name);

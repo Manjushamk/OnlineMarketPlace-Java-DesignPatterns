@@ -5,7 +5,7 @@
 //
 //mkottala
 
-//Concreate class creation for browsing items command that implements the User Actions Command interface
+//Concrete class creation for browsing items command that implements the User Actions Command interface
 public class BrowseUserItems implements UserActions{
 	private User user;
 	private Session session;

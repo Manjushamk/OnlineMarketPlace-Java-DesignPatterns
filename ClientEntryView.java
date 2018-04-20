@@ -24,6 +24,7 @@ public class ClientEntryView {
 		System.out.println("2. Admin");
 		System.out.println("3. Customer Registration");
 		int option = userInput.nextInt();	
+		//options checking for displaying the requested functionality
 		if (option == 1) {
 			return "User";
 		}
@@ -39,7 +40,7 @@ public class ClientEntryView {
 		}
 		return "";
 	}
- 
+	
 
 	//method for input of id, password and setting them.
 	public void checkLogin() {
@@ -51,6 +52,7 @@ public class ClientEntryView {
 		password = userInput.nextLine();
 	}
 
+	//method for entering the user information for registration
 	public void registerUser(){
 		userInput = new Scanner(System.in);
 		System.out.println("Enter first Name: ");
@@ -70,17 +72,17 @@ public class ClientEntryView {
 		return this.password;
 	}
 
-	//returns user Id
+	//returns user user Name
 	public String getUserName() {
 		return this.userName;
 	}
 
-	//returns user Id
+	//returns user First Name
 	public String getFirstName() {
 		return this.firstName;
 	}
 
-	//returns user Id
+	//returns user Last name
 	public String getLastName() {
 		return this.lastName;
 	}

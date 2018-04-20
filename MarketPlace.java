@@ -24,28 +24,35 @@ public interface MarketPlace extends Remote {
 	boolean adminLogin(String userId, String password, String type) throws java.rmi.RemoteException;
 
 	//admin related functions with role based access
-	//add update delete and browse items
+	//add items method for admin
 	@RoleAnnotations("Admin")
 	public String addItems( Session session, String[] itemRow) throws java.rmi.RemoteException;
 
+	//method for adding customers
 	@RoleAnnotations("Admin")
 	public String addUser( Session session, String[] UserRow) throws java.rmi.RemoteException;
 
+	//method for adding admin to admin table
 	@RoleAnnotations("Admin")
 	public String addAdmin( Session session, String[] AdminRow) throws java.rmi.RemoteException;
 
+	//method for deleting the items in the items table 
 	@RoleAnnotations("Admin")
 	public String deleteItems(Session session, int itemId) throws java.rmi.RemoteException;
 
+	//method for removing customers used by admin
 	@RoleAnnotations("Admin")
 	public String removeUser(Session session, int customerId) throws java.rmi.RemoteException;
 
+	//method for updating items description, quantity or price
 	@RoleAnnotations("Admin")
 	public String updateItems(Session session,int itemId, int itemField, String itemUpdate) throws java.rmi.RemoteException;
 
+	//method for displaying items to admin
 	@RoleAnnotations("Admin")
 	public ArrayList<String> browseAdminItems(Session session) throws java.rmi.RemoteException;
 
+	//method for displaying users list to admin
 	@RoleAnnotations("Admin")
 	public ArrayList<String> displayUsersList(Session session) throws java.rmi.RemoteException;
 
@@ -65,6 +72,7 @@ public interface MarketPlace extends Remote {
 	@RoleAnnotations("User")
 	public String addItemsToCart(Session session, int itemId, int quantity) throws java.rmi.RemoteException;
 
+	//function for displaying cart to customer
 	@RoleAnnotations("User")
 	public ArrayList<String> displayCart(Session session) throws java.rmi.RemoteException;
 

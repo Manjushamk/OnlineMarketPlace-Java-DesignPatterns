@@ -5,7 +5,7 @@
 //
 //mkottala
 
-//Concrete class creation for add items to cart command that implements the User Actions Command interface
+//Concrete class creation for diaplay cart items command that implements the User Actions Command interface
 public class DisplayCart implements UserActions{
 	private User user;
 	private Session session;

@@ -18,9 +18,11 @@ public class DBConnection {
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/mkottala_db";
 
-	//initialization of conenction object
+	//initialization of conenction object and making it volatile, So that the 
+	//access to the connection acts as synchrozied block, but doen't lock the object
 	private volatile Connection conn;
 
+	// funcition for establishing database connection
 	public Connection connect() {
 		if (conn == null) {
 			try {

@@ -41,7 +41,7 @@ public class MarketPlaceClientController {
 			frontController.dispatchRequest(entryPoint.performAction());					
 		} catch(Exception e){
 			System.out.println("MarketPlace Client Exception: " +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -68,7 +68,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("MarketPlace Client login Exception: " +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return false;
@@ -81,7 +81,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Session Creation Exception" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return session;
@@ -95,13 +95,13 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
 	}
 
-		//addItems calls server side add items for admin
+	//addUser calls server side add user for admin role
 	public String addUser( Session session, String[] userRow){
 		String value = "";
 		try{
@@ -109,13 +109,13 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in adding User" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
 	}
 
-		//addItems calls server side add items for admin
+	//addAdmin calls server side addAdmin function for admin responsbile
 	public String addAdmin( Session session, String[] AdminRow){
 		String value = "";
 		try{
@@ -123,7 +123,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -137,7 +137,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in purchasing items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -151,7 +151,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in update items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -165,7 +165,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in deleteItems items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -179,7 +179,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -193,7 +193,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in adding items" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -207,13 +207,13 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in displaying " +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
 	}
 
-	//user registration view
+	//Method calls server side register to enter the user details into the customer table
 	public String registerUser(){
 		ClientEntryView registerView = new ClientEntryView();
 		registerView.registerUser();
@@ -225,11 +225,11 @@ public class MarketPlaceClientController {
 		System.out.println("Registering User");
 		//exception handling
 		try {	
-				return marketPlace.register(firstName,lastName, userName, password);
+			return marketPlace.register(firstName,lastName, userName, password);
 		}
 		catch(Exception e){
 			System.out.println("MarketPlace Client registration Exception: " +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		value = "Registration failed";
@@ -244,14 +244,14 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in displaying users" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
 	}
 
 
-	//Delete c calls server side deletemthod for admin
+	//Method calls server side removeUser for admin role
 	public String removeUser(Session session, int customerId){
 		String value = "";
 		try{
@@ -259,7 +259,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in deleting customer" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	
@@ -272,14 +272,14 @@ public class MarketPlaceClientController {
 			value = marketPlace.addItemsToCart(session, itemId, quantity);
 		}
 		catch(Exception e){
-						System.out.println("Error in adding items to cart" +
-					e.getMessage());
+			System.out.println("Error in adding items to cart" +
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;
 	}
 
-	//browse admin items server side method is called
+	//Method to call server side display cart
 	public ArrayList<String> displayCart(Session session){
 		ArrayList<String> value = new ArrayList<String>();
 		try{
@@ -287,7 +287,7 @@ public class MarketPlaceClientController {
 		}
 		catch(Exception e){
 			System.out.println("Error in displaying cart" +
-					e.getMessage());
+				e.getMessage());
 			e.printStackTrace();
 		}
 		return value;	

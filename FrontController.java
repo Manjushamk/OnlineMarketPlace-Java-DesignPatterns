@@ -35,6 +35,7 @@ public class FrontController {
 
 	//method for dispatching the request to the Dispatcher class
 	public void dispatchRequest(String request) {
+		//checking if the requested action is registration
 		if(request == "Register"){
 			request = clientControllerLogin.registerUser();
 		}   
@@ -42,6 +43,7 @@ public class FrontController {
 		// If the user has been authenticated - dispatch request
 		if(isAuthenticUser(request) && !request.equals("Error in Registration")) {
 			if(request.equals("Registration Success")){
+				//if the regidtrstion is successful the request type is set to user to display user profile
 				request = "User";
 			}
 			System.out.println(request + " authentication is successful.");

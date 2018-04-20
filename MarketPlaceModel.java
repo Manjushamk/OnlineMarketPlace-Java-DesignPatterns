@@ -43,11 +43,18 @@ public class MarketPlaceModel {
 				statement = conn.createStatement();
 				try {
 					//Execution of Query
+					//getting the the auto generated customer id
 					statement.executeUpdate(registerUser,Statement.RETURN_GENERATED_KEYS);
 					results = statement.getGeneratedKeys();
 					if(results.next() != false){
 						this.customerId = results.getInt(1);
 						this.userName = userName;
+						//seleting the cart id respective to the current customer id 
+						ResultSet cartResult = statement.executeQuery("SELECT cart_id from tbl_cart WHERE customer_id = "+ results.getInt(1));
+						if (cartResult.next() != false) {
+							this.cartId = cartResult.getInt(1);
+						}
+
 					}
 					//			results = statement.executeQuery(select customer_id from );
 					//statement close
@@ -80,7 +87,7 @@ public class MarketPlaceModel {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
-					//Execution of Query
+					//Execution of Query for adding items to database table items
 					statement.executeUpdate(addItemQuery);
 					//statement close
 					statement.close();
@@ -102,14 +109,14 @@ public class MarketPlaceModel {
 		//Query for Insertion of the new items into the data base
 		if(conn != null) {
 			statement = null;
-
-
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
 				try {
+					// query for select query to verify the presence of item_id in the table
 					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
 					if (results.next()!= false) {
+						//Synchronization the block so only one session can access this block for deleting items
 						synchronized(this) {
 							try{
 								//Execution of Query for delete items
@@ -149,17 +156,18 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				//Synchronization the block so only one session can access this block for adding admins
 				synchronized(this) {
-				try {
-					//Execution of Query
-					statement.executeUpdate(addAdminQuery);
+					try {
+					//Execution of Query to add admin to the admins table
+						statement.executeUpdate(addAdminQuery);
 					//statement close
-					statement.close();
-					return "Admin has been added";
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
+						statement.close();
+						return "Admin has been added";
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			catch(SQLException e) {
@@ -179,17 +187,18 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				//Synchronization the block so only one session can access this block for adding customers
 				synchronized(this) {
-				try {
-					//Execution of Query
-					statement.executeUpdate(addUserQuery);
+					try {
+					//Execution of Query for adding users to the customers table
+						statement.executeUpdate(addUserQuery);
 					//statement close
-					statement.close();
-					return "Customer has been added";
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
+						statement.close();
+						return "Customer has been added";
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			catch(SQLException e) {
@@ -213,6 +222,7 @@ public class MarketPlaceModel {
 			//executing the Query and results contain the output of the Query as a ResultSet Object
 			results = statement.executeQuery("SELECT * FROM tbl_items");
 			while(results.next()){
+				//formatting and adding to arraylist
 				if(results.getString(2).length() <6 && results.getString(3).length() <6){
 					//converting the Query result rows to string with formatting
 					rowData = results.getInt(1)+ " \t " + results.getString(2) + "\t \t \t " + results.getString(3) +"\t \t \t \t" + results.getInt(4) + " \t\t" + results.getDouble(5);
@@ -323,31 +333,31 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
-				
+				//Synchronization the block so only one session can access this block for deleting Users	
 				synchronized(this) {
-				try {
-					results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
-					if (results.next()!= false) {
-						try{
+					try {
+						results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
+						if (results.next()!= false) {
+							try{
 							//Execution of Query for delete customers
-							statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
+								statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
 							//statement close
-							statement.close();
-							return "Customer is deleted";
+								statement.close();
+								return "Customer is deleted";
+							}
+							catch(SQLException e){
+								e.printStackTrace();
+							}
 						}
-						catch(SQLException e){
-							e.printStackTrace();
+						else{
+							return "Enter valid customer id";
 						}
-					}
-					else{
-						return "Enter valid customer id";
-					}
 
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
 				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
@@ -363,63 +373,70 @@ public class MarketPlaceModel {
 			try {
 				//statemt creation to run the sql query
 				statement = conn.createStatement();
+				//Synchronization the block so only one session can access this block for updating items
 				synchronized(this) {
-				try {
-					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
-					if (results.next()!= false) {
-						if(itemField == 1){
-							try{
-								statement.executeUpdate("UPDATE tbl_items SET description = '"+itemUpdate+"' WHERE item_id ="+itemId);
-								return "Updated Item Description";
-							}
-							catch(SQLException e) {
-								e.printStackTrace();
-							}	
-						}
-						else if(itemField == 2){
-							try{
-								double price = Double.parseDouble(itemUpdate);
+					try {
+						//Query for checking if there is a nay data for entered itemId
+						results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
+						if (results.next()!= false) {
+							if(itemField == 1){
 								try{
-									statement.executeUpdate("UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId);
+									// query for updating description
+									statement.executeUpdate("UPDATE tbl_items SET description = '"+itemUpdate+"' WHERE item_id ="+itemId);
 									return "Updated Item Description";
 								}
 								catch(SQLException e) {
 									e.printStackTrace();
-								}
+								}	
 							}
-							catch(NumberFormatException e){
-								return "Enter a valid number";
-							}
-						}
-						else if(itemField == 3){
-							try{
-								int quantity = Integer.parseInt(itemUpdate);
+							else if(itemField == 2){
 								try{
-									statement.executeUpdate("UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId);
-									return "Updated Item Description";
+									double price = Double.parseDouble(itemUpdate);
+									//try catch for checking number format exception
+									try{
+										//query for updating price
+										statement.executeUpdate("UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId);
+										return "Updated Item Description";
+									}
+									catch(SQLException e) {
+										e.printStackTrace();
+									}
 								}
-								catch(SQLException e) {
-									e.printStackTrace();
+								catch(NumberFormatException e){
+									return "Enter a valid number";
 								}
 							}
-							catch(NumberFormatException e){
-								return "Enter a valid positive Integer for quantity";
+							else if(itemField == 3){
+								try{
+									int quantity = Integer.parseInt(itemUpdate);
+									//try catch for checking number format exception
+									try{
+										//query for updating quantity
+										statement.executeUpdate("UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId);
+										return "Updated Item Description";
+									}
+									catch(SQLException e) {
+										e.printStackTrace();
+									}
+								}
+								catch(NumberFormatException e){
+									return "Enter a valid positive Integer for quantity";
+								}
+							}
+							else{
+								return "Invalid option entered";
 							}
 						}
 						else{
-							return "Invalid option entered";
+							return "Enter valid item Id";
 						}
 					}
-					else{
-						return "Enter valid item Id";
+					catch(SQLException e) {
+						e.printStackTrace();
 					}
+
 				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
-				
 			}
-		}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
 			}
@@ -436,34 +453,37 @@ public class MarketPlaceModel {
 			try {
 				//statement creation to run the sql query
 				statement = conn.createStatement();
+				//Synchronization the block so only one session can access this block for adding items to cart
 				synchronized(this) {
-				try{
-					results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
+					try{
+						//Query for checking if there is a nay data for entered itemId
+						results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
 					//Accessing the elements of the ResultSet results
-					while(results.next()){
-						available_quantity = results.getInt("Quantity");
-					}
+						while(results.next()){
+							available_quantity = results.getInt("Quantity");
+						}
 					// closing the ResultSet results
-					results.close();
-					if(available_quantity >0 && available_quantity >= quantity){
-						try{
-							String insertQuery = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+this.cartId+","+itemId+","+quantity+")";
-							statement.executeUpdate(insertQuery);
-							return "Added item Successfully";
+						results.close();
+						if(available_quantity >0 && available_quantity >= quantity){
+							try{
+								//query for inserting the requested item details into cart
+								String insertQuery = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+this.cartId+","+itemId+","+quantity+")";
+								statement.executeUpdate(insertQuery);
+								return "Added item Successfully";
+							}
+							catch(SQLException e) {
+								return "Error in adding item to cart";
+							}
 						}
-						catch(SQLException e) {
-							return "Error in adding item to cart";
+						else{
+							return "Item may be out of Stock";
 						}
-					}
-					else{
-						return "Item may be out of Stock";
-					}
 
-				}	
-				catch(SQLException e) {
-					System.out.println("Error in executing quantity checking Query");
+					}	
+					catch(SQLException e) {
+						System.out.println("Error in executing quantity checking Query");
+					}
 				}
-			}
 			}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
@@ -495,37 +515,39 @@ public class MarketPlaceModel {
 							quantityList.add(i, results.getInt(2));
 							i++;
 						}
-
+						//Synchronization the block so only one session can access this block for purchasing items
 						synchronized(this) {
-						for(i = 0; i< itemsList.size(); i++){
-							int available_quantity = 0;
-							int quantity = quantityList.get(i);
-							int itemId = itemsList.get(i);
-							resultItems = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
-							while(resultItems.next()){
-								available_quantity = resultItems.getInt("Quantity");
-							}
-							if(available_quantity >0 && available_quantity >= quantity){
+							for(i = 0; i< itemsList.size(); i++){
+								int available_quantity = 0;
+								int quantity = quantityList.get(i);
+								int itemId = itemsList.get(i);
+								//Selecting the availble quantity of the given item id
+								resultItems = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
+								while(resultItems.next()){
+									available_quantity = resultItems.getInt("Quantity");
+								}
+								if(available_quantity >0 && available_quantity >= quantity){
 								//Query for updating the Quantity of the item for purchase
-								String purchaseUpdate = "UPDATE tbl_items SET Quantity = "+ (available_quantity - quantity) + " WHERE item_id = "+itemId ;
-								try{
+									String purchaseUpdate = "UPDATE tbl_items SET Quantity = "+ (available_quantity - quantity) + " WHERE item_id = "+itemId ;
+									try{
 									//Query execution
-									statement.executeUpdate(purchaseUpdate);
+										statement.executeUpdate(purchaseUpdate);
 									//Closing the statement
-									statusOfItem = "Item Id : "+itemId+ " Successfully Purchased";
+										statusOfItem = "Item Id : "+itemId+ " Successfully Purchased";
+										returnList.add(i,statusOfItem);
+									}
+									catch(SQLException e){
+										e.printStackTrace();
+									}
+								}
+								else{
+									statusOfItem = "Item Id : "+itemId+ " is out of Stock";
 									returnList.add(i,statusOfItem);
 								}
-								catch(SQLException e){
-									e.printStackTrace();
-								}
 							}
-							else{
-								statusOfItem = "Item Id : "+itemId+ " is out of Stock";
-								returnList.add(i,statusOfItem);
-							}
-						}
 						}
 						try {
+							//Query for deleting emptying the cart after purchase
 							statement.executeUpdate("DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId);
 						}
 						catch(Exception e) {

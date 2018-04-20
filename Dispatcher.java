@@ -33,15 +33,15 @@ public class Dispatcher {
 			while(choice == 1||choice ==2 || choice ==3 || choice ==4){
 				choice = userObj.displayUser(session);
 				switch(choice) {
-				case 1 : invokerObj.getUserActions(browseUserItems);
-				break; 
-				case 2 : invokerObj.getUserActions(purchase);
-				break; 
-				case 3 : invokerObj.getUserActions(addItemsToCart);
-				break; 
-				case 4 : invokerObj.getUserActions(displayCart);
-				break; 
-				default : System.out.println("Exiting");
+					case 1 : invokerObj.getUserActions(browseUserItems);
+					break; 
+					case 2 : invokerObj.getUserActions(purchase);
+					break; 
+					case 3 : invokerObj.getUserActions(addItemsToCart);
+					break; 
+					case 4 : invokerObj.getUserActions(displayCart);
+					break; 
+					default : System.out.println("Exiting");
 				}
 				//perform one of the above selected options
 				invokerObj.performUserActions();
@@ -65,21 +65,21 @@ public class Dispatcher {
 				choice = adminObj.displayAdmin();
 				//admin can select his commands from the below choices
 				switch(choice) {
-				case 1 : invokerObj.getActions(addItems);
-				break;
-				case 2 : invokerObj.getActions(deleteItems);
-				break;
-				case 3 : invokerObj.getActions(updateItems);
-				break;
-				case 4 : invokerObj.getActions(browseItems);
-				break;  
-				case 5 : invokerObj.getActions(addAdmin);
-				break;
-				case 6 : invokerObj.getActions(addUser);
-				break;
-				case 7 : invokerObj.getActions(removeUser);
-				break;
-				default : System.out.println("Exiting");
+					case 1 : invokerObj.getActions(addItems);
+					break;
+					case 2 : invokerObj.getActions(deleteItems);
+					break;
+					case 3 : invokerObj.getActions(updateItems);
+					break;
+					case 4 : invokerObj.getActions(browseItems);
+					break;  
+					case 5 : invokerObj.getActions(addAdmin);
+					break;
+					case 6 : invokerObj.getActions(addUser);
+					break;
+					case 7 : invokerObj.getActions(removeUser);
+					break;
+					default : System.out.println("Exiting");
 				}
 				//perform one of the above selected options
 				invokerObj.performActions();
