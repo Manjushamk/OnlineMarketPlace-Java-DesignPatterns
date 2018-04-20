@@ -15,11 +15,15 @@ import java.util.ArrayList;
 //MarketPlaceAdminView implements from Admin interface and contains all admin related 
 //functions implementation
 public class MarketPlaceAdminView implements Admin{
-
 	private String adminName;
 	private String adminId;
 	private String password;
 	private Scanner userInput;
+	private MarketPlaceClientController clientControllerObj = null;
+
+	public MarketPlaceAdminView(){
+		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
+	}
 
 	//method for entering user login information
 	public void enterLogin() {
@@ -36,7 +40,6 @@ public class MarketPlaceAdminView implements Admin{
 	//method to be implemented for adding items
 	@Override
 	public void add(Session session){
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding items");
 		userInput = new Scanner(System.in);
 		String[] itemRow = {"","","","",""};
@@ -56,7 +59,6 @@ public class MarketPlaceAdminView implements Admin{
 	// Method to be implemented for Browsing items
 	@Override
 	public void browse(Session session) {
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Browsing Items displayed here : ");
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
@@ -68,7 +70,6 @@ public class MarketPlaceAdminView implements Admin{
 	//Method to be implented for Adding Items
 	@Override
 	public void update(Session session){
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		for(int i = 0; i< items.size(); i++){
@@ -92,7 +93,6 @@ public class MarketPlaceAdminView implements Admin{
 	//method to be implemented for deleting items
 	@Override
 	public void delete(Session session){
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		for(int i = 0; i< items.size(); i++){
@@ -138,7 +138,6 @@ public class MarketPlaceAdminView implements Admin{
 	//method for adding admin and passing data to client controller
 	@Override
 	public void addAdmin(Session session) {
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding Admin");
 		userInput = new Scanner(System.in);
 		String[] AdminRow = {"","","",""};
@@ -157,7 +156,6 @@ public class MarketPlaceAdminView implements Admin{
 	//method for adding user and passing data to client controller
 	@Override
 	public void addUser(Session session) {
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		System.out.println("Adding User");
 		userInput = new Scanner(System.in);
 		String[] UserRow = {"","","",""};
@@ -176,7 +174,6 @@ public class MarketPlaceAdminView implements Admin{
 	//method for adding user and passing data to client controller
 	@Override
 	public void removeUser(Session session){
-		MarketPlaceClientController clientControllerObj = new MarketPlaceClientController();
 		ArrayList<String> users = clientControllerObj.displayUsersList(session);
 		System.out.println("Id \t User Name ");
 		for(int i = 0; i< users.size(); i++){
