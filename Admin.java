@@ -8,7 +8,7 @@
 //interface for admin methods
 public interface Admin {
 
-	//admin commands appended with session object
+	//admin commands associated with session object
 	public int displayAdmin();
 	public void add(Session session);
 	public void update(Session session);

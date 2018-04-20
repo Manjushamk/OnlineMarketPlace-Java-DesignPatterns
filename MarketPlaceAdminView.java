@@ -15,26 +15,11 @@ import java.util.ArrayList;
 //functions implementation
 public class MarketPlaceAdminView implements Admin{
 
-	private String adminName;
-	private String adminId;
-	private String password;
 	private Scanner userInput;
 	private MarketPlaceClientController clientControllerObj;
 	
 	public MarketPlaceAdminView(){
 		clientControllerObj = new MarketPlaceClientController();
-	}
-
-	//method for entering user login information
-	public void enterLogin() {
-		// Sample user login 
-		System.out.println(" Admin login ");
-		System.out.println("Enter Id: ");
-		userInput = new Scanner(System.in);
-		adminId = userInput.nextLine();
-		System.out.println("Enter Password: ");
-		password = userInput.nextLine();
-		userInput.close();
 	}
 
 	//method to be implemented for adding items

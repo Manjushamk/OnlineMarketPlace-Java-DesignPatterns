@@ -13,9 +13,6 @@ import java.util.Scanner;
 
 // View class of the MVC pattern and it acts as the client for the Java RMI
 public class MarketPlaceUserView implements User{
-	private String userName;
-	private String userId;
-	private String password;
 	private Session session;
 	private MarketPlaceClientController clientControllerObj;
 
@@ -43,38 +40,45 @@ public class MarketPlaceUserView implements User{
 	// Method to be implemented for Browsing items
 	@Override
 	public void browse(Session session) {
-		System.out.println("Items displayed here :");
+		System.out.println("************************************** ITEMS DISPLAYED HERE ********************************************");
+		System.out.println("");
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		ArrayList<String> items = clientControllerObj.browseUserItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
 		}
+		System.out.println("*******************************************************************************************************");
 	}
 
 	@Override
 	public void purchase(Session session) {
+		System.out.println("*************************************** CHECK OUT ******************************************************");
 		ArrayList<String> result = clientControllerObj.purchase(session);
 		for(int i = 0; i< result.size(); i++){
 			System.out.println(result.get(i));
 		}
+		System.out.println("*******************************************************************************************************");
 	}
 
 	//implementing view output of add items to cart
 	@Override
 	public void addItemsToCart(Session session) {
 		browse(session);
+		System.out.println("************************************* ADD ITEMS TO CART *************************************************");
 		System.out.println("Enter the item Id to add item to cart: ");
 		Scanner userInput = new Scanner(System.in);
 		int itemId =userInput.nextInt();
 		System.out.println("Enter item Quantity: ");
 		int quantity = userInput.nextInt();
 		System.out.println(clientControllerObj.addItemsToCart(session,itemId,quantity));
+		System.out.println("*******************************************************************************************************");
 	}
 
 
 	//implementing view output of display cart
 	@Override
 	public void displayCart(Session session) {
+		System.out.println("******************************************** DISPLAYING CART ********************************************");
 		ArrayList<String> cartItems = clientControllerObj.displayCart(session);
 		if(cartItems.isEmpty()){
 			System.out.println("Cart is Empty");
@@ -86,6 +90,6 @@ public class MarketPlaceUserView implements User{
 				System.out.println(cartItems.get(i));
 			}
 		}
-
+		System.out.println("*******************************************************************************************************");
 	}
 }
