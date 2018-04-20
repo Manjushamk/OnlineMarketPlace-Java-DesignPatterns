@@ -458,35 +458,118 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for purchase item of user role
-	public String purchase(){
+	public ArrayList<String> purchase(){
+		ArrayList<String> returnList= new ArrayList<String>();
+		String statusOfItem = "";
+		ResultSet resultItems = null;
+		if (conn != null) {
+			try{
+				statement = null;
+				int i = 0;
+				statement = conn.createStatement();
+				ArrayList<Integer> itemsList = new ArrayList<Integer>();
+				ArrayList<Integer> quantityList = new ArrayList<Integer>();
+				try{
+					//statement execution and storing it in the result set
+					results = statement.executeQuery("SELECT item_id, quantity FROM tbl_cartItems WHERE cart_id = "+ this.cartId);
+					if(results.next() != false){
+						results.beforeFirst();
+						while(results.next()){
+							itemsList.add(i, results.getInt(1));
+							quantityList.add(i, results.getInt(2));
+							i++;
+							System.out.println(results.getInt(1));
+							System.out.println(results.getInt(1));
+						}
+						System.out.println(itemsList);
+						System.out.println(quantityList);
 
-		return "purchase item";
+						for(i = 0; i< itemsList.size(); i++){
+							int available_quantity = 0;
+							int quantity = quantityList.get(i);
+							int itemId = itemsList.get(i);
+							resultItems = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
+							while(resultItems.next()){
+								available_quantity = resultItems.getInt("Quantity");
+							}
+							if(available_quantity >0 && available_quantity >= quantity){
+								//Query for updating the Quantity of the item for purchase
+								String purchaseUpdate = "UPDATE tbl_items SET Quantity = "+ (available_quantity - quantity) + " WHERE item_id = "+itemId ;
+								try{
+									//Query execution
+									statement.executeUpdate(purchaseUpdate);
+									//Closing the statement
+									statusOfItem = "Item Id : "+itemId+ " Successfully Purchased";
+									returnList.add(i,statusOfItem);
+								}
+								catch(SQLException e){
+									e.printStackTrace();
+								}
+							}
+							else{
+								statusOfItem = "Item Id : "+itemId+ " is out of Stock";
+								returnList.add(i,statusOfItem);
+							}
+						}
+						try {
+							statement.executeUpdate("DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId);
+						}
+						catch(Exception e) {
+							System.out.println("Error in deleting items from cart ");
+							e.printStackTrace();
+						}
+						return returnList;
+					}
+					else{
+						returnList.add(0,"Cart is empty");
+						return returnList;
+					}
+				}
+				catch(SQLException e){
+					System.out.println("Error while executing Query ");
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e){
+				System.out.println("Error while creating statement ");
+				e.printStackTrace();
+			}
+		}
+		returnList.add(0,"Error in Purchasing items");
+		return returnList;
 	}
+
+
 
 	//server side logic for browsing items
 	public ArrayList<String> displayCart(){
-		//list of rows of result in strings format
 		ArrayList<String> cartList = new ArrayList<String>();
-		String rowData;
-		int i = 0;
-		try{
-			//Statement creation
-			statement = conn.createStatement(); 
-			//executing the Query and results contain the output of the Query as a ResultSet Object
-			results = statement.executeQuery("SELECT * FROM tbl_cartItems");
-			while(results.next()){
+		if(conn != null){		
+
+			//list of rows of result in strings format
+			String rowData;
+			int i = 0;
+			try{
+				//Statement creation
+				statement = conn.createStatement(); 
+				//executing the Query and results contain the output of the Query as a ResultSet Object
+				results = statement.executeQuery("SELECT * FROM tbl_cartItems where cart_id ="+this.cartId);
+				while(results.next()){
 					rowData = results.getInt(1)+ " \t  " + results.getInt(2) + " \t   " + results.getInt(3);
-				//adding of the row as string to the string array list
-				cartList.add(i,rowData);
-				i++;
+					//adding of the row as string to the string array list
+					cartList.add(i,rowData);
+					i++;
+				}
+				// closing Statement and ResultSet objects statement and results
+				statement.close();
+				results.close();
 			}
-			// closing Statement and ResultSet objects statement and results
-			statement.close();
-			results.close();
+			catch (SQLException e1){
+				System.out.println("Error while executing displaying cart");
+			}
+
 		}
-		catch (SQLException e1){
-			System.out.println("Error while executing displaying cart");
-		}
+
 		return cartList;
 	}
 
