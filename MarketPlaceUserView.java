@@ -23,29 +23,6 @@ public class MarketPlaceUserView implements User{
 		clientControllerObj = new MarketPlaceClientController();		
 	}
 
-	//method for entering user login information
-
-	//Get methods for userId, UserName and Password
-	public String getUserId() {
-		return this.userId;
-	}
-
-	//get methods
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-
-	// Method to be implemented for Browsing items
-	public void browseItems() {
-		System.out.println("Browsing Items displayed here");
-	}
-
-
 	// Method o be implemented for Displaying User or Admin Profile
 	@Override
 	public int displayUser(Session session) {
@@ -62,19 +39,6 @@ public class MarketPlaceUserView implements User{
 		return option;
 	}
 
-
-	//method for user registration
-	public void registration() {
-		Scanner userInput = new Scanner(System.in);
-		System.out.println(" Enter User Registration Details:  ");
-		System.out.println("User Name: ");
-		userName = userInput.nextLine();
-		System.out.println("User Id: ");
-		userId = userInput.nextLine();
-		System.out.println("Enter Password: ");
-		password = userInput.nextLine();
-		userInput.close();
-	}
 
 	// Method to be implemented for Browsing items
 	@Override

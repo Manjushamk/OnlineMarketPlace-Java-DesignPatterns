@@ -40,7 +40,7 @@ public class MarketPlaceAdminView implements Admin{
 	//method to be implemented for adding items
 	@Override
 	public void add(Session session){
-		System.out.println("Adding items");
+		System.out.println("******************************************** ADDING ITEMS ********************************************");
 		userInput = new Scanner(System.in);
 		String[] itemRow = {"","","","",""};
 		System.out.println("Enter Item Name: ");
@@ -53,32 +53,36 @@ public class MarketPlaceAdminView implements Admin{
 		itemRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addItems(session,itemRow));
+		System.out.println("*******************************************************************************************************");
 	}
 
 
 	// Method to be implemented for Browsing items
 	@Override
 	public void browse(Session session) {
-		System.out.println("Browsing Items displayed here : ");
-		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
+		System.out.println("******************************************** ITEMS DISPLAYED HERE ********************************************");
+		System.out.println("ITEM ID  ITEM NAME \t\t DESCRIPTION  \t\t\tQUANTITY  \tPRICE");
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
 		}
+		System.out.println("**************************************************************************************************************");
 	}
 
 	//Method to be implented for Adding Items
 	@Override
 	public void update(Session session){
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
-		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
+		System.out.println("*******************************************************************************************************");
+		System.out.println("ITEM ID  ITEM NAME \t\t DESCRIPTION  \t\t\tQUANTITY  \tPRICE");
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
 		}
-		System.out.println("Enter Item Id from above list: ");
 		String itemUpdate = "";
+		System.out.println("Enter Item Id from above list: ");
 		userInput = new Scanner(System.in);
 		int itemId = userInput.nextInt();
+		System.out.println("*******************************************************************************************************");
 		System.out.println("Enter update action 1, 2 or 3");
 		System.out.println("1. Update item Description");
 		System.out.println("2. Update item Price");
@@ -88,12 +92,14 @@ public class MarketPlaceAdminView implements Admin{
 		Scanner userUpdate = new Scanner(System.in);
 		itemUpdate = userUpdate.nextLine();
 		System.out.println(clientControllerObj.updateItems(session, itemId, itemField, itemUpdate));
+		System.out.println("*******************************************************************************************************");
 	}
 
 	//method to be implemented for deleting items
 	@Override
 	public void delete(Session session){
 		ArrayList<String> items = clientControllerObj.browseAdminItems(session);
+		System.out.println("********************************************* DELETE ITEMS **********************************************");
 		System.out.println("Item Id  Item Name \t\t Description  \t\t\tQuantity  \tPrice");
 		for(int i = 0; i< items.size(); i++){
 			System.out.println(items.get(i));
@@ -102,6 +108,7 @@ public class MarketPlaceAdminView implements Admin{
 		userInput = new Scanner(System.in);
 		int itemId = userInput.nextInt();
 		System.out.println(clientControllerObj.deleteItems(session, itemId));
+		System.out.println("*******************************************************************************************************");
 	}
 
 
@@ -122,22 +129,10 @@ public class MarketPlaceAdminView implements Admin{
 		return option;
 	}
 
-	//method for user registration - yet to be used
-	public void registration() {
-		Scanner userInput = new Scanner(System.in);
-		System.out.println(" Enter Admin Registration Details:  ");
-		System.out.println("Admin Name: ");
-		adminName = userInput.nextLine();
-		System.out.println("Id: ");
-		adminId = userInput.nextLine();
-		System.out.println("Enter Password: ");
-		password = userInput.nextLine();
-		userInput.close();
-	}
-
 	//method for adding admin and passing data to client controller
 	@Override
 	public void addAdmin(Session session) {
+		System.out.println("******************************************* ADDING ADMIN **********************************************");
 		System.out.println("Adding Admin");
 		userInput = new Scanner(System.in);
 		String[] AdminRow = {"","","",""};
@@ -151,11 +146,14 @@ public class MarketPlaceAdminView implements Admin{
 		AdminRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addAdmin(session,AdminRow));
+		System.out.println("*******************************************************************************************************");
+
 	}
 
 	//method for adding user and passing data to client controller
 	@Override
 	public void addUser(Session session) {
+		System.out.println("********************************************* ADD USER *************************************************");
 		System.out.println("Adding User");
 		userInput = new Scanner(System.in);
 		String[] UserRow = {"","","",""};
@@ -169,11 +167,13 @@ public class MarketPlaceAdminView implements Admin{
 		UserRow[3] = userInput.nextLine();
 		// string array itemRow has the data for item to be added to the database table
 		System.out.println(clientControllerObj.addUser(session,UserRow));
+		System.out.println("*******************************************************************************************************");
 	}
 
 	//method for adding user and passing data to client controller
 	@Override
 	public void removeUser(Session session){
+		System.out.println("******************************************** REMOVE USER ***********************************************");
 		ArrayList<String> users = clientControllerObj.displayUsersList(session);
 		System.out.println("Id \t User Name ");
 		for(int i = 0; i< users.size(); i++){
@@ -183,5 +183,6 @@ public class MarketPlaceAdminView implements Admin{
 		userInput = new Scanner(System.in);
 		int customerId = userInput.nextInt();
 		System.out.println(clientControllerObj.removeUser(session, customerId));
+		System.out.println("*******************************************************************************************************");
 	}
 }
