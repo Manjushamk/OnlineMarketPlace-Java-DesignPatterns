@@ -55,7 +55,7 @@ public class MarketPlaceController extends UnicastRemoteObject implements Market
 	@Override
 	public String addUser( Session session, String[] userRow) throws java.rmi.RemoteException{
 		return model.addUser(userRow);
-	}*/
+	}
 
 	//overriding interface implemented addAdmin method
 	@Override
