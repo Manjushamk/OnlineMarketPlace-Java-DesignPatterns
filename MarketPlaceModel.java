@@ -151,7 +151,7 @@ public class MarketPlaceModel {
 		String rowData;
 		int i = 0;
 		if (dbConnObj.checkConnection()) {
-			dbConnObj.generatebrowseQuery();
+			dbConnObj.generateBrowseQuery();
 			results = dbConnObj.executeSelectQueries();
 			try{
 				while(results.next()){
@@ -181,36 +181,34 @@ public class MarketPlaceModel {
 		return itemList;
 	}
 
-
-
 	//server side logic for displaying Users List
 	public ArrayList<String> displayUsersList(){
 		//list of rows of result in strings format
 		ArrayList<String> userList = new ArrayList<String>();
 		String rowData;
 		int i = 0;
-		try{
-			//Statement creation
-			statement = conn.createStatement(); 
-			//executing the Query and results contain the output of the Query as a ResultSet Object
-			results = statement.executeQuery("SELECT * FROM tbl_customer");
-			while(results.next()){
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateDisplayUsersQuery();
+			results = dbConnObj.executeSelectQueries();
+			try{
+				while(results.next()){
 				//converting the Query result rows to string with formatting
-				rowData = results.getInt(1)+ " \t " + results.getString(4);
+					rowData = results.getInt(1)+ " \t " + results.getString(4);
 
 				//adding of the row as string to the string array list
-				userList.add(i,rowData);
-				i++;
+					userList.add(i,rowData);
+					i++;
+				}
 			}
-			// closing Statement and ResultSet objects statement and results
-			statement.close();
-			results.close();
-		}
-		catch (SQLException e1){
-			System.out.println("Error while getting customers list");
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return userList;
 	}
+
+
 
 	//server side logic for browsing items
 	public ArrayList<String> displayCart(){

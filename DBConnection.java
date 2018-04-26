@@ -161,7 +161,11 @@ public class DBConnection {
 		this.Query ="INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES("+ "'" + userRow[0] +"','" + userRow[1] +"','"+userRow[2]+"','"+userRow[3]+"')";
 	}
 
-	public void generatebrowseQuery(){
+	public void generateBrowseQuery(){
 		this.Query = "SELECT * FROM tbl_items";
+	}
+
+	public void generateDisplayUsersQuery(){
+		this.Query = "SELECT * FROM tbl_customer";
 	}
 }
