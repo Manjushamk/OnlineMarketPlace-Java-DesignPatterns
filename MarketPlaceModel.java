@@ -40,7 +40,7 @@ public class MarketPlaceModel {
 				if(results.next() != false){
 					this.customerId = results.getInt(1);
 					this.userName = userName;
-			//seleting the cart id respective to the current customer id 
+					//seleting the cart id respective to the current customer id 
 					ResultSet cartResult = dbConnObj.getCartId(results.getInt(1));
 					if (cartResult.next() != false) {
 						this.cartId = cartResult.getInt(1);
@@ -62,32 +62,6 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for adding items
-	public String addItem(String[] itemRow){
-		//Query for Insertion of the new items into the data base
-		String addItemQuery = "INSERT INTO tbl_items(itemName,description,price,quantity) VALUES("+ "'" + itemRow[0] +"','" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				try {
-					//Execution of Query for adding items to database table items
-					statement.executeUpdate(addItemQuery);
-					//statement close
-					statement.close();
-					return "Item has been added";
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
-			}
-		}
-		return "Error in Adding Items";
-	}
-
 	public String addItems(String[] itemRow){
 		if (dbConnObj.checkConnection()) {
 			dbConnObj.generateAddItemsQuery(itemRow);
@@ -100,104 +74,49 @@ public class MarketPlaceModel {
 
 	//server side logic for deleting items
 	public String deleteItems(int itemId){
-		//Query for Insertion of the new items into the data base
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				try {
-					// query for select query to verify the presence of item_id in the table
-					results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
-					if (results.next()!= false) {
-						//Synchronization the block so only one session can access this block for deleting items
-						synchronized(this) {
-							try{
-								//Execution of Query for delete items
-								statement.executeUpdate("DELETE FROM tbl_items where item_id = "+ itemId);
-								//statement close
-								statement.close();
-								return "Item is deleted";
-							}
-							catch(SQLException e){
-								e.printStackTrace();
-							}
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateDeleteItemsSelectQuery(itemId);
+			results = dbConnObj.executeSelectQueries();
+			try{
+				if (results.next()!= false) {
+					synchronized(this) {
+						dbConnObj.generateDeleteItemsQuery(itemId);
+						if(dbConnObj.executeUpdateQueries()){
+							return "Deletion of Item successful";
 						}
 					}
-					else{
-						return "Enter valid Item id";
-					}
-
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
 				}
 			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
+			catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
-		return "Error in deleting Items, Should enter correct itemId";
+		return "Error in deleting Items";
 	}
-
 
 	//server side logic for adding admins
 	public String addAdmin(String[] adminRow){
-		//Query for Insertion of the new admins into the data base
-		String addAdminQuery = "INSERT INTO tbl_admin(firstName,lastName,userName,password) VALUES("+ "'" + adminRow[0] +"','" + adminRow[1] +"','"+adminRow[2]+"','"+adminRow[3]+"')";
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				//Synchronization the block so only one session can access this block for adding admins
-				synchronized(this) {
-					try {
-					//Execution of Query to add admin to the admins table
-						statement.executeUpdate(addAdminQuery);
-					//statement close
-						statement.close();
-						return "Admin has been added";
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateAddAdminQuery(adminRow);
+			synchronized(this) {
+				if(dbConnObj.executeUpdateQueries()){
+					return "Admin has been added";
 				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
 			}
 		}
 		return "Error in Adding Admin";
 	}
 
-
 	//server side logic for adding Users
 	public String addUser(String[] userRow){
-		//Query for Insertion of the new users into the data base
-		String addUserQuery = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES("+ "'" + userRow[0] +"','" + userRow[1] +"','"+userRow[2]+"','"+userRow[3]+"')";
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				//Synchronization the block so only one session can access this block for adding customers
-				synchronized(this) {
-					try {
-					//Execution of Query for adding users to the customers table
-						statement.executeUpdate(addUserQuery);
-					//statement close
-						statement.close();
-						return "Customer has been added";
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateAddUserQuery(userRow);
+			synchronized(this) {
+				if(dbConnObj.executeUpdateQueries()){
+					return "Customer has been added";
 				}
 			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
-			}
+
 		}
 		return "Error in Adding Customer";
 	}

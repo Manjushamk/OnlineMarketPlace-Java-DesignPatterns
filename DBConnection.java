@@ -123,6 +123,10 @@ public class DBConnection {
 		return false;
 	}
 
+	public ResultSet getCartId(int customerId){
+		this.Query = "SELECT cart_id from tbl_cart WHERE customer_id = "+customerId;
+		return executeSelectQueries();
+	}
 
 	public void generateRegiserQuery(String firstName, String lastName,String userName, String password){
 		this.Query = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES('"+ firstName+"','" + lastName +"','"+userName+"','"+password+"')";
@@ -132,9 +136,19 @@ public class DBConnection {
 		this.Query = "INSERT INTO tbl_items(itemName,description,price,quantity) VALUES("+ "'" + itemRow[0] +"','" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
 	}
 
-	public ResultSet getCartId(int customerId){
-		this.Query = "SELECT cart_id from tbl_cart WHERE customer_id = "+customerId;
-		return executeSelectQueries();
+	public void generateDeleteItemsSelectQuery(int itemId){
+		this.Query = "SELECT * FROM tbl_items where item_id = "+itemId;
+	}	
+
+	public void generateDeleteItemsQuery(int itemId){
+		this.Query = "DELETE FROM tbl_items where item_id = "+ itemId;
 	}
 
+	public void generateAddAdminQuery(String[] adminRow){
+		this.Query = "INSERT INTO tbl_admin(firstName,lastName,userName,password) VALUES("+ "'" + adminRow[0] +"','" + adminRow[1] +"','"+adminRow[2]+"','"+adminRow[3]+"')";
+	}
+
+	public void generateAddUserQuery(String[] userRow){
+		this.Query ="INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES("+ "'" + userRow[0] +"','" + userRow[1] +"','"+userRow[2]+"','"+userRow[3]+"')";
+	}
 }
