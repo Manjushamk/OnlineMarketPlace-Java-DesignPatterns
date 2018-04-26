@@ -275,6 +275,63 @@ public class MarketPlaceModel {
 
 	//server side logic for updating items
 	public String updateItems(int itemId, int itemField, String itemUpdate){
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateItemSelectQuery(itemId);
+			synchronized(this) {
+				results = dbConnObj.executeSelectQueries();
+				try{
+					if (results.next()!= false) {
+						if(itemField == 1){
+							dbConnObj.generateItemDescriptionUpdateQuery(itemUpdate,itemId);
+							if(dbConnObj.executeUpdateQueries()){
+								return "Updated Item Description";
+							}
+						}
+						else if(itemField == 2){
+							try{
+								double price = Double.parseDouble(itemUpdate);
+								dbConnObj.generateItemPriceUpdateQuery(itemUpdate,itemId);
+								//try catch for checking number format exception
+								if(dbConnObj.executeUpdateQueries()){
+									return "Updated Item Description";
+								}
+								
+							}
+							catch(NumberFormatException e){
+								return "Enter a valid number";
+							}
+						}
+						else if(itemField == 3){
+							try{
+								int quantity = Integer.parseInt(itemUpdate);
+								dbConnObj.generateItemQuantityUpdateQuery(itemUpdate,itemId);
+								//try catch for checking number format exception
+								if(dbConnObj.executeUpdateQueries()){
+									return "Updated Item Description";
+								}
+							}
+							catch(NumberFormatException e){
+								return "Enter a valid positive Integer for quantity";
+							}
+						}
+						else{
+							return "Invalid option entered";
+						}
+					}
+					else{
+						return "Enter valid item Id";
+					}
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return "Error in Updating item, Enter valid option";
+	}
+
+	//server side logic for updating items
+	public String updateItems(int itemId, int itemField, String itemUpdate){
 		if(conn != null) {
 			statement = null;
 			try {

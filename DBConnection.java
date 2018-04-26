@@ -180,4 +180,20 @@ public class DBConnection {
 	public void generateAdminLoginQuery(String userId, String password){
 		this.Query = "SELECT * FROM tbl_admin where userName = '"+ userId + "' and password = '"+password+"'";
 	}
+
+	public void generateItemSelectQuery(int itemId){
+		this.Query = "SELECT * FROM tbl_items where item_id = "+itemId;
+	}
+
+	public void generateItemDescriptionUpdateQuery(String itemUpdate, int itemId){
+		this.Query = "UPDATE tbl_items SET description = '"+itemUpdate+"' WHERE item_id ="+itemId;
+	}
+
+	public void generateItemQuantityUpdateQuery(String itemUpdate, int itemId){
+		this.Query = "UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId;
+	}
+
+	public void generateItemPriceUpdateQuery(String itemUpdate, int itemId){
+		this.Query = "UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId;
+	}
 }
