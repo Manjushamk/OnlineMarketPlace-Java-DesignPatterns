@@ -421,13 +421,14 @@ public class MarketPlaceModel {
 					returnList.add(0,"Cart is empty");
 					return returnList;
 				}
-				catch (SQLException e) {
-					e.printStackTrace();	
-				}
-
 			}
-			returnList.add(0,"Error in Purchasing items");
-			return returnList;
+			catch (SQLException e) {
+				e.printStackTrace();	
+			}
 		}
 
+		returnList.add(0,"Error in Purchasing items");
+		return returnList;
 	}
+
+}

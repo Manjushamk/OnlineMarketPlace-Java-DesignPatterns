@@ -215,9 +215,7 @@ public class DBConnection {
 
 
 	public void generateDeleteCartItems(int cartId){
-		this.Query = "DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId;
+		this.Query = "DELETE FROM tbl_cartItems WHERE cart_id = "+cartId;
 	}
-
-	
 
 }
