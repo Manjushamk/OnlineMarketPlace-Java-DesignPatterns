@@ -168,4 +168,8 @@ public class DBConnection {
 	public void generateDisplayUsersQuery(){
 		this.Query = "SELECT * FROM tbl_customer";
 	}
+
+	public void generateDisplayCartQuery(int cartId){
+		this.Query = "SELECT * FROM tbl_cartItems where cart_id ="+cartId;
+	}
 }

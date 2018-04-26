@@ -209,37 +209,28 @@ public class MarketPlaceModel {
 	}
 
 
-
 	//server side logic for browsing items
 	public ArrayList<String> displayCart(){
 		ArrayList<String> cartList = new ArrayList<String>();
-		if(conn != null){		
-
-			//list of rows of result in strings format
-			String rowData;
-			int i = 0;
+		String rowData;
+		int i = 0;
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateDisplayCartQuery(this.cartId);
+			results = dbConnObj.executeSelectQueries();
 			try{
-				//Statement creation
-				statement = conn.createStatement(); 
-				//executing the Query and results contain the output of the Query as a ResultSet Object
-				results = statement.executeQuery("SELECT * FROM tbl_cartItems where cart_id ="+this.cartId);
 				while(results.next()){
 					rowData = results.getInt(1)+ " \t  " + results.getInt(2) + " \t   " + results.getInt(3);
 					//adding of the row as string to the string array list
 					cartList.add(i,rowData);
 					i++;
 				}
-				// closing Statement and ResultSet objects statement and results
-				statement.close();
-				results.close();
 			}
-			catch (SQLException e1){
-				System.out.println("Error while executing displaying cart");
+			catch (SQLException e) {
+				e.printStackTrace();				
 			}
 		}
 		return cartList;
 	}
-
 
 	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
