@@ -232,48 +232,44 @@ public class MarketPlaceModel {
 		return cartList;
 	}
 
+
 	//method to verify login information
 	public boolean checkLogin(String userId, String password, String type) {
-		if(type.equalsIgnoreCase("User")) {
-			try{
-				//Statement creations
-				statement = conn.createStatement(); 
-				//executing the Query and results contain the output of the Query as a ResultSet Object
-				results = statement.executeQuery("SELECT c.customer_id, ct.cart_id FROM tbl_customer c JOIN tbl_cart ct ON c.customer_id = ct.customer_id where c.userName = '"+ userId + "' and c.password = '"+password+"'");
-				// return true if login is successful
-				if(results.next() != false){
-					this.customerId = results.getInt(1);
-					this.cartId = results.getInt(2);
-					return true;
+		if (dbConnObj.checkConnection()) {
+			if(type.equalsIgnoreCase("User")) {
+				dbConnObj.generateUserLoginQuery(userId,password);
+				results = dbConnObj.executeSelectQueries();
+				try{
+					if(results.next() != false){
+						this.customerId = results.getInt(1);
+						this.cartId = results.getInt(2);
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
-				else{
-					return false;
+				catch (SQLException e) {
+					e.printStackTrace();
 				}
-			}		
-			catch (SQLException e1){
-				System.out.println("Error while while checking user login");
 			}
-
-		}
-		else {
-			try{
-				//Statement creations
-				statement = conn.createStatement(); 
-				//executing the Query and results contain the output of the Query as a ResultSet Object
-				results = statement.executeQuery("SELECT * FROM tbl_admin where userName = '"+ userId + "' and password = '"+password+"'");
-				// return true if admin login is successful
-				if(results.next() != false){
-					return true;
+			else {
+				dbConnObj.generateAdminLoginQuery(userId,password);
+				results = dbConnObj.executeSelectQueries();
+				try{
+					if(results.next() != false){
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
-				else{
-					return false;
+				catch (SQLException e) {
+					e.printStackTrace();
 				}
-			}		
-			catch (SQLException e1){
-				System.out.println("Error while while checking admin login");
 			}
-		}
-		return false;
+		}	
+		return false;	
 	}
 
 

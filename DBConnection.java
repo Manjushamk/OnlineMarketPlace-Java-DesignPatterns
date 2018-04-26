@@ -172,4 +172,12 @@ public class DBConnection {
 	public void generateDisplayCartQuery(int cartId){
 		this.Query = "SELECT * FROM tbl_cartItems where cart_id ="+cartId;
 	}
+
+	public void generateUserLoginQuery(String userId, String password){
+		this.Query = "SELECT c.customer_id, ct.cart_id FROM tbl_customer c JOIN tbl_cart ct ON c.customer_id = ct.customer_id where c.userName = '"+ userId + "' and c.password = '"+password+"'";
+	}
+
+	public void generateAdminLoginQuery(String userId, String password){
+		this.Query = "SELECT * FROM tbl_admin where userName = '"+ userId + "' and password = '"+password+"'";
+	}
 }
