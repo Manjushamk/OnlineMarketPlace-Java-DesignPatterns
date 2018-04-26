@@ -31,21 +31,22 @@ public class MarketPlaceModel {
 	}
 
 
+	//model logic for regidtration of customer
 	public String registerUser(String firstName, String lastName,String userName, String password){
 		if (dbConnObj.checkConnection()) {
 			dbConnObj.generateRegiserQuery(firstName,lastName,userName,password);
 			results = dbConnObj.registrationInsert();
 			try{
 				if(results.next() != false){
-				this.customerId = results.getInt(1);
-				this.userName = userName;
+					this.customerId = results.getInt(1);
+					this.userName = userName;
 			//seleting the cart id respective to the current customer id 
-				ResultSet cartResult = dbConnObj.getCartId(results.getInt(1));
-				if (cartResult.next() != false) {
-					this.cartId = cartResult.getInt(1);
-				}	
-			}
-			return "Registration is successful";
+					ResultSet cartResult = dbConnObj.getCartId(results.getInt(1));
+					if (cartResult.next() != false) {
+						this.cartId = cartResult.getInt(1);
+					}	
+				}
+				return "Registration is successful";
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -61,7 +62,7 @@ public class MarketPlaceModel {
 	}
 
 	//server side logic for adding items
-	public String addItems(String[] itemRow){
+	public String addItem(String[] itemRow){
 		//Query for Insertion of the new items into the data base
 		String addItemQuery = "INSERT INTO tbl_items(itemName,description,price,quantity) VALUES("+ "'" + itemRow[0] +"','" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
 		if(conn != null) {
@@ -82,6 +83,16 @@ public class MarketPlaceModel {
 			}
 			catch(SQLException e) {
 				System.out.println("Error in Statement Creation");
+			}
+		}
+		return "Error in Adding Items";
+	}
+
+	public String addItems(String[] itemRow){
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateAddItemsQuery(itemRow);
+			if(dbConnObj.executeUpdateQueries()){
+				return "item has been added";
 			}
 		}
 		return "Error in Adding Items";

@@ -77,6 +77,19 @@ public class DBConnection {
 		return results;
 	}
 
+	public boolean executeUpdateQueries(){
+		try{
+			createStatementCheck();
+			statement.executeUpdate(Query);
+			return true;
+		}
+		catch (SQLException e) {
+			System.out.println("Error in select Query");
+		}
+		return false;
+	}
+
+
 	public ResultSet registrationInsert(){
 		if (conn != null) {
 			this.createStatementCheck();
@@ -101,8 +114,22 @@ public class DBConnection {
 		}
 	}
 
+
+	//function for checking database conenction
+	public boolean checkConnection(){
+		if(conn != null){
+			return true;
+		}
+		return false;
+	}
+
+
 	public void generateRegiserQuery(String firstName, String lastName,String userName, String password){
 		this.Query = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES('"+ firstName+"','" + lastName +"','"+userName+"','"+password+"')";
+	}
+
+	public void generateAddItemsQuery(String[] itemRow){
+		this.Query = "INSERT INTO tbl_items(itemName,description,price,quantity) VALUES("+ "'" + itemRow[0] +"','" + itemRow[1] +"',"+Integer.parseInt(itemRow[2])+","+Double.parseDouble(itemRow[3])+")";
 	}
 
 	public ResultSet getCartId(int customerId){
@@ -110,10 +137,4 @@ public class DBConnection {
 		return executeSelectQueries();
 	}
 
-	public boolean checkConnection(){
-		if(conn != null){
-			return true;
-		}
-		return false;
-	}
 }
