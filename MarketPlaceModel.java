@@ -30,45 +30,6 @@ public class MarketPlaceModel {
 		conn = dbConnObj.connect();
 	}
 
-	//server side login for registering a user
-	public String registerUsers(String firstName, String lastName,String userName, String password){
-		//Query for Insertion of the new items into the data base
-		String registerUser = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES('"+ firstName+"','" + lastName +"','"+userName+"','"+password+"')";
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				try {
-					//Execution of Query
-					//getting the the auto generated customer id
-					statement.executeUpdate(registerUser,Statement.RETURN_GENERATED_KEYS);
-					results = statement.getGeneratedKeys();
-					if(results.next() != false){
-						this.customerId = results.getInt(1);
-						this.userName = userName;
-						//seleting the cart id respective to the current customer id 
-						ResultSet cartResult = statement.executeQuery("SELECT cart_id from tbl_cart WHERE customer_id = "+ results.getInt(1));
-						if (cartResult.next() != false) {
-							this.cartId = cartResult.getInt(1);
-						}
-
-					}
-					//			results = statement.executeQuery(select customer_id from );
-					//statement close
-					statement.close();
-					return "Registration Success";
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
-			}
-		}
-		return "Error in Registration";
-	}
 
 	public String registerUser(String firstName, String lastName,String userName, String password){
 		if (dbConnObj.checkConnection()) {
