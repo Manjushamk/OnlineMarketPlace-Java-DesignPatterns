@@ -7,14 +7,10 @@
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 
 // Creation of Model for the MarketPlace Application, the database connections should be implemented here
 public class MarketPlaceModel {
-	private String userName;
 	private int customerId;
 	private int cartId;
 	private DBConnection dbConnObj;
@@ -27,7 +23,7 @@ public class MarketPlaceModel {
 	}
 
 
-	//model logic for regidtration of customer
+	//model logic for registration of customer
 	public String registerUser(String firstName, String lastName,String userName, String password){
 		if (dbConnObj.checkConnection()) {
 			dbConnObj.generateRegiserQuery(firstName,lastName,userName,password);
@@ -35,9 +31,8 @@ public class MarketPlaceModel {
 			try{
 				if(results.next() != false){
 					this.customerId = results.getInt(1);
-					this.userName = userName;
-					//seleting the cart id respective to the current customer id 
-					ResultSet cartResult = dbConnObj.getCartId(results.getInt(1));
+					//selecting the cart id respective to the current customer id 
+					ResultSet cartResult = dbConnObj.getCartId(customerId);
 					if (cartResult.next() != false) {
 						this.cartId = cartResult.getInt(1);
 					}	
@@ -71,7 +66,7 @@ public class MarketPlaceModel {
 	//server side logic for deleting items
 	public String deleteItems(int itemId){
 		if (dbConnObj.checkConnection()) {
-			dbConnObj.generateDeleteItemsSelectQuery(itemId);
+			dbConnObj.generateItemSelectQuery(itemId);
 			results = dbConnObj.executeSelectQueries();
 			try{
 				if (results.next()!= false) {
