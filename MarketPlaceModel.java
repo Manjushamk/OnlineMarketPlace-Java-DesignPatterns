@@ -94,6 +94,29 @@ public class MarketPlaceModel {
 		return "Error in deleting Items";
 	}
 
+
+	//server side logic for deleting items
+	public String removeUser(int customerId){
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateDeleteUserSelectQuery(customerId);
+			results = dbConnObj.executeSelectQueries();
+			try{
+				if (results.next()!= false) {
+					synchronized(this) {
+						dbConnObj.generateDeleteUsersQuery(customerId);
+						if(dbConnObj.executeUpdateQueries()){
+							return "Remove User successful";
+						}
+					}
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return "Error in deleting Items";
+	}
+
 	//server side logic for adding admins
 	public String addAdmin(String[] adminRow){
 		if (dbConnObj.checkConnection()) {
@@ -193,6 +216,37 @@ public class MarketPlaceModel {
 		return userList;
 	}
 
+	//server side logic for browsing items
+	public ArrayList<String> displayCart(){
+		ArrayList<String> cartList = new ArrayList<String>();
+		if(conn != null){		
+
+			//list of rows of result in strings format
+			String rowData;
+			int i = 0;
+			try{
+				//Statement creation
+				statement = conn.createStatement(); 
+				//executing the Query and results contain the output of the Query as a ResultSet Object
+				results = statement.executeQuery("SELECT * FROM tbl_cartItems where cart_id ="+this.cartId);
+				while(results.next()){
+					rowData = results.getInt(1)+ " \t  " + results.getInt(2) + " \t   " + results.getInt(3);
+					//adding of the row as string to the string array list
+					cartList.add(i,rowData);
+					i++;
+				}
+				// closing Statement and ResultSet objects statement and results
+				statement.close();
+				results.close();
+			}
+			catch (SQLException e1){
+				System.out.println("Error while executing displaying cart");
+			}
+
+		}
+
+		return cartList;
+	}
 
 
 	//method to verify login information
@@ -239,45 +293,6 @@ public class MarketPlaceModel {
 		return false;
 	}
 
-	//server side logic for deleting items
-	public String removeUser(int customerId){
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				//Synchronization the block so only one session can access this block for deleting Users	
-				synchronized(this) {
-					try {
-						results = statement.executeQuery("SELECT * FROM tbl_customer where customer_id = "+customerId);
-						if (results.next()!= false) {
-							try{
-							//Execution of Query for delete customers
-								statement.executeUpdate("DELETE FROM tbl_customer where customer_id = "+ customerId);
-							//statement close
-								statement.close();
-								return "Customer is deleted";
-							}
-							catch(SQLException e){
-								e.printStackTrace();
-							}
-						}
-						else{
-							return "Enter valid customer id";
-						}
-
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
-			}
-		}
-		return "Error in Deleting Customers, Should enter correct Customer Id";
-	}
 
 	//server side logic for updating items
 	public String updateItems(int itemId, int itemField, String itemUpdate){
@@ -491,38 +506,5 @@ public class MarketPlaceModel {
 		return returnList;
 	}
 
-
-
-	//server side logic for browsing items
-	public ArrayList<String> displayCart(){
-		ArrayList<String> cartList = new ArrayList<String>();
-		if(conn != null){		
-
-			//list of rows of result in strings format
-			String rowData;
-			int i = 0;
-			try{
-				//Statement creation
-				statement = conn.createStatement(); 
-				//executing the Query and results contain the output of the Query as a ResultSet Object
-				results = statement.executeQuery("SELECT * FROM tbl_cartItems where cart_id ="+this.cartId);
-				while(results.next()){
-					rowData = results.getInt(1)+ " \t  " + results.getInt(2) + " \t   " + results.getInt(3);
-					//adding of the row as string to the string array list
-					cartList.add(i,rowData);
-					i++;
-				}
-				// closing Statement and ResultSet objects statement and results
-				statement.close();
-				results.close();
-			}
-			catch (SQLException e1){
-				System.out.println("Error while executing displaying cart");
-			}
-
-		}
-
-		return cartList;
-	}
 
 }

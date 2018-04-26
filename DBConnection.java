@@ -140,6 +140,15 @@ public class DBConnection {
 		this.Query = "SELECT * FROM tbl_items where item_id = "+itemId;
 	}	
 
+	public void generateDeleteUserSelectQuery(int customerId){
+		this.Query = "SELECT * FROM tbl_customer where customer_id = "+customerId;
+	}	
+
+
+	public void generateDeleteUsersQuery(int customerId){
+		this.Query = "DELETE FROM tbl_customer where customer_id = "+ customerId;
+	}
+
 	public void generateDeleteItemsQuery(int itemId){
 		this.Query = "DELETE FROM tbl_items where item_id = "+ itemId;
 	}
