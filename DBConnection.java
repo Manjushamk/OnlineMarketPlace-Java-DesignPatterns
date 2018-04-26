@@ -196,4 +196,13 @@ public class DBConnection {
 	public void generateItemPriceUpdateQuery(String itemUpdate, int itemId){
 		this.Query = "UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId;
 	}
+
+	public void generateQuantitySelectQuery(int itemId){
+		this.Query = "SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId;
+	}
+
+	public void generateCartInsetyQuery(int cartId,int itemId,int quantity){
+		this.Query = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+cartId+","+itemId+","+quantity+")";
+	}
+
 }

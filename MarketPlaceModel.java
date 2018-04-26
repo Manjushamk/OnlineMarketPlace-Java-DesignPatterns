@@ -330,132 +330,37 @@ public class MarketPlaceModel {
 		return "Error in Updating item, Enter valid option";
 	}
 
-	//server side logic for updating items
-	public String updateItems(int itemId, int itemField, String itemUpdate){
-		if(conn != null) {
-			statement = null;
-			try {
-				//statemt creation to run the sql query
-				statement = conn.createStatement();
-				//Synchronization the block so only one session can access this block for updating items
-				synchronized(this) {
-					try {
-						//Query for checking if there is a nay data for entered itemId
-						results = statement.executeQuery("SELECT * FROM tbl_items where item_id = "+itemId);
-						if (results.next()!= false) {
-							if(itemField == 1){
-								try{
-									// query for updating description
-									statement.executeUpdate("UPDATE tbl_items SET description = '"+itemUpdate+"' WHERE item_id ="+itemId);
-									return "Updated Item Description";
-								}
-								catch(SQLException e) {
-									e.printStackTrace();
-								}	
-							}
-							else if(itemField == 2){
-								try{
-									double price = Double.parseDouble(itemUpdate);
-									//try catch for checking number format exception
-									try{
-										//query for updating price
-										statement.executeUpdate("UPDATE tbl_items SET price = "+itemUpdate+" WHERE item_id ="+itemId);
-										return "Updated Item Description";
-									}
-									catch(SQLException e) {
-										e.printStackTrace();
-									}
-								}
-								catch(NumberFormatException e){
-									return "Enter a valid number";
-								}
-							}
-							else if(itemField == 3){
-								try{
-									int quantity = Integer.parseInt(itemUpdate);
-									//try catch for checking number format exception
-									try{
-										//query for updating quantity
-										statement.executeUpdate("UPDATE tbl_items SET quantity = "+itemUpdate+" WHERE item_id ="+itemId);
-										return "Updated Item Description";
-									}
-									catch(SQLException e) {
-										e.printStackTrace();
-									}
-								}
-								catch(NumberFormatException e){
-									return "Enter a valid positive Integer for quantity";
-								}
-							}
-							else{
-								return "Invalid option entered";
-							}
-						}
-						else{
-							return "Enter valid item Id";
-						}
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
-			}
-		}
-		return "Error in Updating item, Enter valid option";
-	}
 
 
 	//Add items to cart
 	public String addItemsToCart(int itemId, int quantity){
 		int available_quantity = 0;
-		if(conn != null) {
-			statement = null;
-			try {
-				//statement creation to run the sql query
-				statement = conn.createStatement();
-				//Synchronization the block so only one session can access this block for adding items to cart
-				synchronized(this) {
-					try{
-						//Query for checking if there is a nay data for entered itemId
-						results = statement.executeQuery("SELECT Quantity FROM tbl_items WHERE item_id = "+ itemId);
-						//Accessing the elements of the ResultSet results
-						while(results.next()){
-							available_quantity = results.getInt("Quantity");
+		if (dbConnObj.checkConnection()) {
+			synchronized(this) {
+				dbConnObj.generateQuantitySelectQuery(itemId);
+				results = dbConnObj.executeSelectQueries();
+				try{
+					while(results.next()){
+						available_quantity = results.getInt("Quantity");
+					}
+					if(available_quantity >0 && available_quantity >= quantity){
+						dbConnObj.generateCartInsetyQuery(this.cartId,itemId,quantity);
+						if (dbConnObj.executeUpdateQueries()) {
+							return "Added item Successfully";
 						}
-						// closing the ResultSet results
-						results.close();
-						if(available_quantity >0 && available_quantity >= quantity){
-							try{
-								//query for inserting the requested item details into cart
-								String insertQuery = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+this.cartId+","+itemId+","+quantity+")";
-								statement.executeUpdate(insertQuery);
-								return "Added item Successfully";
-							}
-							catch(SQLException e) {
-								return "Error in adding item to cart";
-							}
-						}
-						else{
-							return "Item may be out of Stock";
-						}
-
-					}	
-					catch(SQLException e) {
-						System.out.println("Error in executing quantity checking Query");
+					}
+					else{
+						return "Item out of Stock";
 					}
 				}
-			}
-			catch(SQLException e) {
-				System.out.println("Error in Statement Creation");
+				catch (SQLException e) {
+					e.printStackTrace();	
+				}
 			}
 		}
 		return "Error in Adding item to cart";
-
 	}
+
 
 	//server side logic for purchase item of user role
 	public ArrayList<String> purchase(){
