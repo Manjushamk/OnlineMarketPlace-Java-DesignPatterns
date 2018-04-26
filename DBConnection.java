@@ -160,4 +160,8 @@ public class DBConnection {
 	public void generateAddUserQuery(String[] userRow){
 		this.Query ="INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES("+ "'" + userRow[0] +"','" + userRow[1] +"','"+userRow[2]+"','"+userRow[3]+"')";
 	}
+
+	public void generatebrowseQuery(){
+		this.Query = "SELECT * FROM tbl_items";
+	}
 }
