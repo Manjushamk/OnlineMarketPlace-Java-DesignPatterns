@@ -46,7 +46,7 @@ public class MarketPlaceModel {
 						this.cartId = cartResult.getInt(1);
 					}	
 				}
-				return "Registration is successful";
+				return "Registration Success";
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
