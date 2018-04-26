@@ -205,4 +205,19 @@ public class DBConnection {
 		this.Query = "INSERT INTO tbl_cartItems(cart_id,item_id,quantity) VALUES ("+cartId+","+itemId+","+quantity+")";
 	}
 
+	public void generateCartItemsSelectQuery(int cartId){
+		this.Query = "SELECT item_id, quantity FROM tbl_cartItems WHERE cart_id = "+ cartId;
+	}
+	
+	public void generateUpdateQuantityQuery(int availableQuantity, int quantity, int itemId){
+		this.Query = "UPDATE tbl_items SET Quantity = "+ (availableQuantity - quantity) + " WHERE item_id = "+itemId ;
+	}
+
+
+	public void generateDeleteCartItems(int cartId){
+		this.Query = "DELETE FROM tbl_cartItems WHERE cart_id = "+this.cartId;
+	}
+
+	
+
 }
