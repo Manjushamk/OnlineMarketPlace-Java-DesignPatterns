@@ -17,17 +17,13 @@ public class MarketPlaceModel {
 	private String userName;
 	private int customerId;
 	private int cartId;
-	private String[] items = new String[20];
 	private DBConnection dbConnObj;
 	private ResultSet results = null;
-	private Connection conn = null;
-	private Statement statement = null;
 
 	//constructor with user details init
 	public MarketPlaceModel() {
 		//default login
 		dbConnObj = new DBConnection();
-		conn = dbConnObj.connect();
 	}
 
 
