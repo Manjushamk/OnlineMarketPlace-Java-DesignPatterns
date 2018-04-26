@@ -28,12 +28,10 @@ public class MarketPlaceModel {
 		//default login
 		dbConnObj = new DBConnection();
 		conn = dbConnObj.connect();
-		items = new String[]{"Book","Pen","Cycle","Camera"};
-
 	}
 
 	//server side login for registering a user
-	public String registerUser(String firstName, String lastName,String userName, String password){
+	public String registerUsers(String firstName, String lastName,String userName, String password){
 		//Query for Insertion of the new items into the data base
 		String registerUser = "INSERT INTO tbl_customer(firstName,lastName,userName,password) VALUES('"+ firstName+"','" + lastName +"','"+userName+"','"+password+"')";
 		if(conn != null) {
@@ -71,6 +69,30 @@ public class MarketPlaceModel {
 		}
 		return "Error in Registration";
 	}
+
+	public String registerUser(String firstName, String lastName,String userName, String password){
+		if (dbConnObj.checkConnection()) {
+			dbConnObj.generateRegiserQuery(firstName,lastName,userName,password);
+			results = dbConnObj.registrationInsert();
+			try{
+				if(results.next() != false){
+				this.customerId = results.getInt(1);
+				this.userName = userName;
+			//seleting the cart id respective to the current customer id 
+				ResultSet cartResult = dbConnObj.getCartId(results.getInt(1));
+				if (cartResult.next() != false) {
+					this.cartId = cartResult.getInt(1);
+				}	
+			}
+			return "Registration is successful";
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return "Registration failed";
+	}
+
 
 	//server side login for displaying a user
 	public String displayUser(){ 
