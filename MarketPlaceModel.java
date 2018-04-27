@@ -284,7 +284,7 @@ public class MarketPlaceModel {
 								dbConnObj.generateItemPriceUpdateQuery(itemUpdate,itemId);
 								//try catch for checking number format exception
 								if(dbConnObj.executeUpdateQueries()){
-									return "Updated Item Description";
+									return "Updated Item Price";
 								}
 								
 							}
@@ -298,7 +298,7 @@ public class MarketPlaceModel {
 								dbConnObj.generateItemQuantityUpdateQuery(itemUpdate,itemId);
 								//try catch for checking number format exception
 								if(dbConnObj.executeUpdateQueries()){
-									return "Updated Item Description";
+									return "Updated Item Quantity";
 								}
 							}
 							catch(NumberFormatException e){
